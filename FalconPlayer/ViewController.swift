@@ -13,7 +13,6 @@ import CoreGraphics
 class ViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     var videoPlayerView: VideoPlayerView?
-    var videoPlayerViewFrame: CGRect!
     
     override var shouldAutorotate: Bool {
         return false
@@ -55,24 +54,6 @@ class ViewController: UIViewController {
         videoPlayerView.bottomAnchor.constraint(equalTo: playerView.bottomAnchor).isActive = true
         videoPlayerView.trailingAnchor.constraint(equalTo: playerView.trailingAnchor).isActive = true
         playerView.isHidden = false
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(viewWillEnterForeground(notification:)),
-                                               name: UIApplication.willEnterForegroundNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(viewDidEnterBackground(notification:)),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-    }
-    
-    @objc func viewWillEnterForeground(notification: Notification) {
-        
-    }
-
-    
-    @objc func viewDidEnterBackground(notification: Notification) {
-        self.videoPlayerView?.pause()
     }
 }
 

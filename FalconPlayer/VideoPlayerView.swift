@@ -31,6 +31,12 @@ class VideoPlayerView: UIView {
     
     deinit {
         NotificationCenter.default.removeObserver(self,
+                                                  name: UIApplication.willEnterForegroundNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIApplication.didEnterBackgroundNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
                                                   name: UIDevice.orientationDidChangeNotification,
                                                   object: nil)
     }
@@ -60,6 +66,14 @@ class VideoPlayerView: UIView {
         controlView.alpha = 0
         hideErrorView()
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(viewWillEnterForeground(notification:)),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(viewDidEnterBackground(notification:)),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.didChangeOrientation(notification:)),
                                                name: UIDevice.orientationDidChangeNotification,
@@ -225,6 +239,13 @@ class VideoPlayerView: UIView {
             let unmuteImage = UIImage(systemName: "speaker.3")
             muteUnmuteButton.setBackgroundImage(unmuteImage, for: .normal)
         }
+    }
+    
+    @objc func viewWillEnterForeground(notification: Notification) {}
+
+    
+    @objc func viewDidEnterBackground(notification: Notification) {
+        self.pause()
     }
     
     @objc func timerUpdate() {
