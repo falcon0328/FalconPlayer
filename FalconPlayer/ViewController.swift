@@ -19,25 +19,6 @@ class ViewController: UIViewController {
         return false
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.didChangeOrientation(notification:)),
-                                               name: UIDevice.orientationDidChangeNotification,
-                                               object: nil)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIDevice.orientationDidChangeNotification,
-                                                  object: nil)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "saya-volume", ofType: "gif")!))
@@ -89,48 +70,8 @@ class ViewController: UIViewController {
     @objc func viewDidEnterBackground(notification: Notification) {
         self.videoPlayerView?.pause()
     }
-    
-    @objc func didChangeOrientation(notification: NSNotification){
-        switch UIDevice.current.orientation {
-        case .landscapeLeft, .landscapeRight:
-            break
-        case .portrait, .portraitUpsideDown:
-            print("😺Portrait")
-        default:
-            print("😺other")
-        }
-    }
 }
 
 extension ViewController: VideoPlayerViewDelegate {
-    func didTap(videoPlayerView: VideoPlayerView, componentName: String) {
-        videoPlayerView.pause()
-        
-        if videoPlayerView.isExpand {
-            // 縮小処理
-            videoPlayerView.collapse()
-            UIView.animate(withDuration: 0.5,
-                           animations: {
-                            self.playerView.transform = CGAffineTransform(rotationAngle: (0 * .pi) / 180)
-                            self.playerView.frame = self.videoPlayerViewFrame
-            }, completion: { finished in })
-        } else {
-            videoPlayerView.expand()
-            videoPlayerViewFrame = playerView.frame
-            // 拡大処理
-            UIView.animate(withDuration: 0.5,
-                           animations: {
-                            self.playerView!.translatesAutoresizingMaskIntoConstraints = true
-                            self.playerView.transform = CGAffineTransform(rotationAngle: (90 * .pi) / 180)
-                            self.playerView!.frame = CGRect(x: 0,
-                                                            y: 0,
-                                                            width: self.view.frame.width,
-                                                            height: self.view.frame.height)
-                            
-                
-            }, completion: { finished in })
-        }
-
-
-    }
+    func didTap(videoPlayerView: VideoPlayerView, componentName: String) {}
 }

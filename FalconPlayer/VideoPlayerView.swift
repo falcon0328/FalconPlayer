@@ -15,6 +15,7 @@ protocol VideoPlayerViewDelegate: class {
 
 class VideoPlayerView: UIView {
     var isExpand = false
+    var videoPlayerViewFrame: CGRect!
     weak var delegate: VideoPlayerViewDelegate?
     
     @IBOutlet weak var videoPlayer: VideoPlayer!
@@ -27,6 +28,12 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var muteUnmuteButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var expandCollapseButton: UIButton!
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIDevice.orientationDidChangeNotification,
+                                                  object: nil)
+    }
     
     func setPlayer(player: AVPlayer?) {
         videoPlayer.setPlayer(player: player)
@@ -52,6 +59,11 @@ class VideoPlayerView: UIView {
         controlView.isHidden = true
         controlView.alpha = 0
         hideErrorView()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.didChangeOrientation(notification:)),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
     }
     
     func play() {
@@ -68,12 +80,31 @@ class VideoPlayerView: UIView {
     
     func expand() {
         isExpand = true
+        
+        videoPlayerViewFrame = self.superview!.frame
+        UIView.animate(withDuration: 0.5, animations: {
+            self.superview?.translatesAutoresizingMaskIntoConstraints = true
+            self.superview?.transform = CGAffineTransform(rotationAngle: (90 * .pi) / 180)
+            self.superview?.frame = CGRect(x: 0,
+                                           y: 0,
+                                           width: UIScreen.main.bounds.width,
+                                           height: UIScreen.main.bounds.height)
+        })
+
         let collapseImage = UIImage(systemName: "arrow.down.right.and.arrow.up.left")
-        self.expandCollapseButton.setBackgroundImage(collapseImage, for: .normal)
+        expandCollapseButton.setBackgroundImage(collapseImage, for: .normal)
     }
     
     func collapse() {
         isExpand = false
+        
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.superview?.translatesAutoresizingMaskIntoConstraints = true
+                        self.superview?.transform = CGAffineTransform(rotationAngle: (0 * .pi) / 180)
+                        self.superview?.frame = self.videoPlayerViewFrame
+        }, completion: { finished in })
+        
         let expandImage = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
         self.expandCollapseButton.setBackgroundImage(expandImage, for: .normal)
     }
@@ -127,7 +158,11 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapExpandCollapseButton(_ sender: Any) {
-        delegate?.didTap(videoPlayerView: self, componentName: "")
+        if isExpand {
+            collapse()
+        } else {
+            expand()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
