@@ -65,6 +65,16 @@ class VideoPlayerView: UIView {
         videoPlayer.seek(to: to, completionHandler: completionHandler)
     }
     
+    func expand() {
+        let collapseImage = UIImage(systemName: "arrow.down.right.and.arrow.up.left")
+        self.expandCollapseButton.setBackgroundImage(collapseImage, for: .normal)
+    }
+    
+    func collapse() {
+        let expandImage = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
+        self.expandCollapseButton.setBackgroundImage(expandImage, for: .normal)
+    }
+    
     /// 円形画像を作成するプログラム
     /// [参考文献](https://www.code-adviser.com/detail_42092907)
     /// - Parameter size: 丸のサイズ

@@ -103,7 +103,9 @@ class ViewController: UIViewController {
 
 extension ViewController: VideoPlayerViewDelegate {
     func didTap(videoPlayerView: VideoPlayerView, componentName: String) {
+        videoPlayerView.delegate = nil
         videoPlayerView.pause()
+        videoPlayerView.expand()
         
         let vc = UIStoryboard(name: "FullScreen", bundle: Bundle.main).instantiateInitialViewController() as! FullScreenViewController
         vc.videoPlayerView = videoPlayerView

@@ -18,6 +18,7 @@ class FullScreenViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        videoPlayerView.delegate = self
         videoPlayerView.frame = self.view.frame
         
         self.view.addSubview(videoPlayerView)
@@ -37,4 +38,10 @@ class FullScreenViewController: UIViewController {
         return .landscapeRight
     }
 
+}
+
+extension FullScreenViewController: VideoPlayerViewDelegate {
+    func didTap(videoPlayerView: VideoPlayerView, componentName: String) {
+        dismiss(animated: true, completion: nil)
+    }
 }

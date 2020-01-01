@@ -229,6 +229,15 @@
             </connections>
             <point key="canvasLocation" x="-124.6376811594203" y="-85.714285714285708"/>
         </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pv9-OV-iIb">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="24"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <nil key="highlightedColor"/>
+            <point key="canvasLocation" x="118.84057971014494" y="130.58035714285714"/>
+        </label>
     </objects>
     <resources>
         <image name="airplayvideo" catalog="system" width="64" height="48"/>
