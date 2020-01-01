@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		55A0714F23BBC6A2003503E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0714E23BBC6A2003503E2 /* AppDelegate.swift */; };
 		55A0715123BBC6A2003503E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0715023BBC6A2003503E2 /* SceneDelegate.swift */; };
-		55A0715323BBC6A2003503E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0715223BBC6A2003503E2 /* ViewController.swift */; };
 		55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A0715723BBC6A3003503E2 /* Assets.xcassets */; };
 		55A0715B23BBC6A3003503E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0715923BBC6A3003503E2 /* LaunchScreen.storyboard */; };
 		55A0716623BBC6A3003503E2 /* FalconPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0716523BBC6A3003503E2 /* FalconPlayerTests.swift */; };
@@ -18,7 +17,7 @@
 		55A0717E23BBC6C3003503E2 /* FullScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717323BBC6C3003503E2 /* FullScreen.storyboard */; };
 		55A0717F23BBC6C3003503E2 /* UIImage+AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */; };
 		55A0718023BBC6C3003503E2 /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */; };
-		55A0718123BBC6C3003503E2 /* AVPlayerExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717623BBC6C3003503E2 /* AVPlayerExample.swift */; };
+		55A0718123BBC6C3003503E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717623BBC6C3003503E2 /* ViewController.swift */; };
 		55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */; };
 		55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717823BBC6C3003503E2 /* Main.storyboard */; };
 		55A0718423BBC6C3003503E2 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717923BBC6C3003503E2 /* FullScreenViewController.swift */; };
@@ -39,7 +38,6 @@
 		55A0714B23BBC6A2003503E2 /* FalconPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FalconPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A0714E23BBC6A2003503E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A0715023BBC6A2003503E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		55A0715223BBC6A2003503E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		55A0715723BBC6A3003503E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A0715A23BBC6A3003503E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55A0715C23BBC6A3003503E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,7 +49,7 @@
 		55A0717323BBC6C3003503E2 /* FullScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FullScreen.storyboard; sourceTree = "<group>"; };
 		55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AnimatedGIF.swift"; sourceTree = "<group>"; };
 		55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerView.xib; sourceTree = "<group>"; };
-		55A0717623BBC6C3003503E2 /* AVPlayerExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerExample.swift; sourceTree = "<group>"; };
+		55A0717623BBC6C3003503E2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AnimatedGIF.swift"; sourceTree = "<group>"; };
 		55A0717823BBC6C3003503E2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		55A0717923BBC6C3003503E2 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
@@ -98,21 +96,20 @@
 			isa = PBXGroup;
 			children = (
 				55A0714E23BBC6A2003503E2 /* AppDelegate.swift */,
-				55A0715023BBC6A2003503E2 /* SceneDelegate.swift */,
-				55A0715223BBC6A2003503E2 /* ViewController.swift */,
 				55A0715723BBC6A3003503E2 /* Assets.xcassets */,
-				55A0715923BBC6A3003503E2 /* LaunchScreen.storyboard */,
-				55A0715C23BBC6A3003503E2 /* Info.plist */,
-				55A0717823BBC6C3003503E2 /* Main.storyboard */,
-				55A0717623BBC6C3003503E2 /* AVPlayerExample.swift */,
 				55A0717323BBC6C3003503E2 /* FullScreen.storyboard */,
 				55A0717923BBC6C3003503E2 /* FullScreenViewController.swift */,
+				55A0715C23BBC6A3003503E2 /* Info.plist */,
+				55A0715923BBC6A3003503E2 /* LaunchScreen.storyboard */,
+				55A0717823BBC6C3003503E2 /* Main.storyboard */,
+				55A0715023BBC6A2003503E2 /* SceneDelegate.swift */,
 				55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */,
 				55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */,
 				55A0717223BBC6C2003503E2 /* VideoPlayer.swift */,
 				55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */,
 				55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */,
 				55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */,
+				55A0717623BBC6C3003503E2 /* ViewController.swift */,
 			);
 			path = FalconPlayer;
 			sourceTree = "<group>";
@@ -229,8 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55A0718123BBC6C3003503E2 /* AVPlayerExample.swift in Sources */,
-				55A0715323BBC6A2003503E2 /* ViewController.swift in Sources */,
+				55A0718123BBC6C3003503E2 /* ViewController.swift in Sources */,
 				55A0714F23BBC6A2003503E2 /* AppDelegate.swift in Sources */,
 				55A0717F23BBC6C3003503E2 /* UIImage+AnimatedGIF.swift in Sources */,
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,

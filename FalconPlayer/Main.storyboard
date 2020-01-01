@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Player Example-->
+        <!--View Controller-->
         <scene sceneID="D37-eF-E29">
             <objects>
-                <viewController id="stg-Zm-5BU" customClass="AVPlayerExample" customModule="FalconPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="stg-Zm-5BU" customClass="ViewController" customModule="FalconPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NHi-5b-mM5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
