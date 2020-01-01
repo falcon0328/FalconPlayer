@@ -14,13 +14,11 @@
 		55A0716623BBC6A3003503E2 /* FalconPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0716523BBC6A3003503E2 /* FalconPlayerTests.swift */; };
 		55A0717B23BBC6C3003503E2 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */; };
 		55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717223BBC6C2003503E2 /* VideoPlayer.swift */; };
-		55A0717E23BBC6C3003503E2 /* FullScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717323BBC6C3003503E2 /* FullScreen.storyboard */; };
 		55A0717F23BBC6C3003503E2 /* UIImage+AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */; };
 		55A0718023BBC6C3003503E2 /* VideoPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */; };
 		55A0718123BBC6C3003503E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717623BBC6C3003503E2 /* ViewController.swift */; };
 		55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */; };
 		55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717823BBC6C3003503E2 /* Main.storyboard */; };
-		55A0718423BBC6C3003503E2 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717923BBC6C3003503E2 /* FullScreenViewController.swift */; };
 		55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,13 +44,11 @@
 		55A0716723BBC6A3003503E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		55A0717223BBC6C2003503E2 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
-		55A0717323BBC6C3003503E2 /* FullScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FullScreen.storyboard; sourceTree = "<group>"; };
 		55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AnimatedGIF.swift"; sourceTree = "<group>"; };
 		55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerView.xib; sourceTree = "<group>"; };
 		55A0717623BBC6C3003503E2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AnimatedGIF.swift"; sourceTree = "<group>"; };
 		55A0717823BBC6C3003503E2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		55A0717923BBC6C3003503E2 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerTimeFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,8 +93,6 @@
 			children = (
 				55A0714E23BBC6A2003503E2 /* AppDelegate.swift */,
 				55A0715723BBC6A3003503E2 /* Assets.xcassets */,
-				55A0717323BBC6C3003503E2 /* FullScreen.storyboard */,
-				55A0717923BBC6C3003503E2 /* FullScreenViewController.swift */,
 				55A0715C23BBC6A3003503E2 /* Info.plist */,
 				55A0715923BBC6A3003503E2 /* LaunchScreen.storyboard */,
 				55A0717823BBC6C3003503E2 /* Main.storyboard */,
@@ -208,7 +202,6 @@
 				55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */,
 				55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */,
 				55A0718023BBC6C3003503E2 /* VideoPlayerView.xib in Resources */,
-				55A0717E23BBC6C3003503E2 /* FullScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +224,6 @@
 				55A0717F23BBC6C3003503E2 /* UIImage+AnimatedGIF.swift in Sources */,
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,
 				55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */,
-				55A0718423BBC6C3003503E2 /* FullScreenViewController.swift in Sources */,
 				55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */,
 				55A0715123BBC6A2003503E2 /* SceneDelegate.swift in Sources */,
 				55A0717B23BBC6C3003503E2 /* VideoPlayerView.swift in Sources */,

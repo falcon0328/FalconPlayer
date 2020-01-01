@@ -14,6 +14,7 @@ protocol VideoPlayerViewDelegate: class {
 }
 
 class VideoPlayerView: UIView {
+    var isExpand = false
     weak var delegate: VideoPlayerViewDelegate?
     
     @IBOutlet weak var videoPlayer: VideoPlayer!
@@ -66,11 +67,13 @@ class VideoPlayerView: UIView {
     }
     
     func expand() {
+        isExpand = true
         let collapseImage = UIImage(systemName: "arrow.down.right.and.arrow.up.left")
         self.expandCollapseButton.setBackgroundImage(collapseImage, for: .normal)
     }
     
     func collapse() {
+        isExpand = false
         let expandImage = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
         self.expandCollapseButton.setBackgroundImage(expandImage, for: .normal)
     }

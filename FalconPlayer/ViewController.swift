@@ -13,6 +13,7 @@ import CoreGraphics
 class ViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     var videoPlayerView: VideoPlayerView?
+    var videoPlayerViewFrame: CGRect!
     
     override var shouldAutorotate: Bool {
         return false
@@ -103,14 +104,33 @@ class ViewController: UIViewController {
 
 extension ViewController: VideoPlayerViewDelegate {
     func didTap(videoPlayerView: VideoPlayerView, componentName: String) {
-        videoPlayerView.delegate = nil
         videoPlayerView.pause()
-        videoPlayerView.expand()
         
-        let vc = UIStoryboard(name: "FullScreen", bundle: Bundle.main).instantiateInitialViewController() as! FullScreenViewController
-        vc.videoPlayerView = videoPlayerView
-        vc.modalPresentationStyle = .fullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true, completion: nil)
+        if videoPlayerView.isExpand {
+            // 縮小処理
+            videoPlayerView.collapse()
+            UIView.animate(withDuration: 0.5,
+                           animations: {
+                            self.playerView.transform = CGAffineTransform(rotationAngle: (0 * .pi) / 180)
+                            self.playerView.frame = self.videoPlayerViewFrame
+            }, completion: { finished in })
+        } else {
+            videoPlayerView.expand()
+            videoPlayerViewFrame = playerView.frame
+            // 拡大処理
+            UIView.animate(withDuration: 0.5,
+                           animations: {
+                            self.playerView!.translatesAutoresizingMaskIntoConstraints = true
+                            self.playerView.transform = CGAffineTransform(rotationAngle: (90 * .pi) / 180)
+                            self.playerView!.frame = CGRect(x: 0,
+                                                            y: 0,
+                                                            width: self.view.frame.width,
+                                                            height: self.view.frame.height)
+                            
+                
+            }, completion: { finished in })
+        }
+
+
     }
 }
