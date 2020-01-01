@@ -19,6 +19,10 @@ class ViewController: UIViewController {
         return false
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        let data = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "saya-volume", ofType: "gif")!))
