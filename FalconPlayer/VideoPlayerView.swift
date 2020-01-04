@@ -92,13 +92,16 @@ class VideoPlayerView: UIView {
         videoPlayer.seek(to: to, completionHandler: completionHandler)
     }
     
-    func expand() {
+    func expand(transform: CGAffineTransform) {
+         if isExpand {
+            return
+        }
         isExpand = true
         
-        videoPlayerViewFrame = self.superview!.frame
+        videoPlayerViewFrame = superview!.frame
         UIView.animate(withDuration: 0.5, animations: {
             self.superview?.translatesAutoresizingMaskIntoConstraints = true
-            self.superview?.transform = CGAffineTransform(rotationAngle: (90 * .pi) / 180)
+            self.superview?.transform = transform
             self.superview?.frame = CGRect(x: 0,
                                            y: 0,
                                            width: UIScreen.main.bounds.width,
@@ -109,13 +112,20 @@ class VideoPlayerView: UIView {
         expandCollapseButton.setBackgroundImage(collapseImage, for: .normal)
     }
     
+    func expand() {
+        expand(transform: calcurateTransform(deviceOrientation: UIDevice.current.orientation))
+    }
+    
     func collapse() {
+        if !isExpand {
+            return
+        }
         isExpand = false
         
         UIView.animate(withDuration: 0.5,
                        animations: {
                         self.superview?.translatesAutoresizingMaskIntoConstraints = true
-                        self.superview?.transform = CGAffineTransform(rotationAngle: (0 * .pi) / 180)
+                        self.superview?.transform = self.calcurateTransform(deviceOrientation: UIDevice.current.orientation)
                         self.superview?.frame = self.videoPlayerViewFrame
         }, completion: { finished in })
         
@@ -175,7 +185,7 @@ class VideoPlayerView: UIView {
         if isExpand {
             collapse()
         } else {
-            expand()
+            expand(transform: CGAffineTransform(rotationAngle: (90 * .pi) / 180))
         }
     }
     
@@ -241,6 +251,17 @@ class VideoPlayerView: UIView {
         }
     }
     
+    /// デバイスの向きに対応した回転角度
+    /// - Parameter deviceOrientation: デバイスの向き
+    func calcurateTransform(deviceOrientation: UIDeviceOrientation) -> CGAffineTransform {
+        if deviceOrientation == .landscapeLeft {
+            return CGAffineTransform(rotationAngle: (90 * .pi) / 180)
+        } else if deviceOrientation == .landscapeRight {
+            return CGAffineTransform(rotationAngle: (-90 * .pi) / 180)
+        }
+        return CGAffineTransform(rotationAngle: (0 * .pi) / 180)
+    }
+    
     @objc func viewWillEnterForeground(notification: Notification) {}
 
     
@@ -250,6 +271,21 @@ class VideoPlayerView: UIView {
     
     @objc func timerUpdate() {
         hideControlView()
+    }
+    
+    @objc func didChangeOrientation(notification: NSNotification){
+        seekbar.maximumValue = videoPlayer.duration
+        bufferbar.maximumValue = videoPlayer.duration
+        seekbar.value = videoPlayer.currentTime
+        bufferbar.value = videoPlayer.bufferLoadedRange
+        switch UIDevice.current.orientation {
+        case .landscapeLeft, .landscapeRight:
+            expand()
+        case .portrait, .portraitUpsideDown:
+            collapse()
+        default:
+            break
+        }
     }
 }
 

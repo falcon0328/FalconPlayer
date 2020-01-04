@@ -27,7 +27,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="dDm-q8-KN4" secondAttribute="bottom" id="Kv2-m4-v97"/>
                             <constraint firstItem="dDm-q8-KN4" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="hcY-IT-QNf"/>
