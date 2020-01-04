@@ -75,7 +75,7 @@ class VideoPlayerView: UIView {
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.didChangeOrientation(notification:)),
+                                               selector: #selector(didChangeOrientation(notification:)),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
     }
@@ -130,7 +130,7 @@ class VideoPlayerView: UIView {
         }, completion: { finished in })
         
         let expandImage = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
-        self.expandCollapseButton.setBackgroundImage(expandImage, for: .normal)
+        expandCollapseButton.setBackgroundImage(expandImage, for: .normal)
     }
     
     /// 円形画像を作成するプログラム
@@ -277,7 +277,7 @@ class VideoPlayerView: UIView {
 
     
     @objc func viewDidEnterBackground(notification: Notification) {
-        self.pause()
+        pause()
     }
     
     @objc func timerUpdate() {
@@ -309,8 +309,8 @@ extension VideoPlayerView: PlayerStateDelegate {
     
     func didUpdatePeriodicTimer(player: VideoPlayer) {
         currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: videoPlayer.currentTime)
-        self.seekbar.setValue(videoPlayer.currentTime, animated: true)
-        self.bufferbar.setValue(videoPlayer.bufferLoadedRange, animated: true)
+        seekbar.setValue(videoPlayer.currentTime, animated: true)
+        bufferbar.setValue(videoPlayer.bufferLoadedRange, animated: true)
     }
     
     func didChange(player: VideoPlayer, playerState: VideoPlayerState) {

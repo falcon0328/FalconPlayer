@@ -91,14 +91,14 @@ class VideoPlayer: UIView {
     }
     /// プレイヤー動画をバッファできている時間
     var bufferLoadedRange: Float {
-        guard let timeRangeValue = self.player?.currentItem?.loadedTimeRanges.last?.timeRangeValue else {
+        guard let timeRangeValue = player?.currentItem?.loadedTimeRanges.last?.timeRangeValue else {
             return 0.0
         }
         return Float(CMTimeGetSeconds(CMTimeAdd(timeRangeValue.start, timeRangeValue.duration)))
     }
     /// 動画尺
     var duration: Float {
-        guard let duration = self.player?.currentItem?.asset.duration else {
+        guard let duration = player?.currentItem?.asset.duration else {
             return 0.0
         }
         return Float(CMTimeGetSeconds(duration))
@@ -177,22 +177,22 @@ class VideoPlayer: UIView {
     }
     
     func setVideoGravity(videoGravity: AVLayerVideoGravity) {
-        (self.layer as! AVPlayerLayer).videoGravity = videoGravity
+        (layer as! AVPlayerLayer).videoGravity = videoGravity
     }
     
     func play() {
-        self.player?.play()
+        player?.play()
     }
     
     func pause() {
-        self.player?.pause()
+        player?.pause()
     }
     
     func seek(to: Double, completionHandler: @escaping (Bool) -> Void) {
-        self.player?.seek(to: CMTimeMakeWithSeconds(to, preferredTimescale: Int32(NSEC_PER_SEC)),
-                          toleranceBefore: CMTime.zero,
-                          toleranceAfter: CMTime.zero,
-                          completionHandler: completionHandler)
+        player?.seek(to: CMTimeMakeWithSeconds(to, preferredTimescale: Int32(NSEC_PER_SEC)),
+                     toleranceBefore: CMTime.zero,
+                     toleranceAfter: CMTime.zero,
+                     completionHandler: completionHandler)
     }
     
     func mute() {
@@ -209,7 +209,7 @@ class VideoPlayer: UIView {
     /// - Parameter playerItemStatus: AVPlayerItemのステータス
     func playerItemStatusChangeHandler(playerItemStatus: AVPlayerItem.Status) {
         if playerItemStatus == .readyToPlay {
-            self.delegate?.didPrepareToPlayer(player: self)
+            delegate?.didPrepareToPlayer(player: self)
         } else {
             playerState = .error
         }
