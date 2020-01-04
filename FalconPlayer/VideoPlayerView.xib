@@ -16,18 +16,19 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-Ch-ogV" customClass="VideoPlayer" customModule="FalconPlayer" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                     <subviews>
-                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ea-qM-JEh">
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ea-qM-JEh">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kbM-wg-mUT">
-                                    <rect key="frame" x="216" y="114.5" width="48" height="48"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.triangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="kbM-wg-mUT">
+                                    <rect key="frame" x="216" y="118.5" width="48" height="48"/>
                                     <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="hXg-Eu-ncT"/>
+                                        <constraint firstAttribute="width" constant="48" id="r0H-aR-cOV"/>
+                                    </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heS-IU-4ps">
-                                    <rect key="frame" x="8" y="171" width="464" height="33.5"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heS-IU-4ps">
+                                    <rect key="frame" x="161.5" y="169.5" width="157.5" height="33.5"/>
                                     <string key="text">動画の再生中にエラーが
 発生しました</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -36,6 +37,12 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="heS-IU-4ps" firstAttribute="centerX" secondItem="7ea-qM-JEh" secondAttribute="centerX" id="5Fp-mI-tRl"/>
+                                <constraint firstItem="kbM-wg-mUT" firstAttribute="centerX" secondItem="7ea-qM-JEh" secondAttribute="centerX" id="DOQ-uj-czR"/>
+                                <constraint firstItem="heS-IU-4ps" firstAttribute="top" secondItem="kbM-wg-mUT" secondAttribute="bottom" constant="2" id="GG2-Qf-0ny"/>
+                                <constraint firstItem="heS-IU-4ps" firstAttribute="centerY" secondItem="7ea-qM-JEh" secondAttribute="centerY" constant="26" id="gTg-mz-c7c"/>
+                            </constraints>
                         </view>
                         <view opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-aK-Ocm">
                             <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
@@ -195,10 +202,14 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7ea-qM-JEh" secondAttribute="trailing" id="0gB-RQ-AOV"/>
                         <constraint firstAttribute="bottom" secondItem="SHQ-aK-Ocm" secondAttribute="bottom" id="21L-sm-cil"/>
                         <constraint firstItem="SHQ-aK-Ocm" firstAttribute="leading" secondItem="XDS-Ch-ogV" secondAttribute="leading" id="NMU-0L-50A"/>
+                        <constraint firstAttribute="bottom" secondItem="7ea-qM-JEh" secondAttribute="bottom" id="RQV-CD-asC"/>
                         <constraint firstAttribute="trailing" secondItem="SHQ-aK-Ocm" secondAttribute="trailing" id="V7d-sd-iK8"/>
                         <constraint firstItem="SHQ-aK-Ocm" firstAttribute="top" secondItem="XDS-Ch-ogV" secondAttribute="top" id="gZt-5F-zka"/>
+                        <constraint firstItem="7ea-qM-JEh" firstAttribute="leading" secondItem="XDS-Ch-ogV" secondAttribute="leading" id="rrs-fs-gAZ"/>
+                        <constraint firstItem="7ea-qM-JEh" firstAttribute="top" secondItem="XDS-Ch-ogV" secondAttribute="top" id="vSg-MR-ppS"/>
                     </constraints>
                 </view>
             </subviews>
