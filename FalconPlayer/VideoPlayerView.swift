@@ -203,7 +203,7 @@ class VideoPlayerView: UIView {
     
     func showControlView() {
         UIView.animate(withDuration: 0.5, animations: {
-            self.controlView.alpha = 0.5
+            self.controlView.alpha = 0.8
             self.controlView.isHidden = false
         }, completion: { finished in })
     }
