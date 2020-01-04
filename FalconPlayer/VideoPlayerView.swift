@@ -125,7 +125,7 @@ class VideoPlayerView: UIView {
         UIView.animate(withDuration: 0.5,
                        animations: {
                         self.superview?.translatesAutoresizingMaskIntoConstraints = true
-                        self.superview?.transform = self.calcurateTransform(deviceOrientation: UIDevice.current.orientation)
+                        self.superview?.transform = CGAffineTransform(rotationAngle: (.pi * 0) / 180)
                         self.superview?.frame = self.videoPlayerViewFrame
         }, completion: { finished in })
         
