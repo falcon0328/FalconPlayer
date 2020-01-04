@@ -20,22 +20,22 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8x-TM-S0T">
-                                <rect key="frame" x="0.0" y="44" width="414" height="220"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="264"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Y8x-TM-S0T" secondAttribute="height" multiplier="207:110" id="ezc-1m-6g3"/>
+                                    <constraint firstAttribute="width" secondItem="Y8x-TM-S0T" secondAttribute="height" multiplier="69:44" id="Isa-pp-XXE"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="dDm-q8-KN4" secondAttribute="bottom" id="Kv2-m4-v97"/>
-                            <constraint firstItem="dDm-q8-KN4" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="hcY-IT-QNf"/>
-                            <constraint firstItem="dDm-q8-KN4" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="ixt-0o-wpi"/>
-                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="top" secondItem="0GA-ZU-WMn" secondAttribute="top" id="vIn-jj-OhO"/>
-                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="yr4-oA-mL4"/>
-                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="zd0-Tq-ueW"/>
-                            <constraint firstItem="dDm-q8-KN4" firstAttribute="top" secondItem="Y8x-TM-S0T" secondAttribute="bottom" id="zuC-9m-SoE"/>
+                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="17w-zM-J0J"/>
+                            <constraint firstItem="dDm-q8-KN4" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="1Dd-0Z-TVj"/>
+                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="top" secondItem="NHi-5b-mM5" secondAttribute="top" id="PTR-de-TkH"/>
+                            <constraint firstItem="dDm-q8-KN4" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="WiA-8O-znW"/>
+                            <constraint firstAttribute="bottom" secondItem="dDm-q8-KN4" secondAttribute="bottom" id="aX1-dU-Qkj"/>
+                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="knF-h4-25U"/>
+                            <constraint firstItem="dDm-q8-KN4" firstAttribute="top" secondItem="Y8x-TM-S0T" secondAttribute="bottom" id="kpC-Vv-Tm2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0GA-ZU-WMn"/>
                     </view>
