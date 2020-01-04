@@ -189,6 +189,17 @@ class VideoPlayerView: UIView {
         }
     }
     
+    @IBAction func didTapListButton(_ sender: Any) {
+        delegate?.didTap(videoPlayerView: self,
+                         componentName: "List")
+        guard let topVC = RootViewControllerGetter.getRootViewController() else {
+            return
+        }
+        topVC.present(SemiModalViewController.make(),
+                      animated: true,
+                      completion: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if videoPlayer.playerState == .error {
             // TODO: リロード

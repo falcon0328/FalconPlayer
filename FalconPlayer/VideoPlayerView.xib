@@ -115,6 +115,9 @@
                                     </constraints>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" backgroundImage="ellipsis.circle" catalog="system"/>
+                                    <connections>
+                                        <action selector="didTapListButton:" destination="1eD-Qv-9vk" eventType="touchUpInside" id="EDs-LS-Wzm"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7J-VJ-gBj">
                                     <rect key="frame" x="396" y="24" width="24" height="24"/>
