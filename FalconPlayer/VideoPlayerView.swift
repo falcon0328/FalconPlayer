@@ -17,6 +17,8 @@ class VideoPlayerView: UIView {
     var isExpand = false
     var videoPlayerViewFrame: CGRect!
     weak var delegate: VideoPlayerViewDelegate?
+    /// シーク処理の間かどうかを示すフラグ
+    var isSeeking = false
     
     @IBOutlet weak var videoPlayer: VideoPlayer!
     @IBOutlet weak var seekbar: UISlider!
@@ -88,7 +90,7 @@ class VideoPlayerView: UIView {
         videoPlayer.pause()
     }
     
-    func seek(to: Double, completionHandler: @escaping (Bool) -> Void) {
+    func seek(to: Float, completionHandler: @escaping (Bool) -> Void) {
         videoPlayer.seek(to: to, completionHandler: completionHandler)
     }
     
@@ -160,14 +162,14 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapForward10secButton(_ sender: Any) {
-        videoPlayer.seek(to: Double(videoPlayer.currentTime + 10.0),
+        videoPlayer.seek(to: videoPlayer.currentTime + 10.0,
                          completionHandler: { finished in
             
         })
     }
     
     @IBAction func didTapBackward10secButton(_ sender: Any) {
-        videoPlayer.seek(to: Double(videoPlayer.currentTime - 10.0),
+        videoPlayer.seek(to: videoPlayer.currentTime - 10.0,
                          completionHandler: { finished in
             
         })
@@ -198,6 +200,18 @@ class VideoPlayerView: UIView {
         topVC.present(SemiModalViewController.make(),
                       animated: true,
                       completion: nil)
+    }
+    
+    @IBAction func didTouchStartSeekbar(_ sender: Any) {
+        isSeeking = true
+    }
+    
+    @IBAction func didTouchFinishSeekbar(_ sender: Any) {
+        if !isSeeking {
+            return
+        }
+        isSeeking = false
+        seek(to: seekbar.value, completionHandler: {finish in })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -309,8 +323,10 @@ extension VideoPlayerView: PlayerStateDelegate {
     
     func didUpdatePeriodicTimer(player: VideoPlayer) {
         currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: videoPlayer.currentTime)
-        seekbar.setValue(videoPlayer.currentTime, animated: true)
         bufferbar.setValue(videoPlayer.bufferLoadedRange, animated: true)
+        if !isSeeking {
+            seekbar.setValue(videoPlayer.currentTime, animated: true)
+        }
     }
     
     func didChange(player: VideoPlayer, playerState: VideoPlayerState) {

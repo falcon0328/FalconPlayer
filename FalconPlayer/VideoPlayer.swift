@@ -188,8 +188,8 @@ class VideoPlayer: UIView {
         player?.pause()
     }
     
-    func seek(to: Double, completionHandler: @escaping (Bool) -> Void) {
-        player?.seek(to: CMTimeMakeWithSeconds(to, preferredTimescale: Int32(NSEC_PER_SEC)),
+    func seek(to: Float, completionHandler: @escaping (Bool) -> Void) {
+        player?.seek(to: CMTimeMakeWithSeconds(Float64(to), preferredTimescale: Int32(NSEC_PER_SEC)),
                      toleranceBefore: CMTime.zero,
                      toleranceAfter: CMTime.zero,
                      completionHandler: completionHandler)
