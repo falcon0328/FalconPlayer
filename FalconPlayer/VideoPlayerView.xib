@@ -239,6 +239,8 @@
                 <outlet property="durationLabel" destination="mPn-Gf-Gnb" id="Pxn-m2-ghy"/>
                 <outlet property="errorView" destination="7ea-qM-JEh" id="SaE-N2-ABy"/>
                 <outlet property="expandCollapseButton" destination="70J-M3-gru" id="KEb-QB-7R9"/>
+                <outlet property="gobackward10Button" destination="dPa-bP-05X" id="7dX-wi-UAn"/>
+                <outlet property="goforward10Button" destination="qhX-eD-1VL" id="e19-xD-e95"/>
                 <outlet property="muteUnmuteButton" destination="LGH-fN-H99" id="a99-EU-g1M"/>
                 <outlet property="playPauseButton" destination="nJg-F8-pdb" id="aFE-L2-Xe3"/>
                 <outlet property="seekbar" destination="4Xf-TW-Rb0" id="Rir-Q6-1nH"/>

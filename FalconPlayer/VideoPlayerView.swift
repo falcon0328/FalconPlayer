@@ -26,6 +26,8 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var controlView: UIView!
     @IBOutlet weak var playPauseButton: UIButton!
+    @IBOutlet weak var gobackward10Button: UIButton!
+    @IBOutlet weak var goforward10Button: UIButton!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var muteUnmuteButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
@@ -204,6 +206,7 @@ class VideoPlayerView: UIView {
     
     @IBAction func didTouchStartSeekbar(_ sender: Any) {
         isSeeking = true
+        hideButtons()
     }
     
     @IBAction func didTouchFinishSeekbar(_ sender: Any) {
@@ -212,6 +215,7 @@ class VideoPlayerView: UIView {
         }
         isSeeking = false
         seek(to: seekbar.value, completionHandler: {finish in })
+        showButtons()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -239,6 +243,21 @@ class VideoPlayerView: UIView {
         }, completion: { finished in
             self.controlView.isHidden = true
         })
+    }
+    
+    
+    /// 10秒戻る・進むボタンと再生停止ボタンを表示する
+    func showButtons() {
+        goforward10Button.isHidden = false
+        gobackward10Button.isHidden = false
+        playPauseButton.isHidden = false
+    }
+    
+    /// 10秒戻る・進むボタンと再生停止ボタンを非表示する
+    func hideButtons() {
+        goforward10Button.isHidden = true
+        gobackward10Button.isHidden = true
+        playPauseButton.isHidden = true
     }
     
     /// エラー画面を表示にする
