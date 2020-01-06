@@ -145,7 +145,7 @@
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" backgroundImage="arrow.clockwise" catalog="system"/>
                                 </button>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7kB-lI-ozo">
+                                <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7kB-lI-ozo">
                                     <rect key="frame" x="96" y="275" width="285" height="31"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -158,6 +158,13 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="hst-0e-Qkc"/>
                                     </constraints>
+                                    <connections>
+                                        <action selector="didTouchFinishSeekbar:" destination="1eD-Qv-9vk" eventType="touchUpInside" id="cGK-Dm-6iJ"/>
+                                        <action selector="didTouchFinishSeekbar:" destination="1eD-Qv-9vk" eventType="touchUpOutside" id="kDO-Ja-Dgg"/>
+                                        <action selector="didTouchFinishSeekbar:" destination="1eD-Qv-9vk" eventType="touchCancel" id="uyW-dn-25k"/>
+                                        <action selector="didTouchStartSeekbar:" destination="1eD-Qv-9vk" eventType="valueChanged" id="916-qr-ppL"/>
+                                        <action selector="didTouchStartSeekbar:" destination="1eD-Qv-9vk" eventType="touchDown" id="tY3-q8-d1O"/>
+                                    </connections>
                                 </slider>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70J-M3-gru">
                                     <rect key="frame" x="436" y="277.5" width="24" height="24"/>
