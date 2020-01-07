@@ -302,6 +302,7 @@ class VideoPlayerView: UIView {
     func showSeekThumbnailView() {
         seekThumbnailView.isHidden = false
         seekThumbnailView.updateCurrentTime(currentTime: seekbar.value)
+        seekThumbnailView.updateThumbnail(image: nil)
         updatePositionToSeekThumbnailView()
     }
     
