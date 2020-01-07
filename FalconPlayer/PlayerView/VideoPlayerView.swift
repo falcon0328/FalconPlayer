@@ -313,12 +313,18 @@ class VideoPlayerView: UIView {
     }
     
     func updatePlayPauseButtonImage() {
-        if videoPlayer.playerState == .playing {
+        switch videoPlayer.playerState {
+        case .playing:
             let pauseImage = UIImage(systemName: "pause")
             playPauseButton.setBackgroundImage(pauseImage, for: .normal)
-        } else {
+        case .pause:
             let playImage = UIImage(systemName: "play")
             playPauseButton.setBackgroundImage(playImage, for: .normal)
+        case .ended:
+            let reloadImage = UIImage(systemName: "arrow.clockwise")
+            playPauseButton.setBackgroundImage(reloadImage, for: .normal)
+        default:
+            break
         }
     }
     

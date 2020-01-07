@@ -209,7 +209,15 @@ class VideoPlayer: UIView {
         player?.seek(to: CMTimeMakeWithSeconds(Float64(to), preferredTimescale: Int32(NSEC_PER_SEC)),
                      toleranceBefore: CMTime.zero,
                      toleranceAfter: CMTime.zero,
-                     completionHandler: completionHandler)
+                     completionHandler: { [weak self] finished in
+                        guard let strongSelf = self else {
+                            return
+                        }
+                        if finished {
+                            strongSelf.playerState = .pause
+                        }
+                        completionHandler(finished)
+        })
     }
     
     func mute() {
