@@ -13,7 +13,9 @@ class VideoPlayerSeekThumbnailView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var currentTimeLabel: UILabel!
     
-    override func awakeFromNib() {
-        currentTimeLabel.layer.cornerRadius = 10.0
+    /// 表示中の再生時間を更新する
+    /// - Parameter currentTime: 再生時間
+    func updateCurrentTime(currentTime: Float) {
+        currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: currentTime)
     }
 }

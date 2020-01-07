@@ -75,6 +75,7 @@ class VideoPlayerView: UIView {
                                 for: .normal)
         controlView.isHidden = true
         controlView.alpha = 0
+        
         hideErrorView()
         
         let seekThumbnailView = Bundle.main.loadNibNamed("VideoPlayerSeekThumbnailView",
@@ -82,6 +83,7 @@ class VideoPlayerView: UIView {
                                                          options: nil)?.first as! VideoPlayerSeekThumbnailView
         controlView.addSubview(seekThumbnailView)
         self.seekThumbnailView = seekThumbnailView
+        hideSeekThumbnailView()
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewWillEnterForeground(notification:)),
@@ -293,6 +295,7 @@ class VideoPlayerView: UIView {
     /// シークサムネイルを表示する
     func showSeekThumbnailView() {
         seekThumbnailView.isHidden = false
+        seekThumbnailView.updateCurrentTime(currentTime: seekbar.value)
         updatePositionToSeekThumbnailView()
     }
     
@@ -301,6 +304,7 @@ class VideoPlayerView: UIView {
     /// シークサムネイルの表示位置の更新は呼ぶ
     func hideSeekThumbnailView() {
         seekThumbnailView.isHidden = true
+        seekThumbnailView.updateCurrentTime(currentTime: seekbar.value)
         updatePositionToSeekThumbnailView()
     }
     
