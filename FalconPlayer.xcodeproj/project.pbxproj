@@ -124,22 +124,16 @@
 		55A0714D23BBC6A2003503E2 /* FalconPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				552B323A23C0C61B00BD9753 /* SemiModal */,
-				55BB89BA23C4B536007D81F9 /* Seekbar */,
+				55BB89BD23C4C713007D81F9 /* Player */,
+				55BB89BE23C4C72D007D81F9 /* PlayerView */,
+				55BB89BF23C4C739007D81F9 /* Util */,
 				55A0714E23BBC6A2003503E2 /* AppDelegate.swift */,
 				55A0715723BBC6A3003503E2 /* Assets.xcassets */,
 				55A0715C23BBC6A3003503E2 /* Info.plist */,
 				55A0715923BBC6A3003503E2 /* LaunchScreen.storyboard */,
 				55A0717823BBC6C3003503E2 /* Main.storyboard */,
 				55A0715023BBC6A2003503E2 /* SceneDelegate.swift */,
-				55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */,
-				55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */,
-				55A0717223BBC6C2003503E2 /* VideoPlayer.swift */,
-				55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */,
-				55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */,
-				55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */,
 				55A0717623BBC6C3003503E2 /* ViewController.swift */,
-				552B324723C0D62D00BD9753 /* RootViewControllerGetter.swift */,
 			);
 			path = FalconPlayer;
 			sourceTree = "<group>";
@@ -161,6 +155,44 @@
 				55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */,
 			);
 			path = Seekbar;
+			sourceTree = "<group>";
+		};
+		55BB89BD23C4C713007D81F9 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				55A0717223BBC6C2003503E2 /* VideoPlayer.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		55BB89BE23C4C72D007D81F9 /* PlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */,
+				55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */,
+				55BB89BA23C4B536007D81F9 /* Seekbar */,
+			);
+			path = PlayerView;
+			sourceTree = "<group>";
+		};
+		55BB89BF23C4C739007D81F9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */,
+				552B324723C0D62D00BD9753 /* RootViewControllerGetter.swift */,
+				55BB89C023C4C766007D81F9 /* GIFAnimation */,
+				552B323A23C0C61B00BD9753 /* SemiModal */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		55BB89C023C4C766007D81F9 /* GIFAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				55A0717423BBC6C3003503E2 /* UIImage+AnimatedGIF.swift */,
+				55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */,
+			);
+			path = GIFAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
