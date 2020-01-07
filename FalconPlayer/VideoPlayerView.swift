@@ -21,7 +21,7 @@ class VideoPlayerView: UIView {
     var isSeeking = false
     
     @IBOutlet weak var videoPlayer: VideoPlayer!
-    @IBOutlet weak var seekbar: UISlider!
+    @IBOutlet weak var seekbar: VideoPlayerSeekbar!
     @IBOutlet weak var bufferbar: UISlider!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var controlView: UIView!

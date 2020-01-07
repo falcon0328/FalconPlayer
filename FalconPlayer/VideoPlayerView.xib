@@ -152,7 +152,7 @@
                                         <constraint firstAttribute="height" constant="30" id="yxK-1u-riv"/>
                                     </constraints>
                                 </slider>
-                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4Xf-TW-Rb0">
+                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4Xf-TW-Rb0" customClass="VideoPlayerSeekbar" customModule="FalconPlayer" customModuleProvider="target">
                                     <rect key="frame" x="96" y="275" width="285" height="31"/>
                                     <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -243,7 +243,7 @@
                 <outlet property="goforward10Button" destination="qhX-eD-1VL" id="e19-xD-e95"/>
                 <outlet property="muteUnmuteButton" destination="LGH-fN-H99" id="a99-EU-g1M"/>
                 <outlet property="playPauseButton" destination="nJg-F8-pdb" id="aFE-L2-Xe3"/>
-                <outlet property="seekbar" destination="4Xf-TW-Rb0" id="Rir-Q6-1nH"/>
+                <outlet property="seekbar" destination="4Xf-TW-Rb0" id="d3r-64-fak"/>
                 <outlet property="videoPlayer" destination="XDS-Ch-ogV" id="1Gv-u1-heg"/>
             </connections>
             <point key="canvasLocation" x="-124.6376811594203" y="-85.714285714285708"/>
