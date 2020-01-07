@@ -17,6 +17,8 @@ enum VideoPlayerState: Int {
     case playing
     /// 停止
     case pause
+    /// 再生完了
+    case ended
     /// エラー
     case error
 }
@@ -122,11 +124,13 @@ class VideoPlayer: UIView {
     deinit {
         removePeriodicTimeObserver()
         removePlayerObserver()
+        removeDidPlayToEndTimeNotification()
     }
     
     func setPlayer(player: AVPlayer?) {
         self.player = player
         setPlayerObserver()
+        setDidPlayToEndTimeNotification()
     }
     
     func setPeriodicTimeObserver(interval: CMTime) {
@@ -176,6 +180,19 @@ class VideoPlayer: UIView {
         playerRateObservation = nil
     }
     
+    func setDidPlayToEndTimeNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didPlayToEndTimeNotification(notification:)),
+                                               name: Notification.Name.AVPlayerItemDidPlayToEndTime,
+                                               object: player?.currentItem)
+    }
+    
+    func removeDidPlayToEndTimeNotification() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name.AVPlayerItemDidPlayToEndTime,
+                                                  object: player?.currentItem)
+    }
+    
     func setVideoGravity(videoGravity: AVLayerVideoGravity) {
         (layer as! AVPlayerLayer).videoGravity = videoGravity
     }
@@ -219,9 +236,14 @@ class VideoPlayer: UIView {
     /// - Parameter rate:
     func playerRateChangeHandler(rate: Float) {
         if rate == 0.0 {
+            if playerState == .ended { return }
             playerState = .pause
         } else {
             playerState = .playing
         }
+    }
+    
+    @objc func didPlayToEndTimeNotification(notification: Notification) {
+        playerState = .ended
     }
 }
