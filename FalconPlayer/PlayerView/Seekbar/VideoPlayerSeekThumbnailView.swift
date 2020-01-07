@@ -13,6 +13,12 @@ class VideoPlayerSeekThumbnailView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var currentTimeLabel: UILabel!
     
+    /// サムネイルの更新
+    /// - Parameter image: サムネイル
+    func updateThumbnail(image: UIImage?) {
+        imageView.image = image
+    }
+    
     /// 表示中の再生時間を更新する
     /// - Parameter currentTime: 再生時間
     func updateCurrentTime(currentTime: Float) {

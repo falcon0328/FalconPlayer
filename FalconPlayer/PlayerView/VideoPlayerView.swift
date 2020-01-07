@@ -310,8 +310,6 @@ class VideoPlayerView: UIView {
     /// シークサムネイルの表示位置の更新は呼ぶ
     func hideSeekThumbnailView() {
         seekThumbnailView.isHidden = true
-        seekThumbnailView.updateCurrentTime(currentTime: seekbar.value)
-        updatePositionToSeekThumbnailView()
     }
     
     /// シークサムネイルの位置を更新する
@@ -324,6 +322,10 @@ class VideoPlayerView: UIView {
                                          y: y,
                                          width: seekThumbnailView.frame.width,
                                          height: seekThumbnailView.frame.height)
+    }
+    
+    func updateImageToSeekThumbnailView() {
+        
     }
     
     func updatePlayPauseButtonImage() {
