@@ -103,6 +103,11 @@ class VideoPlayerView: UIView {
         videoPlayer.seek(to: to, completionHandler: completionHandler)
     }
     
+    /// 動画を最初から再生する
+    func replay() {
+        videoPlayer.replay()
+    }
+    
     func expand(transform: CGAffineTransform) {
          if isExpand {
             return
@@ -162,10 +167,15 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapPlayPauseButton(_ sender: Any) {
-        if videoPlayer.playerState == .playing {
-            videoPlayer.pause()
-        } else {
-            videoPlayer.play()
+        switch videoPlayer.playerState {
+        case .playing:
+            pause()
+        case .pause:
+            play()
+        case .ended:
+            replay()
+        default:
+            break
         }
         updatePlayPauseButtonImage()
     }

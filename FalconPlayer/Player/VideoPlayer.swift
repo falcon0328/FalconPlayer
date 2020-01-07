@@ -213,10 +213,17 @@ class VideoPlayer: UIView {
                         guard let strongSelf = self else {
                             return
                         }
-                        if finished {
-                            strongSelf.playerState = .pause
-                        }
+                        strongSelf.playerState = .pause
                         completionHandler(finished)
+        })
+    }
+    
+    func replay() {
+        seek(to: 0.0, completionHandler: { [weak self] finished in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.play()
         })
     }
     
