@@ -14,6 +14,8 @@ protocol VideoPlayerViewDelegate: class {
 }
 
 class VideoPlayerView: UIView {
+    static let SEEKBAR_THUMB_SIZE: CGFloat = 12.0
+    
     var isExpand = false
     var videoPlayerViewFrame: CGRect!
     weak var delegate: VideoPlayerViewDelegate?
@@ -32,6 +34,9 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var muteUnmuteButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var expandCollapseButton: UIButton!
+    
+    /// シークサムネイルを表示するView
+    var seekThumbnailView: VideoPlayerSeekThumbnailView!
     
     deinit {
         NotificationCenter.default.removeObserver(self,
@@ -60,16 +65,24 @@ class VideoPlayerView: UIView {
         seekbar.minimumValue = 0
         seekbar.maximumValue = 0
         seekbar.setValue(0, animated: false)
-        seekbar.setThumbImage(makeCircleWith(size: CGSize(width: 12, height: 12), backgroundColor: .red), for: .normal)
+        seekbar.setThumbImage(makeCircleWith(size: CGSize(width: VideoPlayerView.SEEKBAR_THUMB_SIZE,height: VideoPlayerView.SEEKBAR_THUMB_SIZE),backgroundColor: .red),
+                              for: .normal)
         bufferbar.isUserInteractionEnabled = false
         bufferbar.minimumValue = 0
         bufferbar.maximumValue = 0
         bufferbar.setValue(0, animated: false)
-        bufferbar.setThumbImage(makeCircleWith(size: CGSize(width: 0.01, height: 0.01), backgroundColor: .white), for: .normal)
+        bufferbar.setThumbImage(makeCircleWith(size: CGSize(width: 0.01, height: 0.01), backgroundColor: .white),
+                                for: .normal)
         controlView.isHidden = true
         controlView.alpha = 0
         hideErrorView()
         
+        let seekThumbnailView = Bundle.main.loadNibNamed("VideoPlayerSeekThumbnailView",
+                                                         owner: self,
+                                                         options: nil)?.first as! VideoPlayerSeekThumbnailView
+        controlView.addSubview(seekThumbnailView)
+        self.seekThumbnailView = seekThumbnailView
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewWillEnterForeground(notification:)),
                                                name: UIApplication.willEnterForegroundNotification,
@@ -207,6 +220,7 @@ class VideoPlayerView: UIView {
     @IBAction func didTouchStartSeekbar(_ sender: Any) {
         isSeeking = true
         hideButtons()
+        showSeekThumbnailView()
     }
     
     @IBAction func didTouchFinishSeekbar(_ sender: Any) {
@@ -216,6 +230,7 @@ class VideoPlayerView: UIView {
         isSeeking = false
         seek(to: seekbar.value, completionHandler: {finish in })
         showButtons()
+        hideSeekThumbnailView()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -273,6 +288,32 @@ class VideoPlayerView: UIView {
         errorView.isHidden = true
         seekbar.isHidden = false
         bufferbar.isHidden = false
+    }
+    
+    /// シークサムネイルを表示する
+    func showSeekThumbnailView() {
+        seekThumbnailView.isHidden = false
+        updatePositionToSeekThumbnailView()
+    }
+    
+    /// シークサムネイルを非表示にする
+    ///
+    /// シークサムネイルの表示位置の更新は呼ぶ
+    func hideSeekThumbnailView() {
+        seekThumbnailView.isHidden = true
+        updatePositionToSeekThumbnailView()
+    }
+    
+    /// シークサムネイルの位置を更新する
+    func updatePositionToSeekThumbnailView() {
+        seekThumbnailView.translatesAutoresizingMaskIntoConstraints = true
+        let seekbarThumbFrameCenterX = seekbar.thumbFrame.origin.x + VideoPlayerView.SEEKBAR_THUMB_SIZE / 2.0
+        let x = seekbarThumbFrameCenterX - seekThumbnailView.frame.width / 2.0
+        let y = seekbar.thumbFrame.origin.y - seekThumbnailView.frame.height - 16.0
+        seekThumbnailView.frame = CGRect(x: x,
+                                         y: y,
+                                         width: seekThumbnailView.frame.width,
+                                         height: seekThumbnailView.frame.height)
     }
     
     func updatePlayPauseButtonImage() {

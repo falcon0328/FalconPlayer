@@ -28,6 +28,8 @@
 		55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */; };
 		55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717823BBC6C3003503E2 /* Main.storyboard */; };
 		55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */; };
+		55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */; };
+		55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AnimatedGIF.swift"; sourceTree = "<group>"; };
 		55A0717823BBC6C3003503E2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerTimeFormatter.swift; sourceTree = "<group>"; };
+		55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerSeekThumbnailView.xib; sourceTree = "<group>"; };
+		55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSeekThumbnailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				552B323A23C0C61B00BD9753 /* SemiModal */,
+				55BB89BA23C4B536007D81F9 /* Seekbar */,
 				55A0714E23BBC6A2003503E2 /* AppDelegate.swift */,
 				55A0715723BBC6A3003503E2 /* Assets.xcassets */,
 				55A0715C23BBC6A3003503E2 /* Info.plist */,
@@ -131,7 +136,6 @@
 				55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */,
 				55A0717223BBC6C2003503E2 /* VideoPlayer.swift */,
 				55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */,
-				552B324923C4A2BC00BD9753 /* VideoPlayerSeekbar.swift */,
 				55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */,
 				55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */,
 				55A0717623BBC6C3003503E2 /* ViewController.swift */,
@@ -147,6 +151,16 @@
 				55A0716723BBC6A3003503E2 /* Info.plist */,
 			);
 			path = FalconPlayerTests;
+			sourceTree = "<group>";
+		};
+		55BB89BA23C4B536007D81F9 /* Seekbar */ = {
+			isa = PBXGroup;
+			children = (
+				552B324923C4A2BC00BD9753 /* VideoPlayerSeekbar.swift */,
+				55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */,
+				55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */,
+			);
+			path = Seekbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */,
 				55A0715B23BBC6A3003503E2 /* LaunchScreen.storyboard in Resources */,
 				55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */,
 				55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */,
@@ -260,6 +275,7 @@
 				552B323E23C0C66000BD9753 /* OverCurrentTransitioningInteractor.swift in Sources */,
 				552B324A23C4A2BC00BD9753 /* VideoPlayerSeekbar.swift in Sources */,
 				55A0717F23BBC6C3003503E2 /* UIImage+AnimatedGIF.swift in Sources */,
+				55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */,
 				552B324623C0C68800BD9753 /* SemiModalViewController.swift in Sources */,
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,
 				552B324223C0C66D00BD9753 /* DismissAnimator.swift in Sources */,
