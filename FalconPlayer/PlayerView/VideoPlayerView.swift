@@ -166,6 +166,10 @@ class VideoPlayerView: UIView {
         return image
     }
     
+    @IBAction func didTapReplayButton(_ sender: Any) {
+        replay()
+    }
+    
     @IBAction func didTapPlayPauseButton(_ sender: Any) {
         switch videoPlayer.playerState {
         case .playing:
