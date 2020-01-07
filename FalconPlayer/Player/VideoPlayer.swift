@@ -213,7 +213,9 @@ class VideoPlayer: UIView {
                         guard let strongSelf = self else {
                             return
                         }
-                        strongSelf.playerState = .pause
+                        if strongSelf.playerState == .ended {
+                            strongSelf.playerState = .pause
+                        }
                         completionHandler(finished)
         })
     }
