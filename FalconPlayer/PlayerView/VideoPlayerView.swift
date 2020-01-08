@@ -317,16 +317,19 @@ class VideoPlayerView: UIView {
     func updatePositionToSeekThumbnailView() {
         seekThumbnailView.translatesAutoresizingMaskIntoConstraints = true
         let seekbarThumbFrameCenterX = seekbar.thumbFrame.origin.x + VideoPlayerView.SEEKBAR_THUMB_SIZE / 2.0
-        let x = seekbarThumbFrameCenterX - seekThumbnailView.frame.width / 2.0
+        let tmpX: CGFloat = seekbarThumbFrameCenterX - seekThumbnailView.frame.width / 2.0
+        // シークサムネイルがシークバーの中で完結するように座標を修正
+        var x = tmpX
+        if tmpX <= seekbar.frame.origin.x {
+            x = seekbar.frame.origin.x
+        } else if (tmpX + seekThumbnailView.frame.width) >= (seekbar.frame.origin.x + seekbar.frame.width) {
+            x = (seekbar.frame.origin.x + seekbar.frame.width) - seekThumbnailView.frame.width
+        }
         let y = seekbar.thumbFrame.origin.y - seekThumbnailView.frame.height - 16.0
         seekThumbnailView.frame = CGRect(x: x,
                                          y: y,
                                          width: seekThumbnailView.frame.width,
                                          height: seekThumbnailView.frame.height)
-    }
-    
-    func updateImageToSeekThumbnailView() {
-        
     }
     
     func updatePlayPauseButtonImage() {
