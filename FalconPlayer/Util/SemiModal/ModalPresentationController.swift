@@ -37,8 +37,26 @@ final class ModalPresentationController: UIPresentationController {
 
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
-
+        updateContainerViewBoundsIfNeeded(deviceOrientation: UIDevice.current.orientation)
         overlayView.frame = containerView!.bounds
         presentedView!.frame = frameOfPresentedViewInContainerView
+    }
+    
+    /// ContainerViewのBoundsを更新
+    /// - Parameter deviceOrientation: デバイスの向き
+    func updateContainerViewBoundsIfNeeded(deviceOrientation: UIDeviceOrientation) {
+        guard let containerView = self.containerView else {
+            return
+        }
+        // containerViewを操作できるようにする
+        containerView.translatesAutoresizingMaskIntoConstraints = true
+        // transformとboundsの処理
+        if deviceOrientation == .landscapeLeft {
+            containerView.transform = CGAffineTransform(rotationAngle: (90 * .pi) / 180)
+            containerView.bounds = CGRect(x: 0, y: 0, width: containerView.bounds.height, height: containerView.bounds.width)
+        } else if deviceOrientation == .landscapeRight {
+            containerView.transform = CGAffineTransform(rotationAngle: (-90 * .pi) / 180)
+            containerView.bounds = CGRect(x: 0, y: 0, width: containerView.bounds.height, height: containerView.bounds.width)
+        }
     }
 }
