@@ -27,6 +27,8 @@
 		55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717823BBC6C3003503E2 /* Main.storyboard */; };
 		55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */; };
 		55ADDA3B23C62B9300D99D34 /* SemiModalBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */; };
+		55ADDA3E23C6318B00D99D34 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ADDA3C23C6318B00D99D34 /* SettingTableViewCell.swift */; };
+		55ADDA3F23C6318B00D99D34 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADDA3D23C6318B00D99D34 /* SettingTableViewCell.xib */; };
 		55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */; };
 		55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */; };
 		55FA50BF23C617E800740790 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FA50BE23C617E800740790 /* SettingViewController.xib */; };
@@ -68,6 +70,8 @@
 		55A0717823BBC6C3003503E2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerTimeFormatter.swift; sourceTree = "<group>"; };
 		55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiModalBaseViewController.swift; sourceTree = "<group>"; };
+		55ADDA3C23C6318B00D99D34 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		55ADDA3D23C6318B00D99D34 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerSeekThumbnailView.xib; sourceTree = "<group>"; };
 		55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSeekThumbnailView.swift; sourceTree = "<group>"; };
 		55FA50BE23C617E800740790 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 			children = (
 				55FA50BE23C617E800740790 /* SettingViewController.xib */,
 				55FA50C023C6259A00740790 /* SettingViewController.swift */,
+				55ADDA3D23C6318B00D99D34 /* SettingTableViewCell.xib */,
+				55ADDA3C23C6318B00D99D34 /* SettingTableViewCell.swift */,
 			);
 			path = SettingView;
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 				55A0715B23BBC6A3003503E2 /* LaunchScreen.storyboard in Resources */,
 				55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */,
 				55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */,
+				55ADDA3F23C6318B00D99D34 /* SettingTableViewCell.xib in Resources */,
 				55A0718023BBC6C3003503E2 /* VideoPlayerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +329,7 @@
 				55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */,
 				55FA50C123C6259A00740790 /* SettingViewController.swift in Sources */,
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,
+				55ADDA3E23C6318B00D99D34 /* SettingTableViewCell.swift in Sources */,
 				552B324223C0C66D00BD9753 /* DismissAnimator.swift in Sources */,
 				55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */,
 				55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */,

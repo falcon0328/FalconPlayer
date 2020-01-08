@@ -8,8 +8,20 @@
 
 import UIKit
 
+/// 設定画面で表示するデータを表す列挙型
+struct SettingTableViewCellData {
+    /// 画像
+    let image: UIImage?
+    /// カテゴリ
+    let category: String?
+    /// 値
+    let value: String?
+}
+
 class SettingViewController: SemiModalBaseViewController {
     var tableViewContentOffsetY: CGFloat = 0.0
+    /// 設定画面に表示するセル一覧
+    var cellDatas: [SettingTableViewCellData] = []
     
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var headerView: UIView!
@@ -19,12 +31,14 @@ class SettingViewController: SemiModalBaseViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         transitioningDelegate = self
         modalPresentationStyle = .custom
+        setupDatas()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         transitioningDelegate = self
         modalPresentationStyle = .custom
+        setupDatas()
     }
     
     /// VIewをBundleから生成する
@@ -47,7 +61,24 @@ class SettingViewController: SemiModalBaseViewController {
         setupViews()
     }
     
-    private func setupViews() {
+    /// テーブルに表示するデータの用意
+    func setupDatas() {
+        let bitrateCell = SettingTableViewCellData(image: UIImage(systemName: "gear"),
+                                                   category: "画質",
+                                                   value: nil)
+        let subtitleCell = SettingTableViewCellData(image: UIImage(systemName: "text.bubble"),
+                                                    category: "字幕",
+                                                    value: nil)
+        let rateCell = SettingTableViewCellData(image: UIImage(systemName: "memories"),
+                                                category: "再生速度",
+                                                value: nil)
+        let vrCell = SettingTableViewCellData(image: UIImage(systemName: "eyeglasses"),
+                                                category: "VRで再生",
+                                                value: nil)
+        cellDatas = [bitrateCell, subtitleCell, rateCell, vrCell]
+    }
+    
+    func setupViews() {
         headerView.layer.cornerRadius = 8.0
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         let headerGesture = UIPanGestureRecognizer(target: self, action: #selector(didScrollHeader(_:)))
@@ -59,6 +90,7 @@ class SettingViewController: SemiModalBaseViewController {
         let tableViewGesture = UIPanGestureRecognizer(target: self, action: #selector(didScrollTableView(_:)))
         tableViewGesture.delegate = self
         tableView.addGestureRecognizer(tableViewGesture)
+        tableView.register(UINib(nibName: "SettingTableViewCell", bundle: nil), forCellReuseIdentifier: "SettingTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -83,12 +115,14 @@ class SettingViewController: SemiModalBaseViewController {
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return cellDatas.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = String(indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as! SettingTableViewCell
+        cell.iconImageView.image = cellDatas[indexPath.row].image
+        cell.categoryLabel.text = cellDatas[indexPath.row].category
+        cell.valueLabel.text = cellDatas[indexPath.row].value
         return cell
     }
 
