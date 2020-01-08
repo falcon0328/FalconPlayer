@@ -220,7 +220,7 @@ class VideoPlayerView: UIView {
         guard let topVC = RootViewControllerGetter.getRootViewController() else {
             return
         }
-        topVC.present(SemiModalViewController.make(),
+        topVC.present(SettingViewController.make(),
                       animated: true,
                       completion: nil)
     }

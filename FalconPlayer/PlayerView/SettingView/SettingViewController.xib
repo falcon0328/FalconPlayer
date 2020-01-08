@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="Tqy-0K-aaX" customClass="SettingViewController" customModule="FalconPlayer" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="pfg-d9-9wE">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BDB-jt-aa9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKN-bk-h1c">
+                        <rect key="frame" x="0.0" y="616" width="375" height="196"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="196" id="ubM-Zl-OFO"/>
+                        </constraints>
+                    </tableView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1SZ-DQ-UoE">
+                        <rect key="frame" x="0.0" y="572" width="375" height="44"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwr-KB-t1z">
+                                <rect key="frame" x="157.66666666666666" y="8" width="60" height="8"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="JrX-68-0mW"/>
+                                    <constraint firstAttribute="height" constant="8" id="m0y-AF-hgo"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Fwr-KB-t1z" firstAttribute="top" secondItem="1SZ-DQ-UoE" secondAttribute="top" constant="8" id="Jbj-Us-1OW"/>
+                            <constraint firstAttribute="height" constant="44" id="ShT-J2-bEI"/>
+                            <constraint firstItem="Fwr-KB-t1z" firstAttribute="centerX" secondItem="1SZ-DQ-UoE" secondAttribute="centerX" id="alw-el-IgV"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="fKN-bk-h1c" secondAttribute="bottom" id="3he-jI-y4v"/>
+                    <constraint firstItem="1SZ-DQ-UoE" firstAttribute="leading" secondItem="lbl-ut-9Za" secondAttribute="leading" id="5kp-do-Oeb"/>
+                    <constraint firstItem="fKN-bk-h1c" firstAttribute="leading" secondItem="lbl-ut-9Za" secondAttribute="leading" id="6Yd-zO-d7H"/>
+                    <constraint firstItem="BDB-jt-aa9" firstAttribute="leading" secondItem="lbl-ut-9Za" secondAttribute="leading" id="6xA-Wb-EPh"/>
+                    <constraint firstItem="1SZ-DQ-UoE" firstAttribute="top" secondItem="BDB-jt-aa9" secondAttribute="bottom" id="Lna-ri-6C0"/>
+                    <constraint firstItem="fKN-bk-h1c" firstAttribute="top" secondItem="1SZ-DQ-UoE" secondAttribute="bottom" id="e4Q-M1-Je2"/>
+                    <constraint firstItem="BDB-jt-aa9" firstAttribute="top" secondItem="pfg-d9-9wE" secondAttribute="top" id="ezn-7Q-ee4"/>
+                    <constraint firstItem="1SZ-DQ-UoE" firstAttribute="trailing" secondItem="lbl-ut-9Za" secondAttribute="trailing" id="mGc-eF-jQv"/>
+                    <constraint firstItem="BDB-jt-aa9" firstAttribute="trailing" secondItem="lbl-ut-9Za" secondAttribute="trailing" id="uUH-eh-5mT"/>
+                    <constraint firstItem="fKN-bk-h1c" firstAttribute="trailing" secondItem="lbl-ut-9Za" secondAttribute="trailing" id="xtV-v9-cVa"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="lbl-ut-9Za"/>
+            </view>
+            <connections>
+                <outlet property="backgroundView" destination="BDB-jt-aa9" id="t4v-4S-uWi"/>
+                <outlet property="headerView" destination="1SZ-DQ-UoE" id="VBH-le-NMQ"/>
+                <outlet property="tableView" destination="fKN-bk-h1c" id="y8L-4U-fet"/>
+            </connections>
+            <point key="canvasLocation" x="-540" y="124.8768472906404"/>
+        </viewController>
+    </objects>
+</document>

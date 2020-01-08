@@ -11,8 +11,6 @@
 		552B323F23C0C66000BD9753 /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B323C23C0C66000BD9753 /* ModalPresentationController.swift */; };
 		552B324023C0C66000BD9753 /* OverCurrentTransitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B323D23C0C66000BD9753 /* OverCurrentTransitionable.swift */; };
 		552B324223C0C66D00BD9753 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B324123C0C66D00BD9753 /* DismissAnimator.swift */; };
-		552B324523C0C68800BD9753 /* SemiModalViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 552B324323C0C68800BD9753 /* SemiModalViewController.storyboard */; };
-		552B324623C0C68800BD9753 /* SemiModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B324423C0C68800BD9753 /* SemiModalViewController.swift */; };
 		552B324823C0D62D00BD9753 /* RootViewControllerGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B324723C0D62D00BD9753 /* RootViewControllerGetter.swift */; };
 		552B324A23C4A2BC00BD9753 /* VideoPlayerSeekbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B324923C4A2BC00BD9753 /* VideoPlayerSeekbar.swift */; };
 		55A0714F23BBC6A2003503E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0714E23BBC6A2003503E2 /* AppDelegate.swift */; };
@@ -28,8 +26,11 @@
 		55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */; };
 		55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0717823BBC6C3003503E2 /* Main.storyboard */; };
 		55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */; };
+		55ADDA3B23C62B9300D99D34 /* SemiModalBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */; };
 		55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */; };
 		55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */; };
+		55FA50BF23C617E800740790 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FA50BE23C617E800740790 /* SettingViewController.xib */; };
+		55FA50C123C6259A00740790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FA50C023C6259A00740790 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +48,6 @@
 		552B323C23C0C66000BD9753 /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
 		552B323D23C0C66000BD9753 /* OverCurrentTransitionable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverCurrentTransitionable.swift; sourceTree = "<group>"; };
 		552B324123C0C66D00BD9753 /* DismissAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
-		552B324323C0C68800BD9753 /* SemiModalViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SemiModalViewController.storyboard; sourceTree = "<group>"; };
-		552B324423C0C68800BD9753 /* SemiModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemiModalViewController.swift; sourceTree = "<group>"; };
 		552B324723C0D62D00BD9753 /* RootViewControllerGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewControllerGetter.swift; sourceTree = "<group>"; };
 		552B324923C4A2BC00BD9753 /* VideoPlayerSeekbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSeekbar.swift; sourceTree = "<group>"; };
 		55A0714B23BBC6A2003503E2 /* FalconPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FalconPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,8 +67,11 @@
 		55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AnimatedGIF.swift"; sourceTree = "<group>"; };
 		55A0717823BBC6C3003503E2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerTimeFormatter.swift; sourceTree = "<group>"; };
+		55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiModalBaseViewController.swift; sourceTree = "<group>"; };
 		55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerSeekThumbnailView.xib; sourceTree = "<group>"; };
 		55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSeekThumbnailView.swift; sourceTree = "<group>"; };
+		55FA50BE23C617E800740790 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		55FA50C023C6259A00740790 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +95,7 @@
 		552B323A23C0C61B00BD9753 /* SemiModal */ = {
 			isa = PBXGroup;
 			children = (
-				552B324323C0C68800BD9753 /* SemiModalViewController.storyboard */,
-				552B324423C0C68800BD9753 /* SemiModalViewController.swift */,
+				55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */,
 				552B324123C0C66D00BD9753 /* DismissAnimator.swift */,
 				552B323C23C0C66000BD9753 /* ModalPresentationController.swift */,
 				552B323D23C0C66000BD9753 /* OverCurrentTransitionable.swift */,
@@ -171,6 +172,7 @@
 				55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */,
 				55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */,
 				55BB89BA23C4B536007D81F9 /* Seekbar */,
+				55FA50BD23C6177F00740790 /* SettingView */,
 			);
 			path = PlayerView;
 			sourceTree = "<group>";
@@ -193,6 +195,15 @@
 				55A0717723BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift */,
 			);
 			path = GIFAnimation;
+			sourceTree = "<group>";
+		};
+		55FA50BD23C6177F00740790 /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				55FA50BE23C617E800740790 /* SettingViewController.xib */,
+				55FA50C023C6259A00740790 /* SettingViewController.swift */,
+			);
+			path = SettingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,11 +288,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */,
+				55FA50BF23C617E800740790 /* SettingViewController.xib in Resources */,
 				55A0715B23BBC6A3003503E2 /* LaunchScreen.storyboard in Resources */,
 				55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */,
 				55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */,
 				55A0718023BBC6C3003503E2 /* VideoPlayerView.xib in Resources */,
-				552B324523C0C68800BD9753 /* SemiModalViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,13 +313,14 @@
 				552B324023C0C66000BD9753 /* OverCurrentTransitionable.swift in Sources */,
 				55A0718123BBC6C3003503E2 /* ViewController.swift in Sources */,
 				552B323F23C0C66000BD9753 /* ModalPresentationController.swift in Sources */,
+				55ADDA3B23C62B9300D99D34 /* SemiModalBaseViewController.swift in Sources */,
 				552B324823C0D62D00BD9753 /* RootViewControllerGetter.swift in Sources */,
 				55A0714F23BBC6A2003503E2 /* AppDelegate.swift in Sources */,
 				552B323E23C0C66000BD9753 /* OverCurrentTransitioningInteractor.swift in Sources */,
 				552B324A23C4A2BC00BD9753 /* VideoPlayerSeekbar.swift in Sources */,
 				55A0717F23BBC6C3003503E2 /* UIImage+AnimatedGIF.swift in Sources */,
 				55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */,
-				552B324623C0C68800BD9753 /* SemiModalViewController.swift in Sources */,
+				55FA50C123C6259A00740790 /* SettingViewController.swift in Sources */,
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,
 				552B324223C0C66D00BD9753 /* DismissAnimator.swift in Sources */,
 				55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */,
