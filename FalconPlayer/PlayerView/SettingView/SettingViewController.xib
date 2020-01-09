@@ -29,11 +29,11 @@
                         <rect key="frame" x="0.0" y="572" width="375" height="44"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwr-KB-t1z">
-                                <rect key="frame" x="157.66666666666666" y="8" width="60" height="8"/>
+                                <rect key="frame" x="157.66666666666666" y="28" width="60" height="8"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="JrX-68-0mW"/>
-                                    <constraint firstAttribute="height" constant="8" id="m0y-AF-hgo"/>
+                                    <constraint firstAttribute="width" constant="60" id="Se5-dD-4ly"/>
+                                    <constraint firstAttribute="height" constant="8" id="fDU-ob-qpM"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -42,11 +42,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Fwr-KB-t1z" firstAttribute="top" secondItem="1SZ-DQ-UoE" secondAttribute="top" constant="8" id="Jbj-Us-1OW"/>
+                            <constraint firstItem="Fwr-KB-t1z" firstAttribute="centerX" secondItem="1SZ-DQ-UoE" secondAttribute="centerX" id="IdA-Bb-aft"/>
+                            <constraint firstAttribute="bottom" secondItem="Fwr-KB-t1z" secondAttribute="bottom" constant="8" id="LcB-hS-xY9"/>
                             <constraint firstAttribute="height" constant="44" id="ShT-J2-bEI"/>
-                            <constraint firstItem="Fwr-KB-t1z" firstAttribute="centerX" secondItem="1SZ-DQ-UoE" secondAttribute="centerX" id="alw-el-IgV"/>
                         </constraints>
                     </view>
                 </subviews>
