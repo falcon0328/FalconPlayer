@@ -127,18 +127,6 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tro-9z-NQK">
-                                    <rect key="frame" x="17" y="22" width="24" height="24"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="24" id="fnH-aO-26a"/>
-                                        <constraint firstAttribute="height" constant="24" id="lMe-gm-D5N"/>
-                                    </constraints>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" backgroundImage="arrow.clockwise" catalog="system"/>
-                                    <connections>
-                                        <action selector="didTapReplayButton:" destination="1eD-Qv-9vk" eventType="touchUpInside" id="aLj-0R-0FV"/>
-                                    </connections>
-                                </button>
                                 <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="7kB-lI-ozo">
                                     <rect key="frame" x="96" y="275" width="285" height="31"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -194,14 +182,12 @@
                                 <constraint firstAttribute="bottom" secondItem="7kB-lI-ozo" secondAttribute="bottom" constant="15" id="HXk-jd-ubb"/>
                                 <constraint firstItem="tDL-Ya-Txc" firstAttribute="top" secondItem="SHQ-aK-Ocm" secondAttribute="top" constant="22" id="Kly-Kr-Ejv"/>
                                 <constraint firstItem="4Xf-TW-Rb0" firstAttribute="leading" secondItem="2bw-fX-4bG" secondAttribute="trailing" constant="10" id="Ldt-bz-6if"/>
-                                <constraint firstItem="Tro-9z-NQK" firstAttribute="leading" secondItem="SHQ-aK-Ocm" secondAttribute="leading" constant="17" id="M0j-Mf-lZe"/>
                                 <constraint firstItem="tDL-Ya-Txc" firstAttribute="leading" secondItem="paY-zc-UGV" secondAttribute="trailing" constant="16" id="MJS-Sm-ZCs"/>
                                 <constraint firstItem="2bw-fX-4bG" firstAttribute="leading" secondItem="LGH-fN-H99" secondAttribute="trailing" constant="8" id="RDj-8J-aNv"/>
                                 <constraint firstItem="nJg-F8-pdb" firstAttribute="leading" secondItem="dPa-bP-05X" secondAttribute="trailing" constant="88" id="TsF-Sw-ynS"/>
                                 <constraint firstAttribute="trailing" secondItem="tDL-Ya-Txc" secondAttribute="trailing" constant="20" id="Upb-VH-1pC"/>
                                 <constraint firstItem="mPn-Gf-Gnb" firstAttribute="leading" secondItem="4Xf-TW-Rb0" secondAttribute="trailing" constant="10" id="V4a-Gr-uG0"/>
                                 <constraint firstAttribute="bottom" secondItem="4Xf-TW-Rb0" secondAttribute="bottom" constant="15" id="aIS-Tg-N8v"/>
-                                <constraint firstItem="Tro-9z-NQK" firstAttribute="top" secondItem="SHQ-aK-Ocm" secondAttribute="top" constant="23" id="bYN-Ep-HNe"/>
                                 <constraint firstAttribute="bottom" secondItem="2bw-fX-4bG" secondAttribute="bottom" constant="22" id="bxT-V1-MtV"/>
                                 <constraint firstItem="qhX-eD-1VL" firstAttribute="centerY" secondItem="SHQ-aK-Ocm" secondAttribute="centerY" id="jLX-NV-WN4"/>
                                 <constraint firstItem="mPn-Gf-Gnb" firstAttribute="leading" secondItem="7kB-lI-ozo" secondAttribute="trailing" constant="10" id="nXE-M2-ZTK"/>
@@ -262,7 +248,6 @@
         </label>
     </objects>
     <resources>
-        <image name="arrow.clockwise" catalog="system" width="56" height="64"/>
         <image name="arrow.up.left.and.arrow.down.right" catalog="system" width="64" height="56"/>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="exclamationmark.triangle" catalog="system" width="64" height="56"/>
