@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 protocol VideoPlayerViewDelegate: class {
     func didTap(videoPlayerView: VideoPlayerView, componentName: String)
@@ -34,6 +35,9 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var muteUnmuteButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var expandCollapseButton: UIButton!
+    
+    var routePickerView: AVRoutePickerView!
+    @IBOutlet weak var routePickerBaseView: UIView!
     
     /// シークサムネイルを表示するView
     var seekThumbnailView: VideoPlayerSeekThumbnailView!
@@ -76,6 +80,11 @@ class VideoPlayerView: UIView {
         controlView.addSubview(seekThumbnailView)
         self.seekThumbnailView = seekThumbnailView
         hideSeekThumbnailView()
+        
+        let routePickerView = AVRoutePickerView(frame: routePickerBaseView.bounds)
+        routePickerView.tintColor = .white
+        self.routePickerView = routePickerView
+        routePickerBaseView.addSubview(routePickerView)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewWillEnterForeground(notification:)),
