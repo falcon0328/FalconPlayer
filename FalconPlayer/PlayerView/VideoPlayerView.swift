@@ -140,7 +140,7 @@ class VideoPlayerView: UIView {
         })
 
         let collapseImage = UIImage(systemName: "arrow.down.right.and.arrow.up.left")
-        expandCollapseButton.setBackgroundImage(collapseImage, for: .normal)
+        expandCollapseButton.setImage(collapseImage, for: .normal)
     }
     
     func expand() {
@@ -161,7 +161,7 @@ class VideoPlayerView: UIView {
         }, completion: { finished in })
         
         let expandImage = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
-        expandCollapseButton.setBackgroundImage(expandImage, for: .normal)
+        expandCollapseButton.setImage(expandImage, for: .normal)
     }
     
     /// 円形画像を作成するプログラム
@@ -350,10 +350,10 @@ class VideoPlayerView: UIView {
     func updateMuteUnmuteButtonImage() {
         if videoPlayer.audioState == .mute {
             let unmuteImage = UIImage(systemName: "speaker.slash")
-            muteUnmuteButton.setBackgroundImage(unmuteImage, for: .normal)
+            muteUnmuteButton.setImage(unmuteImage, for: .normal)
         } else {
             let unmuteImage = UIImage(systemName: "speaker.3")
-            muteUnmuteButton.setBackgroundImage(unmuteImage, for: .normal)
+            muteUnmuteButton.setImage(unmuteImage, for: .normal)
         }
     }
     
