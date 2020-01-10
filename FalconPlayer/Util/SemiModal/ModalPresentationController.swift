@@ -37,36 +37,7 @@ final class ModalPresentationController: UIPresentationController {
 
     override func containerViewWillLayoutSubviews() {
         super.containerViewWillLayoutSubviews()
-        updateContainerViewBoundsIfNeeded(deviceOrientation: UIDevice.current.orientation)
         overlayView.frame = containerView!.bounds
         presentedView!.frame = frameOfPresentedViewInContainerView
-    }
-    
-    /// ContainerViewのBoundsを更新
-    /// - Parameter deviceOrientation: デバイスの向き
-    func updateContainerViewBoundsIfNeeded(deviceOrientation: UIDeviceOrientation) {
-        if !VideoPlayerConfiguration.shared.isExpand { return }
-        // transformとboundsの処理
-        if VideoPlayerConfiguration.shared.isExpand {
-            if deviceOrientation == .landscapeRight {
-                updateContainerView(rotationAngle: (-90 * .pi) / 180)
-                return
-            }
-            updateContainerView(rotationAngle: (90 * .pi) / 180)
-
-        }
-    }
-    
-    /// ContainerViewのBoundsを指定された回転角をもとに更新する
-    /// - Parameter rotationAngle: 回転させる角度
-    func updateContainerView(rotationAngle: CGFloat) {
-        guard let containerView = self.containerView else {
-            return
-        }
-        // containerViewを操作できるようにする
-        containerView.translatesAutoresizingMaskIntoConstraints = true
-        // 角度とbounds情報の更新
-        containerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        containerView.bounds = CGRect(x: 0, y: 0, width: containerView.bounds.height, height: containerView.bounds.width)
     }
 }

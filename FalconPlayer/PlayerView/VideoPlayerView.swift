@@ -131,7 +131,6 @@ class VideoPlayerView: UIView {
         videoPlayerViewFrame = superview!.frame
         UIView.animate(withDuration: 0.5, animations: {
             self.superview?.translatesAutoresizingMaskIntoConstraints = true
-            self.superview?.transform = transform
             self.superview?.frame = CGRect(x: 0,
                                            y: 0,
                                            width: UIScreen.main.bounds.width,
@@ -154,8 +153,7 @@ class VideoPlayerView: UIView {
         
         UIView.animate(withDuration: 0.5,
                        animations: {
-                        self.superview?.translatesAutoresizingMaskIntoConstraints = true
-                        self.superview?.transform = CGAffineTransform(rotationAngle: (.pi * 0) / 180)
+                        self.superview?.translatesAutoresizingMaskIntoConstraints = false
                         self.superview?.frame = self.videoPlayerViewFrame
         }, completion: { finished in })
         
@@ -218,9 +216,13 @@ class VideoPlayerView: UIView {
     
     @IBAction func didTapExpandCollapseButton(_ sender: Any) {
         if VideoPlayerConfiguration.shared.isExpand {
-            collapse()
+            UIDevice.current.setValue(UIDeviceOrientation.portrait.rawValue,
+                                      forKey: "orientation")
+
         } else {
-            expand(transform: CGAffineTransform(rotationAngle: (90 * .pi) / 180))
+            UIDevice.current.setValue(UIDeviceOrientation.landscapeLeft.rawValue,
+                                      forKey: "orientation")
+
         }
     }
     

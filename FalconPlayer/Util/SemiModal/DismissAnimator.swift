@@ -12,7 +12,7 @@ class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
         containerView.addSubview(fromVC.view)
 
-        let screenBoundsSize = getScreenBounds(deviceOrientation: UIDevice.current.orientation)
+        let screenBoundsSize = UIScreen.main.bounds.size
         let bottomLeftCorner = CGPoint(x: 0, y: screenBoundsSize.height)
         let finalFrame = CGRect(origin: bottomLeftCorner, size: screenBoundsSize)
         let option: UIView.AnimationOptions = transitionContext.isInteractive ? .curveLinear : .curveEaseIn
@@ -27,14 +27,5 @@ class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                        }
         )
-    }
-    
-    /// CGSizeをデバイスの向きに合わせて生成する
-    /// - Parameter deviceOrientation: デバイスの向き
-    func getScreenBounds(deviceOrientation: UIDeviceOrientation) -> CGSize {
-        if VideoPlayerConfiguration.shared.isExpand {
-            return CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width)
-        }
-        return UIScreen.main.bounds.size
     }
 }
