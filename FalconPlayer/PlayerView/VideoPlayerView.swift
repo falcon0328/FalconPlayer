@@ -19,6 +19,8 @@ class VideoPlayerView: UIView {
     
     var videoPlayerViewFrame: CGRect!
     weak var delegate: VideoPlayerViewDelegate?
+    /// 拡大中かどうかを示すフラグ
+    var isExpand = false
     /// シーク処理の間かどうかを示すフラグ
     var isSeeking = false
     
@@ -123,10 +125,10 @@ class VideoPlayerView: UIView {
     }
     
     func expand(transform: CGAffineTransform) {
-         if VideoPlayerConfiguration.shared.isExpand {
+         if isExpand {
             return
         }
-        VideoPlayerConfiguration.shared.isExpand = true
+        isExpand = true
         
         videoPlayerViewFrame = superview!.frame
         UIView.animate(withDuration: 0.5, animations: {
@@ -146,10 +148,10 @@ class VideoPlayerView: UIView {
     }
     
     func collapse() {
-        if !VideoPlayerConfiguration.shared.isExpand {
+        if isExpand {
             return
         }
-        VideoPlayerConfiguration.shared.isExpand = false
+        isExpand = false
         
         UIView.animate(withDuration: 0.5,
                        animations: {
@@ -215,7 +217,7 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapExpandCollapseButton(_ sender: Any) {
-        if VideoPlayerConfiguration.shared.isExpand {
+        if isExpand {
             UIDevice.current.setValue(UIDeviceOrientation.portrait.rawValue,
                                       forKey: "orientation")
 
