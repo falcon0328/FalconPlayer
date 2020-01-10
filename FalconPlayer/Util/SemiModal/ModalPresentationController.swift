@@ -45,18 +45,28 @@ final class ModalPresentationController: UIPresentationController {
     /// ContainerViewのBoundsを更新
     /// - Parameter deviceOrientation: デバイスの向き
     func updateContainerViewBoundsIfNeeded(deviceOrientation: UIDeviceOrientation) {
+        if !VideoPlayerConfiguration.shared.isExpand { return }
+        // transformとboundsの処理
+        if VideoPlayerConfiguration.shared.isExpand {
+            if deviceOrientation == .landscapeRight {
+                updateContainerView(rotationAngle: (-90 * .pi) / 180)
+                return
+            }
+            updateContainerView(rotationAngle: (90 * .pi) / 180)
+
+        }
+    }
+    
+    /// ContainerViewのBoundsを指定された回転角をもとに更新する
+    /// - Parameter rotationAngle: 回転させる角度
+    func updateContainerView(rotationAngle: CGFloat) {
         guard let containerView = self.containerView else {
             return
         }
         // containerViewを操作できるようにする
         containerView.translatesAutoresizingMaskIntoConstraints = true
-        // transformとboundsの処理
-        if deviceOrientation == .landscapeLeft {
-            containerView.transform = CGAffineTransform(rotationAngle: (90 * .pi) / 180)
-            containerView.bounds = CGRect(x: 0, y: 0, width: containerView.bounds.height, height: containerView.bounds.width)
-        } else if deviceOrientation == .landscapeRight {
-            containerView.transform = CGAffineTransform(rotationAngle: (-90 * .pi) / 180)
-            containerView.bounds = CGRect(x: 0, y: 0, width: containerView.bounds.height, height: containerView.bounds.width)
-        }
+        // 角度とbounds情報の更新
+        containerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        containerView.bounds = CGRect(x: 0, y: 0, width: containerView.bounds.height, height: containerView.bounds.width)
     }
 }

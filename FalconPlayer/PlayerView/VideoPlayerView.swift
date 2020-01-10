@@ -17,7 +17,6 @@ protocol VideoPlayerViewDelegate: class {
 class VideoPlayerView: UIView {
     static let SEEKBAR_THUMB_SIZE: CGFloat = 12.0
     
-    var isExpand = false
     var videoPlayerViewFrame: CGRect!
     weak var delegate: VideoPlayerViewDelegate?
     /// シーク処理の間かどうかを示すフラグ
@@ -124,10 +123,10 @@ class VideoPlayerView: UIView {
     }
     
     func expand(transform: CGAffineTransform) {
-         if isExpand {
+         if VideoPlayerConfiguration.shared.isExpand {
             return
         }
-        isExpand = true
+        VideoPlayerConfiguration.shared.isExpand = true
         
         videoPlayerViewFrame = superview!.frame
         UIView.animate(withDuration: 0.5, animations: {
@@ -148,10 +147,10 @@ class VideoPlayerView: UIView {
     }
     
     func collapse() {
-        if !isExpand {
+        if !VideoPlayerConfiguration.shared.isExpand {
             return
         }
-        isExpand = false
+        VideoPlayerConfiguration.shared.isExpand = false
         
         UIView.animate(withDuration: 0.5,
                        animations: {
@@ -218,7 +217,7 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapExpandCollapseButton(_ sender: Any) {
-        if isExpand {
+        if VideoPlayerConfiguration.shared.isExpand {
             collapse()
         } else {
             expand(transform: CGAffineTransform(rotationAngle: (90 * .pi) / 180))

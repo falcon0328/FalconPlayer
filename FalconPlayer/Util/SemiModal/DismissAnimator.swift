@@ -32,7 +32,7 @@ class DismissAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     /// CGSizeをデバイスの向きに合わせて生成する
     /// - Parameter deviceOrientation: デバイスの向き
     func getScreenBounds(deviceOrientation: UIDeviceOrientation) -> CGSize {
-        if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
+        if VideoPlayerConfiguration.shared.isExpand {
             return CGSize(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width)
         }
         return UIScreen.main.bounds.size
