@@ -58,6 +58,9 @@ class VideoPlayerView: UIView {
     }
     
     override func awakeFromNib() {
+        let videoPlayerTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoView))
+        videoPlayer.addGestureRecognizer(videoPlayerTapGesture)
+        
         seekbar.minimumValue = 0
         seekbar.maximumValue = 0
         seekbar.setValue(0, animated: false)
@@ -71,6 +74,8 @@ class VideoPlayerView: UIView {
                                 for: .normal)
         controlView.isHidden = true
         controlView.alpha = 0
+        let controlViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapControlView))
+        controlView.addGestureRecognizer(controlViewTapGesture)
         
         hideErrorView()
         
@@ -83,6 +88,7 @@ class VideoPlayerView: UIView {
         
         let routePickerView = AVRoutePickerView(frame: routePickerBaseView.bounds)
         routePickerView.tintColor = .white
+        routePickerView.delegate = self
         self.routePickerView = routePickerView
         routePickerBaseView.addSubview(routePickerView)
 
@@ -246,18 +252,6 @@ class VideoPlayerView: UIView {
         hideSeekThumbnailView()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if videoPlayer.playerState == .error {
-            // TODO: リロード
-            return
-        }
-        if controlView.isHidden {
-            showControlView()
-        } else {
-            hideControlView()
-        }
-    }
-    
     func showControlView() {
         UIView.animate(withDuration: 0.5, animations: {
             self.controlView.alpha = 0.8
@@ -399,6 +393,14 @@ class VideoPlayerView: UIView {
             break
         }
     }
+    
+    @objc func didTapVideoView() {
+        showControlView()
+    }
+    
+    @objc func didTapControlView() {
+        hideControlView()
+    }
 }
 
 extension VideoPlayerView: PlayerStateDelegate {
@@ -424,4 +426,10 @@ extension VideoPlayerView: PlayerStateDelegate {
         updateMuteUnmuteButtonImage()
     }
     
+}
+
+extension VideoPlayerView: AVRoutePickerViewDelegate {
+    func routePickerViewWillBeginPresentingRoutes(_ routePickerView: AVRoutePickerView) {}
+    
+    func routePickerViewDidEndPresentingRoutes(_ routePickerView: AVRoutePickerView) {}
 }
