@@ -24,6 +24,7 @@ class SettingViewController: SemiModalBaseViewController {
     var cellDatas: [SettingTableViewCellData] = []
     
     @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var draggerView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
@@ -79,6 +80,8 @@ class SettingViewController: SemiModalBaseViewController {
     }
     
     func setupViews() {
+        let draggerGesture = UIPanGestureRecognizer(target: self, action: #selector(didScrollHeader(_:)))
+        draggerView.addGestureRecognizer(draggerGesture)
         headerView.layer.cornerRadius = 8.0
         headerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         let headerGesture = UIPanGestureRecognizer(target: self, action: #selector(didScrollHeader(_:)))
