@@ -72,6 +72,7 @@ class VideoPlayer: UIView {
     /// プレイヤーの状態
     private(set) var playerState: VideoPlayerState = .idle {
         didSet {
+            if oldValue == playerState { return }
             delegate?.didChange(player: self, playerState: playerState)
         }
     }
