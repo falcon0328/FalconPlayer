@@ -40,7 +40,6 @@ class ViewController: UIViewController {
         // AVPlayerは再生したいAVPlayerItemをセットして行う
         let player = AVPlayer(playerItem: playerItem)
         videoPlayerView.setPlayer(player: player)
-        videoPlayerView.play()
         videoPlayerView.delegate = self
         
         playerView.addSubview(videoPlayerView)
@@ -54,5 +53,9 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: VideoPlayerViewDelegate {
+    func didPrepare(videoPlayerView: VideoPlayerView) {
+        videoPlayerView.play()
+    }
+    
     func didTap(videoPlayerView: VideoPlayerView, componentName: String) {}
 }
