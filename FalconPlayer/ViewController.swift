@@ -14,10 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerView: UIView!
     var videoPlayerView: VideoPlayerView?
     
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
