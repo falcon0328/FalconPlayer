@@ -258,6 +258,7 @@ class VideoPlayer: UIView {
     func playerItemStatusChangeHandler(playerItemStatus: AVPlayerItem.Status) {
         if playerItemStatus == .readyToPlay {
             delegate?.didPrepareToPlayer(player: self)
+            playerState = .paused
         } else {
             playerState = .error
         }
