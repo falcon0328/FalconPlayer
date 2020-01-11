@@ -275,10 +275,12 @@ class VideoPlayer: UIView {
     }
     
     /// AVPlayerのtimeControlStatusが変更された際に何をコールバックするか決定するメソッド
-    /// - Parameter timeControlStatus:
+    /// - Parameter timeControlStatus: プレイヤーの再生状態
+    /// - Warning: 再生完了後はシークするまで動作しない
     func playerTimeControlStatusChangeHandler(timeControlStatus: AVPlayer.TimeControlStatus) {
         switch timeControlStatus {
         case .paused:
+            if playerState == .ended { return }
             playerState = .paused
         case .playing:
             playerState = .playing
