@@ -252,10 +252,12 @@ class VideoPlayerView: UIView {
         if !isSeeking {
             return
         }
-        isSeeking = false
-        seek(to: seekbar.value, completionHandler: {finish in })
-        showButtons()
         hideSeekThumbnailView()
+        showButtons()
+        seek(to: seekbar.value,
+             completionHandler: { finish in
+                self.isSeeking = false
+        })
     }
     
     func showControlView() {
