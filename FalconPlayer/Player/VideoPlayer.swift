@@ -16,7 +16,7 @@ enum VideoPlayerState: Int {
     /// 再生
     case playing
     /// 停止
-    case pause
+    case paused
     /// 再生完了
     case ended
     /// エラー
@@ -214,7 +214,7 @@ class VideoPlayer: UIView {
                             return
                         }
                         if strongSelf.playerState == .ended {
-                            strongSelf.playerState = .pause
+                            strongSelf.playerState = .paused
                         }
                         completionHandler(finished)
         })
@@ -254,7 +254,7 @@ class VideoPlayer: UIView {
     func playerRateChangeHandler(rate: Float) {
         if rate == 0.0 {
             if playerState == .ended { return }
-            playerState = .pause
+            playerState = .paused
         } else {
             playerState = .playing
         }

@@ -184,7 +184,7 @@ class VideoPlayerView: UIView {
         switch videoPlayer.playerState {
         case .playing:
             pause()
-        case .pause:
+        case .paused:
             play()
         case .ended:
             replay()
@@ -339,7 +339,7 @@ class VideoPlayerView: UIView {
         case .playing:
             let pauseImage = UIImage(systemName: "pause")
             playPauseButton.setBackgroundImage(pauseImage, for: .normal)
-        case .pause:
+        case .paused:
             let playImage = UIImage(systemName: "play")
             playPauseButton.setBackgroundImage(playImage, for: .normal)
         case .ended:
