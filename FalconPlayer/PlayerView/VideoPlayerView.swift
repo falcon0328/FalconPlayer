@@ -148,7 +148,7 @@ class VideoPlayerView: UIView {
     }
     
     func collapse() {
-        if isExpand {
+        if !isExpand {
             return
         }
         isExpand = false
