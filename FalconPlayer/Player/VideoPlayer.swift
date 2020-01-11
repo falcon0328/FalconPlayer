@@ -37,7 +37,7 @@ enum AudioState: Int {
 protocol PlayerStateDelegate: class {
     /// プレイヤーの準備ができた
     /// - Parameter player: プレイヤー
-    func didPrepareToPlayer(player: VideoPlayer)
+    func didPrepare(player: VideoPlayer)
     
     /// プレイヤーでエラーが起きた
     /// - Parameter player: プレイヤー
@@ -257,8 +257,12 @@ class VideoPlayer: UIView {
     /// - Parameter playerItemStatus: AVPlayerItemのステータス
     func playerItemStatusChangeHandler(playerItemStatus: AVPlayerItem.Status) {
         if playerItemStatus == .readyToPlay {
-            delegate?.didPrepareToPlayer(player: self)
-            playerState = .paused
+            // 初回のreadyToPlay時は、ステータスをpausedにしプレイヤーの準備成功をコールバックする
+            if playerState == .idle {
+                playerState = .paused
+                delegate?.didPrepare(player: self)
+                return
+            }
         } else {
             playerState = .error
         }

@@ -11,6 +11,9 @@ import AVFoundation
 import AVKit
 
 protocol VideoPlayerViewDelegate: class {
+    /// プレイヤービューの準備ができた
+    /// - Parameter videoPlayerView: プレイヤービュー
+    func didPrepare(videoPlayerView: VideoPlayerView)
     func didTap(videoPlayerView: VideoPlayerView, componentName: String)
 }
 
@@ -407,7 +410,9 @@ class VideoPlayerView: UIView {
 }
 
 extension VideoPlayerView: PlayerStateDelegate {
-    func didPrepareToPlayer(player: VideoPlayer) {}
+    func didPrepare(player: VideoPlayer) {
+        delegate?.didPrepare(videoPlayerView: self)
+    }
     
     func didFailure(player: VideoPlayer) {
         showErrorView()
