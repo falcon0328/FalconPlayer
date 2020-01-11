@@ -13,6 +13,8 @@ import AVFoundation
 enum VideoPlayerState: Int {
     /// アイドル
     case idle
+    /// バッファリング
+    case buffering
     /// 再生
     case playing
     /// 停止
@@ -115,6 +117,8 @@ class VideoPlayer: UIView {
     var playerRateObservation: NSKeyValueObservation?
     /// AVPlayerItemのKVO監視をしているインスタンス
     var playerItemStatusObservation: NSKeyValueObservation?
+    /// AVPlayerの現状のステータス監視をしているインスタンス
+    var playerTimeControlStatusObservation: NSKeyValueObservation?
 
     
     override class var layerClass: AnyClass {
@@ -171,6 +175,13 @@ class VideoPlayer: UIView {
             }
             wself.playerRateChangeHandler(rate: player.rate)
         })
+        // timeControlStatus
+        playerTimeControlStatusObservation = self.player?.observe(\.timeControlStatus, changeHandler: { [weak self] player, change in
+            guard let sSelf = self else {
+                return
+            }
+            sSelf.playerTimeControlStatusChangeHandler(timeControlStatus: player.timeControlStatus)
+        })
     }
     
     func removePlayerObserver() {
@@ -178,6 +189,8 @@ class VideoPlayer: UIView {
         playerItemStatusObservation = nil
         playerRateObservation?.invalidate()
         playerRateObservation = nil
+        playerTimeControlStatusObservation?.invalidate()
+        playerTimeControlStatusObservation = nil
     }
     
     func setDidPlayToEndTimeNotification() {
@@ -252,11 +265,21 @@ class VideoPlayer: UIView {
     /// AVPlayerのrateが変更された際のコールバックメソッド
     /// - Parameter rate:
     func playerRateChangeHandler(rate: Float) {
-        if rate == 0.0 {
-            if playerState == .ended { return }
+
+    }
+    
+    /// AVPlayerのtimeControlStatusが変更された際に何をコールバックするか決定するメソッド
+    /// - Parameter timeControlStatus:
+    func playerTimeControlStatusChangeHandler(timeControlStatus: AVPlayer.TimeControlStatus) {
+        switch timeControlStatus {
+        case .paused:
             playerState = .paused
-        } else {
+        case .playing:
             playerState = .playing
+        case .waitingToPlayAtSpecifiedRate:
+            playerState = .buffering
+        @unknown default:
+            playerState = .idle
         }
     }
     
