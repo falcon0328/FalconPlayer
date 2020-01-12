@@ -24,8 +24,10 @@ class VideoPlayerView: UIView {
     weak var delegate: VideoPlayerViewDelegate?
     /// 拡大中かどうかを示すフラグ
     var isExpand = false
-    /// シーク処理の間かどうかを示すフラグ
-    var isSeeking = false
+    /// シークバーを操作したことによるシーク処理をしている間かどうかを示すフラグ
+    var isSeekFromBar = false
+    /// シークバーに触れているかどうかを示すフラグ
+    var isTouchSeekbar = false
     
     @IBOutlet weak var videoPlayer: VideoPlayer!
     @IBOutlet weak var seekbar: VideoPlayerSeekbar!
@@ -45,8 +47,7 @@ class VideoPlayerView: UIView {
     
     /// シークサムネイルを表示するView
     var seekThumbnailView: VideoPlayerSeekThumbnailView!
-    /// シークバーに触れているかどうかを示すフラグ
-    var isTouchSeekbar = false
+
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -246,9 +247,9 @@ class VideoPlayerView: UIView {
     
     @IBAction func didTouchStartSeekbar(_ sender: Any) {
         isTouchSeekbar = true
-        if !isSeeking {
+        if !isSeekFromBar {
             // シーク中扱いにし、UIを更新する
-            isSeeking = true
+            isSeekFromBar = true
             hideButtons()
         }
         showSeekThumbnailView()
@@ -257,14 +258,14 @@ class VideoPlayerView: UIView {
     @IBAction func didTouchFinishSeekbar(_ sender: Any) {
         // シークバーから指が離れた
         isTouchSeekbar = false
-        if !isSeeking {
+        if !isSeekFromBar {
             return
         }
         hideSeekThumbnailView()
         showButtons()
         seek(to: seekbar.value,
              completionHandler: { finish in
-                self.isSeeking = false
+                self.isSeekFromBar = false
         })
     }
     
@@ -431,9 +432,9 @@ extension VideoPlayerView: PlayerStateDelegate {
     func didUpdatePeriodicTimer(player: VideoPlayer) {
         currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: videoPlayer.currentTime)
         bufferbar.setValue(videoPlayer.bufferLoadedRange, animated: true)
-        if !isSeeking {
+        if !isSeekFromBar {
             seekbar.setValue(videoPlayer.currentTime, animated: true)
-        } else if isSeeking && !isTouchSeekbar {
+        } else if isSeekFromBar && !isTouchSeekbar {
             currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: seekbar.value)
         }
     }
