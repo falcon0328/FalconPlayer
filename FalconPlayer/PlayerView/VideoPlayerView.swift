@@ -45,6 +45,8 @@ class VideoPlayerView: UIView {
     
     /// シークサムネイルを表示するView
     var seekThumbnailView: VideoPlayerSeekThumbnailView!
+    /// シークバーに触れているかどうかを示すフラグ
+    var isTouchSeekbar = false
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -243,12 +245,18 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTouchStartSeekbar(_ sender: Any) {
-        isSeeking = true
-        hideButtons()
+        isTouchSeekbar = true
+        if !isSeeking {
+            // シーク中扱いにし、UIを更新する
+            isSeeking = true
+            hideButtons()
+        }
         showSeekThumbnailView()
     }
     
     @IBAction func didTouchFinishSeekbar(_ sender: Any) {
+        // シークバーから指が離れた
+        isTouchSeekbar = false
         if !isSeeking {
             return
         }
@@ -425,6 +433,8 @@ extension VideoPlayerView: PlayerStateDelegate {
         bufferbar.setValue(videoPlayer.bufferLoadedRange, animated: true)
         if !isSeeking {
             seekbar.setValue(videoPlayer.currentTime, animated: true)
+        } else if isSeeking && !isTouchSeekbar {
+            currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: seekbar.value)
         }
     }
     
