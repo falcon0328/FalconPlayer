@@ -229,6 +229,7 @@
                 <outlet property="expandCollapseButton" destination="70J-M3-gru" id="KEb-QB-7R9"/>
                 <outlet property="gobackward10Button" destination="dPa-bP-05X" id="7dX-wi-UAn"/>
                 <outlet property="goforward10Button" destination="qhX-eD-1VL" id="e19-xD-e95"/>
+                <outlet property="listButton" destination="tDL-Ya-Txc" id="QVK-iK-Uhw"/>
                 <outlet property="muteUnmuteButton" destination="LGH-fN-H99" id="a99-EU-g1M"/>
                 <outlet property="playPauseButton" destination="nJg-F8-pdb" id="aFE-L2-Xe3"/>
                 <outlet property="routePickerBaseView" destination="paY-zc-UGV" id="JCW-q2-STA"/>

@@ -34,6 +34,8 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var bufferbar: UISlider!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var controlView: UIView!
+    @IBOutlet weak var routePickerBaseView: UIView!
+    @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var gobackward10Button: UIButton!
     @IBOutlet weak var goforward10Button: UIButton!
@@ -43,7 +45,6 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var expandCollapseButton: UIButton!
     
     var routePickerView: AVRoutePickerView!
-    @IBOutlet weak var routePickerBaseView: UIView!
     
     /// シークサムネイルを表示するView
     var seekThumbnailView: VideoPlayerSeekThumbnailView!
@@ -287,6 +288,8 @@ class VideoPlayerView: UIView {
     
     /// 10秒戻る・進むボタンと再生停止ボタンを表示する
     func showButtons() {
+        listButton.isHidden = false
+        routePickerBaseView.isHidden = false
         goforward10Button.isHidden = false
         gobackward10Button.isHidden = false
         playPauseButton.isHidden = false
@@ -294,6 +297,8 @@ class VideoPlayerView: UIView {
     
     /// 10秒戻る・進むボタンと再生停止ボタンを非表示する
     func hideButtons() {
+        listButton.isHidden = true
+        routePickerBaseView.isHidden = true
         goforward10Button.isHidden = true
         gobackward10Button.isHidden = true
         playPauseButton.isHidden = true
