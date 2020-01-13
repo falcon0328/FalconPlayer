@@ -66,7 +66,9 @@ class VideoPlayerView: UIView {
     
     /// シークサムネイルを表示するView
     var seekThumbnailView: VideoPlayerSeekThumbnailView!
-
+    
+    /// サムネイルを表示するView
+    var thumbnailView: ThumbnailView!
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -118,6 +120,14 @@ class VideoPlayerView: UIView {
         routePickerBaseView.addSubview(routePickerView)
         
         hideBufferActivityIndicatorView()
+        
+        let thumbnailView = Bundle.main.loadNibNamed("ThumbnailView",
+                                                     owner: self,
+                                                     options: nil)?.first as! ThumbnailView
+        thumbnailView.setImage(image: UIImage(named: "sample"))
+        insertSubview(thumbnailView, aboveSubview: controlView)
+        self.thumbnailView = thumbnailView
+        showThumbnailView()
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewWillEnterForeground(notification:)),
@@ -325,6 +335,7 @@ class VideoPlayerView: UIView {
     
     /// エラー画面を表示にする
     func showErrorView() {
+        hideThumbnailView()
         errorView.isHidden = false
         controlView.isHidden = true
         seekbar.isHidden = true
@@ -421,6 +432,24 @@ class VideoPlayerView: UIView {
         }
     }
     
+    /// サムネイルを表示する
+    func showThumbnailView() {
+        thumbnailView.loadImage()
+        thumbnailView.isHidden = false
+    }
+    
+    /// サムネイルを非表示にする
+    func hideThumbnailView() {
+        thumbnailView.stopAnimating()
+        UIView.animate(withDuration: 0.5,
+                       animations: { [weak self] in
+                        self?.thumbnailView.alpha = 0.0
+        },
+                       completion: { [weak self] finished in
+                        self?.thumbnailView.isHidden = true
+        })
+    }
+    
     /// デバイスの向きに対応した回転角度
     /// - Parameter deviceOrientation: デバイスの向き
     func calcurateTransform(deviceOrientation: UIDeviceOrientation) -> CGAffineTransform {
@@ -469,6 +498,7 @@ class VideoPlayerView: UIView {
 
 extension VideoPlayerView: PlayerStateDelegate {
     func didPrepare(player: VideoPlayer) {
+        hideThumbnailView()
         videoPlayer.setVideoGravity(videoGravity: .resize)
         durationLabel.text = VideoPlayerTimeFormatter.format(time: videoPlayer.duration)
         seekbar.maximumValue = videoPlayer.duration
