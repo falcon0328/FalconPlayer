@@ -44,5 +44,13 @@ extension ViewController: VideoPlayerViewDelegate {
         videoPlayerView.play()
     }
     
+    func didFailure(videoPlayerView: VideoPlayerView) {}
+    
+    func didUpdatePeriodicTimer(videoPlayerView: VideoPlayerView) {}
+    
+    func didChange(videoPlayerView: VideoPlayerView, playerState: VideoPlayerState) {}
+    
+    func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState) {}
+    
     func didTap(videoPlayerView: VideoPlayerView, componentName: String) {}
 }

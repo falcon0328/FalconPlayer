@@ -14,6 +14,23 @@ protocol VideoPlayerViewDelegate: class {
     /// プレイヤービューの準備ができた
     /// - Parameter videoPlayerView: プレイヤービュー
     func didPrepare(videoPlayerView: VideoPlayerView)
+    /// プレイヤービューの準備が失敗した
+    /// - Parameter videoPlayerView: プレイヤービュー
+    func didFailure(videoPlayerView: VideoPlayerView)
+    /// プレイヤービュー内で再生中のプレイヤーのタイマーが更新されたことを通知する
+    /// - Parameter videoPlayerView: プレイヤービュー
+    func didUpdatePeriodicTimer(videoPlayerView: VideoPlayerView)
+    /// プレイヤービュー内のプレイヤー状態が変わったことを通知する
+    /// - Parameter videoPlayerView: プレイヤービュー
+    /// - Parameter playerState: 変更後のプレイヤー状態
+    func didChange(videoPlayerView: VideoPlayerView, playerState: VideoPlayerState)
+    /// プレイヤービュー内のオーディオ状態が変わったことを通知する
+    /// - Parameter videoPlayerView: プレイヤービュー
+    /// - Parameter audioState: 変更後のオーディオ状態
+    func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState)
+    /// プレイヤービュー内の各UIコンポーネントがタップされた
+    /// - Parameter videoPlayerView: プレイヤービュー
+    /// - Parameter componentName: タップされたUIコンポーネント
     func didTap(videoPlayerView: VideoPlayerView, componentName: String)
 }
 
@@ -463,6 +480,7 @@ extension VideoPlayerView: PlayerStateDelegate {
     
     func didFailure(player: VideoPlayer) {
         showErrorView()
+        delegate?.didFailure(videoPlayerView: self)
     }
     
     func didUpdatePeriodicTimer(player: VideoPlayer) {
@@ -473,15 +491,18 @@ extension VideoPlayerView: PlayerStateDelegate {
         } else if isSeekFromBar && !isTouchSeekbar {
             currentTimeLabel.text = VideoPlayerTimeFormatter.format(time: seekbar.value)
         }
+        delegate?.didUpdatePeriodicTimer(videoPlayerView: self)
     }
     
     func didChange(player: VideoPlayer, playerState: VideoPlayerState) {
         updateBufferActivityIndicatorView(playerState: playerState)
         updatePlayPauseButtonImage()
+        delegate?.didChange(videoPlayerView: self, playerState: playerState)
     }
     
     func didChange(player: VideoPlayer, audioState: AudioState) {
         updateMuteUnmuteButtonImage()
+        delegate?.didChange(videoPlayerView: self, audioState: audioState)
     }
     
 }
