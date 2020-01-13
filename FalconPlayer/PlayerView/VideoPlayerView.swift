@@ -56,14 +56,13 @@ class VideoPlayerView: UIView {
     }
     
     func setPlayer(player: AVPlayer?) {
-        videoPlayer.setPlayer(player: player)
-        videoPlayer.setVideoGravity(videoGravity: .resize)
-        durationLabel.text = VideoPlayerTimeFormatter.format(time: videoPlayer.duration)
-        seekbar.maximumValue = videoPlayer.duration
-        bufferbar.maximumValue = videoPlayer.duration
-        videoPlayer.setPeriodicTimeObserver(interval: CMTime(value: 5, timescale: 10))
         videoPlayer.delegate = self
-        videoPlayer.mute()
+        videoPlayer.setPlayer(player: player)
+    }
+    
+    func setVideoURL(url: URL?) {
+        videoPlayer.delegate = self
+        videoPlayer.setVideoURL(url: url)
     }
     
     override func awakeFromNib() {
@@ -453,6 +452,12 @@ class VideoPlayerView: UIView {
 
 extension VideoPlayerView: PlayerStateDelegate {
     func didPrepare(player: VideoPlayer) {
+        videoPlayer.setVideoGravity(videoGravity: .resize)
+        durationLabel.text = VideoPlayerTimeFormatter.format(time: videoPlayer.duration)
+        seekbar.maximumValue = videoPlayer.duration
+        bufferbar.maximumValue = videoPlayer.duration
+        videoPlayer.setPeriodicTimeObserver(interval: CMTime(value: 5, timescale: 10))
+        videoPlayer.mute()
         delegate?.didPrepare(videoPlayerView: self)
     }
     

@@ -59,6 +59,12 @@ protocol PlayerStateDelegate: class {
 }
 
 class VideoPlayer: UIView {
+    /// AVAsset生成時に読み込ませたいキーの一覧
+    enum AssetLoadKeys: String {
+        /// 再生可能かどうか
+        case playable
+    }
+    
     private(set) var player: AVPlayer? {
         get {
             let layer = self.layer as! AVPlayerLayer
@@ -132,10 +138,41 @@ class VideoPlayer: UIView {
         removeDidPlayToEndTimeNotification()
     }
     
+    /// AVPlayerをセットし、各種オブザーバーを起動させる
+    /// - Parameter player: プレイヤー
     func setPlayer(player: AVPlayer?) {
         self.player = player
         setPlayerObserver()
         setDidPlayToEndTimeNotification()
+    }
+    
+    /// 動画のURLを設定し、プレイヤーを生成する
+    /// - Parameter url: 動画のURL
+    func setVideoURL(url: URL?) {
+        guard let url = url else {
+            delegate?.didFailure(player: self)
+            return
+        }
+        let asset = AVAsset(url: url)
+        asset.loadValuesAsynchronously(forKeys: [AssetLoadKeys.playable.rawValue],
+                                       completionHandler: { [weak self] in
+                                        guard let sself = self else {
+                                            return
+                                        }
+                                        var error: NSError?
+                                        let status = asset.statusOfValue(forKey: AssetLoadKeys.playable.rawValue,
+                                                                         error: &error)
+                                        DispatchQueue.main.async {
+                                            switch status {
+                                            case .loaded:
+                                                let playerItem = AVPlayerItem(asset: asset)
+                                                let player = AVPlayer(playerItem: playerItem)
+                                                sself.setPlayer(player: player)
+                                            default:
+                                                sself.delegate?.didFailure(player: sself)
+                                            }
+                                        }
+        })
     }
     
     func setPeriodicTimeObserver(interval: CMTime) {

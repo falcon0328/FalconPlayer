@@ -24,30 +24,17 @@ class ViewController: UIViewController {
         
         let videoPlayerView = Bundle.main.loadNibNamed("VideoPlayerView", owner: self, options: nil)?.first as! VideoPlayerView
         videoPlayerView.frame = playerView.frame
-        self.videoPlayerView = videoPlayerView
-        
-        let url = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8")!
-        
-        // iOSでAVの情報を管理するためのモデルクラス
-        // AVの参照先URL、作成日、尺の長さなどが取得できる
-        let asset = AVAsset(url: url)
-        
-        // 動画の表示状態や状況を管理するためのモデルクラスを生成
-        // 再生時間、再生状態（未定義・準備完了・エラー）、バッファリング済みの動画尺などの取得ができる
-        let playerItem = AVPlayerItem(asset: asset)
-
-        // AVの再生や停止、ミュートやアンミュート、ボリューム変更など各種AV操作を行う
-        // AVPlayerは再生したいAVPlayerItemをセットして行う
-        let player = AVPlayer(playerItem: playerItem)
-        videoPlayerView.setPlayer(player: player)
+        // https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8
         videoPlayerView.delegate = self
-        
+        videoPlayerView.setVideoURL(url: URL(string: "https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8"))
         playerView.addSubview(videoPlayerView)
+
         videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
         videoPlayerView.leadingAnchor.constraint(equalTo: playerView.leadingAnchor).isActive = true
         videoPlayerView.topAnchor.constraint(equalTo: playerView.topAnchor).isActive = true
         videoPlayerView.bottomAnchor.constraint(equalTo: playerView.bottomAnchor).isActive = true
         videoPlayerView.trailingAnchor.constraint(equalTo: playerView.trailingAnchor).isActive = true
+        self.videoPlayerView = videoPlayerView
         playerView.isHidden = false
     }
 }
