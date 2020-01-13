@@ -124,7 +124,7 @@ class VideoPlayerView: UIView {
         let thumbnailView = Bundle.main.loadNibNamed("ThumbnailView",
                                                      owner: self,
                                                      options: nil)?.first as! ThumbnailView
-        thumbnailView.setImage(image: UIImage(named: "sample"))
+        thumbnailView.setImage(image: UIImage(named: "BigBuckBunny"))
         insertSubview(thumbnailView, aboveSubview: controlView)
         self.thumbnailView = thumbnailView
         showThumbnailView()
