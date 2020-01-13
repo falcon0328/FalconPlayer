@@ -168,6 +168,14 @@
                                         <action selector="didTapMuteUnmuteButton:" destination="1eD-Qv-9vk" eventType="touchUpInside" id="Zha-eZ-NMC"/>
                                     </connections>
                                 </button>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="DiG-CN-oFq">
+                                    <rect key="frame" x="216" y="136" width="48" height="48"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="48" id="hQg-eR-7eK"/>
+                                        <constraint firstAttribute="height" constant="48" id="oa7-am-JjD"/>
+                                    </constraints>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -175,11 +183,13 @@
                                 <constraint firstItem="mPn-Gf-Gnb" firstAttribute="leading" secondItem="7kB-lI-ozo" secondAttribute="trailing" constant="10" id="5wX-B6-jUT"/>
                                 <constraint firstAttribute="bottom" secondItem="LGH-fN-H99" secondAttribute="bottom" constant="15" id="C7b-yC-s4o"/>
                                 <constraint firstItem="nJg-F8-pdb" firstAttribute="centerY" secondItem="SHQ-aK-Ocm" secondAttribute="centerY" id="DPz-7w-cua"/>
+                                <constraint firstItem="DiG-CN-oFq" firstAttribute="centerY" secondItem="SHQ-aK-Ocm" secondAttribute="centerY" id="Dsp-1N-5bt"/>
                                 <constraint firstAttribute="trailing" secondItem="tDL-Ya-Txc" secondAttribute="trailing" constant="12" id="EMA-t4-U3L"/>
                                 <constraint firstAttribute="bottom" secondItem="7kB-lI-ozo" secondAttribute="bottom" constant="15" id="Eid-oI-yQs"/>
                                 <constraint firstItem="2bw-fX-4bG" firstAttribute="leading" secondItem="LGH-fN-H99" secondAttribute="trailing" constant="10" id="FtD-LB-XVR"/>
                                 <constraint firstItem="dPa-bP-05X" firstAttribute="centerY" secondItem="SHQ-aK-Ocm" secondAttribute="centerY" id="GvU-1e-nN7"/>
                                 <constraint firstAttribute="bottom" secondItem="mPn-Gf-Gnb" secondAttribute="bottom" constant="22" id="J7X-WK-7TE"/>
+                                <constraint firstItem="DiG-CN-oFq" firstAttribute="centerX" secondItem="SHQ-aK-Ocm" secondAttribute="centerX" id="LoL-Xq-793"/>
                                 <constraint firstItem="mPn-Gf-Gnb" firstAttribute="leading" secondItem="4Xf-TW-Rb0" secondAttribute="trailing" constant="10" id="TiT-2U-bK7"/>
                                 <constraint firstItem="nJg-F8-pdb" firstAttribute="leading" secondItem="dPa-bP-05X" secondAttribute="trailing" constant="88" id="TsF-Sw-ynS"/>
                                 <constraint firstItem="tDL-Ya-Txc" firstAttribute="top" secondItem="SHQ-aK-Ocm" secondAttribute="top" constant="22.5" id="XgF-N2-QnW"/>
@@ -221,6 +231,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="sy0-yN-yMl"/>
             <connections>
+                <outlet property="bufferActivityIndicatiorView" destination="DiG-CN-oFq" id="cc5-2S-7TB"/>
                 <outlet property="bufferbar" destination="7kB-lI-ozo" id="Vbg-wH-RH8"/>
                 <outlet property="controlView" destination="SHQ-aK-Ocm" id="mEQ-CH-8Px"/>
                 <outlet property="currentTimeLabel" destination="2bw-fX-4bG" id="gY4-Ta-bGP"/>

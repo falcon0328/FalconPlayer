@@ -43,6 +43,7 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var muteUnmuteButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var expandCollapseButton: UIButton!
+    @IBOutlet weak var bufferActivityIndicatiorView: UIActivityIndicatorView!
     
     var routePickerView: AVRoutePickerView!
     
@@ -99,6 +100,8 @@ class VideoPlayerView: UIView {
         routePickerView.delegate = self
         self.routePickerView = routePickerView
         routePickerBaseView.addSubview(routePickerView)
+        
+        hideBufferActivityIndicatorView()
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewWillEnterForeground(notification:)),
@@ -379,6 +382,29 @@ class VideoPlayerView: UIView {
         }
     }
     
+    /// バッファリング中を示すインジケーターを表示する
+    func showBufferActivityIndicatorView() {
+        playPauseButton.isHidden = true
+        bufferActivityIndicatiorView.isHidden = false
+        bufferActivityIndicatiorView.startAnimating()
+    }
+    
+    /// バッファリング中を示すインジケーターを非表示にする
+    func hideBufferActivityIndicatorView() {
+        playPauseButton.isHidden = false
+        bufferActivityIndicatiorView.isHidden = true
+        bufferActivityIndicatiorView.stopAnimating()
+    }
+    
+    ///　バッファリング中を示すインジケーターの状態をplayerStateに合わせて更新する
+    func updateBufferActivityIndicatorView(playerState: VideoPlayerState) {
+        if playerState == .buffering {
+            showBufferActivityIndicatorView()
+        } else {
+            hideBufferActivityIndicatorView()
+        }
+    }
+    
     /// デバイスの向きに対応した回転角度
     /// - Parameter deviceOrientation: デバイスの向き
     func calcurateTransform(deviceOrientation: UIDeviceOrientation) -> CGAffineTransform {
@@ -445,6 +471,7 @@ extension VideoPlayerView: PlayerStateDelegate {
     }
     
     func didChange(player: VideoPlayer, playerState: VideoPlayerState) {
+        updateBufferActivityIndicatorView(playerState: playerState)
         updatePlayPauseButtonImage()
     }
     
