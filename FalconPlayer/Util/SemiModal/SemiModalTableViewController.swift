@@ -103,7 +103,7 @@ class SemiModalTableViewController: SemiModalBaseViewController {
     }
 
     @objc func didScrollTableView(_ sender: UIPanGestureRecognizer) {
-        interactor.setStartInteractionTranslationY(sender.translation(in: view).y)
+        interactor.updateStateShouldStartIfNeeded()
         handleTransitionGesture(sender)
     }
 }
