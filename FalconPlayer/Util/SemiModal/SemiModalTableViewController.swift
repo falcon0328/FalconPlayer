@@ -14,6 +14,7 @@ class SemiModalTableViewController: SemiModalBaseViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var draggerView: UIView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tableViewHightConstraint: NSLayoutConstraint!
     
     var tableViewContentOffsetY: CGFloat = 0.0
     
@@ -36,6 +37,12 @@ class SemiModalTableViewController: SemiModalBaseViewController {
                                                                     options: nil)?.first as! SemiModalTableViewController
         
         return semiModalTableViewController
+    }
+    
+    /// セミモーダル内のUITableViewに高さを設定する
+    /// - Parameter height: 高さ
+    func setTableViewHight(_ height: CGFloat) {
+        tableViewHightConstraint.constant = height
     }
     
     /// セミモーダルビュー内のUITableViewにdelegateを設定する

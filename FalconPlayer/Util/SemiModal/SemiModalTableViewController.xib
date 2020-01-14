@@ -80,6 +80,7 @@
                 <outlet property="draggerView" destination="7oT-1j-Mzn" id="vL0-VF-FvR"/>
                 <outlet property="headerView" destination="JLo-3j-kAd" id="wJU-g7-c2a"/>
                 <outlet property="tableView" destination="uPz-g3-p9o" id="BIa-iP-3nq"/>
+                <outlet property="tableViewHightConstraint" destination="xPP-2I-pdj" id="OV7-oa-hJL"/>
             </connections>
             <point key="canvasLocation" x="-540" y="124.8768472906404"/>
         </viewController>
