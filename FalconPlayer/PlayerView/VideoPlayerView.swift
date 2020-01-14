@@ -70,6 +70,11 @@ class VideoPlayerView: UIView {
     /// サムネイルを表示するView
     var thumbnailView: ThumbnailView!
     
+    /// 設定の一覧を表示するセミモーダルビュー
+    var settingViewController: SemiModalTableViewController!
+    /// 設定一覧画面のデータソース
+    let settingViewDataSouce = SettingViewDataSource()
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -128,6 +133,10 @@ class VideoPlayerView: UIView {
         insertSubview(thumbnailView, aboveSubview: controlView)
         self.thumbnailView = thumbnailView
         showThumbnailView()
+        
+        settingViewController = SemiModalTableViewController.make()
+        settingViewController.register(SettingViewDataSource.cellNib, forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
+        settingViewController.setDataSource(dataSource: settingViewDataSouce)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(viewWillEnterForeground(notification:)),
@@ -270,7 +279,7 @@ class VideoPlayerView: UIView {
         guard let topVC = RootViewControllerGetter.getRootViewController() else {
             return
         }
-        topVC.present(SettingViewController.make(),
+        topVC.present(settingViewController,
                       animated: true,
                       completion: nil)
     }
