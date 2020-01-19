@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 58
+        tableView.estimatedRowHeight = 14
         tableView.register(UINib(nibName: "VideoPlayerLogTableViewCell", bundle: Bundle.main),
                            forCellReuseIdentifier: "VideoPlayerLogTableViewCell")
         tableView.delegate = self
