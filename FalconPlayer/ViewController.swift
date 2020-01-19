@@ -72,8 +72,8 @@ class ViewController: UIViewController {
     }
     
     func insertLog(category: String, categoryColor: UIColor, value: String = "") {
-        videoPlayerLogList.append(VideoPlayerLog(category: category, categoryColor: categoryColor, value: value))
-        tableView.insertRows(at: [IndexPath(row: videoPlayerLogList.count - 1, section: 0)], with: .automatic)
+        videoPlayerLogList.insert(VideoPlayerLog(category: category, categoryColor: categoryColor, value: value), at: 0)
+        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
 }
 
@@ -81,17 +81,26 @@ extension ViewController: VideoPlayerViewDelegate {
     func didPrepare(videoPlayerView: VideoPlayerView) {
         insertLog(category: "didPrepare", categoryColor: UIColor.systemGreen)
         videoPlayerView.play()
+        insertLog(category: "play()", categoryColor: UIColor.systemOrange)
     }
     
-    func didFailure(videoPlayerView: VideoPlayerView) {}
+    func didFailure(videoPlayerView: VideoPlayerView) {
+        insertLog(category: "didFailure", categoryColor: UIColor.systemRed)
+    }
     
     func didUpdatePeriodicTimer(videoPlayerView: VideoPlayerView) {}
     
-    func didChange(videoPlayerView: VideoPlayerView, playerState: VideoPlayerState) {}
+    func didChange(videoPlayerView: VideoPlayerView, playerState: VideoPlayerState) {
+        insertLog(category: "didChange playerState", categoryColor: UIColor.systemGreen, value: "playerState: \(playerState)")
+    }
     
-    func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState) {}
+    func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState) {
+        insertLog(category: "didChange audioState", categoryColor: UIColor.systemGreen, value: "audioState: \(audioState)")
+    }
     
-    func didTap(videoPlayerView: VideoPlayerView, componentName: String) {}
+    func didTap(videoPlayerView: VideoPlayerView, componentName: String) {
+        insertLog(category: "didTap", categoryColor: UIColor.systemOrange, value: "componentName: \(componentName)")
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
