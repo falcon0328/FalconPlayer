@@ -28,6 +28,10 @@ protocol VideoPlayerViewDelegate: class {
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter audioState: 変更後のオーディオ状態
     func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState)
+    /// プレイヤーの設定している再生速度がユーザによって変更されたことを通知する
+    /// - Parameter videoPlayerView: プレイヤービュー
+    /// - Parameter rate: 変更後の再生速度
+    func didChange(videoPlayerView: VideoPlayerView, rate: Float)
     /// プレイヤービュー内の各UIコンポーネントがタップされた
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter componentName: タップされたUIコンポーネント
@@ -570,6 +574,9 @@ extension VideoPlayerView: PlayerStateDelegate {
         delegate?.didChange(videoPlayerView: self, audioState: audioState)
     }
     
+    func didChange(player: VideoPlayer, rate: Float) {
+        delegate?.didChange(videoPlayerView: self, rate: rate)
+    }
 }
 
 extension VideoPlayerView: AVRoutePickerViewDelegate {

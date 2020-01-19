@@ -56,6 +56,11 @@ protocol PlayerStateDelegate: class {
     /// - Parameter player: プレイヤー
     /// - Parameter audioState: 変更後のオーディオ状態
     func didChange(player: VideoPlayer, audioState: AudioState)
+    
+    /// プレイヤーの設定している再生速度がユーザによって変更されたことを通知する
+    /// - Parameter player: プレイヤー
+    /// - Parameter rate: 変更後の再生速度
+    func didChange(player: VideoPlayer, rate: Float)
 }
 
 class VideoPlayer: UIView {
@@ -323,7 +328,7 @@ class VideoPlayer: UIView {
     /// AVPlayerのrateが変更された際のコールバックメソッド
     /// - Parameter rate:
     func playerRateChangeHandler(rate: Float) {
-
+        delegate?.didChange(player: self, rate: rate)
     }
     
     /// AVPlayerのtimeControlStatusが変更された際に何をコールバックするか決定するメソッド

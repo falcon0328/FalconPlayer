@@ -104,6 +104,10 @@ extension ViewController: VideoPlayerViewDelegate {
         insertLog(category: "didChange audioState", categoryColor: UIColor.systemGreen, value: "audioState: \(audioState)")
     }
     
+    func didChange(videoPlayerView: VideoPlayerView, rate: Float) {
+        insertLog(category: "didChange rate", categoryColor: UIColor.systemGreen, value: "rate: \(rate)")
+    }
+    
     func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName) {
         insertLog(category: "didTap", categoryColor: UIColor.systemOrange, value: "componentName: \(componentName)")
     }
