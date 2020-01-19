@@ -26,13 +26,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cls-Ft-XkW">
-                        <rect key="frame" x="5" y="5" width="26.5" height="12"/>
+                        <rect key="frame" x="16" y="5" width="26.5" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWN-Jc-eZf">
-                        <rect key="frame" x="5" y="22" width="310" height="13"/>
+                        <rect key="frame" x="16" y="22" width="299" height="13"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -40,13 +40,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="fWN-Jc-eZf" secondAttribute="trailing" constant="5" id="1WR-qt-az7"/>
-                    <constraint firstItem="fWN-Jc-eZf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="LuG-Nr-vCe"/>
+                    <constraint firstItem="fWN-Jc-eZf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="LuG-Nr-vCe"/>
                     <constraint firstAttribute="bottom" secondItem="fWN-Jc-eZf" secondAttribute="bottom" constant="5" id="SSS-5q-bIf"/>
                     <constraint firstItem="Cls-Ft-XkW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="X6t-YF-6Yl"/>
                     <constraint firstItem="fpf-cf-akg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ba2-my-3a9"/>
                     <constraint firstAttribute="trailing" secondItem="fpf-cf-akg" secondAttribute="trailing" constant="5" id="eKq-MY-4Hr"/>
                     <constraint firstItem="fWN-Jc-eZf" firstAttribute="top" secondItem="fpf-cf-akg" secondAttribute="bottom" constant="5" id="hTM-sh-9HT"/>
-                    <constraint firstItem="Cls-Ft-XkW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="vub-bP-MpT"/>
+                    <constraint firstItem="Cls-Ft-XkW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="vub-bP-MpT"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
