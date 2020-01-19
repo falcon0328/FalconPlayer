@@ -136,6 +136,7 @@ class VideoPlayer: UIView {
         removePeriodicTimeObserver()
         removePlayerObserver()
         removeDidPlayToEndTimeNotification()
+        removeTimeBaseEffectiveRateChanged()
     }
     
     /// AVPlayerをセットし、各種オブザーバーを起動させる
@@ -144,6 +145,7 @@ class VideoPlayer: UIView {
         self.player = player
         setPlayerObserver()
         setDidPlayToEndTimeNotification()
+        setTimeBaseEffectiveRateChanged()
     }
     
     /// 動画のURLを設定し、プレイヤーを生成する
@@ -244,6 +246,19 @@ class VideoPlayer: UIView {
                                                   object: player?.currentItem)
     }
     
+    func setTimeBaseEffectiveRateChanged() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didTimeBaseEffectiveRateChanged(notification:)),
+                                               name: Notification.Name(rawValue: String(kCMTimebaseNotification_EffectiveRateChanged)),
+                                               object: player?.currentItem?.timebase)
+    }
+    
+    func removeTimeBaseEffectiveRateChanged() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name(rawValue: String(kCMTimebaseNotification_EffectiveRateChanged)),
+                                                  object: player?.currentItem?.timebase)
+    }
+    
     func setVideoGravity(videoGravity: AVLayerVideoGravity) {
         (layer as! AVPlayerLayer).videoGravity = videoGravity
     }
@@ -330,5 +345,16 @@ class VideoPlayer: UIView {
     
     @objc func didPlayToEndTimeNotification(notification: Notification) {
         playerState = .ended
+    }
+    
+    @objc func didTimeBaseEffectiveRateChanged(notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            print("🐩 didTimeBaseEffectiveRateChanged")
+            guard let timebase = self?.player?.currentItem?.timebase else {
+                return
+            }
+            let timebaseRate = Float(CMTimebaseGetRate(timebase))
+            print("😺 EffectiveRate: \(timebaseRate)")
+        }
     }
 }
