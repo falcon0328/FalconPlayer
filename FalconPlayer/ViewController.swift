@@ -41,12 +41,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let log1 = VideoPlayerLog(category: "category1", value: "aaa")
-        let log2 = VideoPlayerLog(category: "category1", value: "aaa\nbbb")
-        let log3 = VideoPlayerLog(category: "category1", value: "aaa\nbbb\nccc")
-        videoPlayerLogList = [log1, log2, log3]
-        
         tableView.estimatedRowHeight = 58
         tableView.register(UINib(nibName: "VideoPlayerLogTableViewCell", bundle: Bundle.main),
                            forCellReuseIdentifier: "VideoPlayerLogTableViewCell")
