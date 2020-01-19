@@ -61,6 +61,11 @@ protocol PlayerStateDelegate: class {
     /// - Parameter player: プレイヤー
     /// - Parameter rate: 変更後の再生速度
     func didChange(player: VideoPlayer, rate: Float)
+    
+    /// プレイヤーの設定しているバッファリング中なども含めた実際の再生速度が変更されたことを通知する
+    /// - Parameter player: プレイヤー
+    /// - Parameter effectiveRate: 変更後の実際の再生速度
+    func didChange(player: VideoPlayer, effectiveRate: Float)
 }
 
 class VideoPlayer: UIView {
@@ -118,6 +123,20 @@ class VideoPlayer: UIView {
             return 0.0
         }
         return Float(CMTimeGetSeconds(duration))
+    }
+    /// ユーザの設定している再生速度
+    var rate: Float {
+        guard let rate = player?.rate else {
+            return 0.0
+        }
+        return rate
+    }
+    /// バッファリング中なども含めた実際の再生速度
+    var effectiveRate: Float = 0.0 {
+        didSet {
+            if effectiveRate == oldValue { return }
+            delegate?.didChange(player: self, effectiveRate: effectiveRate)
+        }
     }
     /// プレイヤーの状態が変わったことを通知するデリゲート
     weak var delegate: PlayerStateDelegate?
@@ -354,12 +373,12 @@ class VideoPlayer: UIView {
     
     @objc func didTimeBaseEffectiveRateChanged(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
-            print("🐩 didTimeBaseEffectiveRateChanged")
             guard let timebase = self?.player?.currentItem?.timebase else {
                 return
             }
-            let timebaseRate = Float(CMTimebaseGetRate(timebase))
-            print("😺 EffectiveRate: \(timebaseRate)")
+            let effectiveRate = Float(CMTimebaseGetRate(timebase))
+            print("😺 EffectiveRate: \(effectiveRate)")
+            self?.effectiveRate = effectiveRate
         }
     }
 }

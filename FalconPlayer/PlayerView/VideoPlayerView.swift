@@ -24,14 +24,18 @@ protocol VideoPlayerViewDelegate: class {
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter playerState: 変更後のプレイヤー状態
     func didChange(videoPlayerView: VideoPlayerView, playerState: VideoPlayerState)
-    /// プレイヤービュー内のオーディオ状態が変わったことを通知する
+    /// プレイヤービュー内のプレイヤーのオーディオ状態が変わったことを通知する
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter audioState: 変更後のオーディオ状態
     func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState)
-    /// プレイヤーの設定している再生速度がユーザによって変更されたことを通知する
+    /// プレイヤービュー内のプレイヤーの設定している再生速度がユーザによって変更されたことを通知する
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter rate: 変更後の再生速度
     func didChange(videoPlayerView: VideoPlayerView, rate: Float)
+    /// プレイヤービュー内のプレイヤーの設定しているバッファリング中なども含めた実際の再生速度が変更されたことを通知する
+    /// - Parameter videoPlayerView: プレイヤービュー
+    /// - Parameter effectiveRate: 変更後の実際の再生速度
+    func didChange(videoPlayerView: VideoPlayerView, effectiveRate: Float)
     /// プレイヤービュー内の各UIコンポーネントがタップされた
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter componentName: タップされたUIコンポーネント
@@ -576,6 +580,10 @@ extension VideoPlayerView: PlayerStateDelegate {
     
     func didChange(player: VideoPlayer, rate: Float) {
         delegate?.didChange(videoPlayerView: self, rate: rate)
+    }
+    
+    func didChange(player: VideoPlayer, effectiveRate: Float) {
+        delegate?.didChange(videoPlayerView: self, effectiveRate: effectiveRate)
     }
 }
 
