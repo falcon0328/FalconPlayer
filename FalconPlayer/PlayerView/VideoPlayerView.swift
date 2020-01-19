@@ -37,7 +37,7 @@ protocol VideoPlayerViewDelegate: class {
 class VideoPlayerView: UIView {
     static let SEEKBAR_THUMB_SIZE: CGFloat = 12.0
     
-    var videoPlayerViewFrame: CGRect!
+    var videoPlayerViewFrame: CGRect?
     weak var delegate: VideoPlayerViewDelegate?
     /// 拡大中かどうかを示すフラグ
     var isExpand = false
@@ -77,6 +77,11 @@ class VideoPlayerView: UIView {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    /// Portrait時に指定するFrame情報
+    func setPortraitFrame(_ frame: CGRect) {
+        videoPlayerViewFrame = frame
     }
     
     func setPlayer(player: AVPlayer?) {
@@ -170,11 +175,9 @@ class VideoPlayerView: UIView {
     }
     
     func expand(transform: CGAffineTransform) {
-         if isExpand {
-            return
-        }
+         if isExpand { return }
         isExpand = true
-        
+        expandCollapseButton.setImage(UIImage(systemName: "arrow.down.right.and.arrow.up.left"), for: .normal)
         videoPlayerViewFrame = superview!.frame
         UIView.animate(withDuration: 0.5, animations: {
             self.superview?.translatesAutoresizingMaskIntoConstraints = true
@@ -183,9 +186,6 @@ class VideoPlayerView: UIView {
                                            width: UIScreen.main.bounds.width,
                                            height: UIScreen.main.bounds.height)
         })
-
-        let collapseImage = UIImage(systemName: "arrow.down.right.and.arrow.up.left")
-        expandCollapseButton.setImage(collapseImage, for: .normal)
     }
     
     func expand() {
@@ -193,19 +193,16 @@ class VideoPlayerView: UIView {
     }
     
     func collapse() {
-        if !isExpand {
-            return
-        }
+        if !isExpand { return }
         isExpand = false
-        
-        UIView.animate(withDuration: 0.5,
-                       animations: {
-                        self.superview?.translatesAutoresizingMaskIntoConstraints = false
-                        self.superview?.frame = self.videoPlayerViewFrame
-        }, completion: { finished in })
-        
-        let expandImage = UIImage(systemName: "arrow.up.left.and.arrow.down.right")
-        expandCollapseButton.setImage(expandImage, for: .normal)
+        expandCollapseButton.setImage(UIImage(systemName: "arrow.up.left.and.arrow.down.right"), for: .normal)
+        if let portraitFrame = videoPlayerViewFrame {
+            UIView.animate(withDuration: 0.5,
+                           animations: {
+                            self.superview?.translatesAutoresizingMaskIntoConstraints = false
+                            self.superview?.frame = portraitFrame
+            }, completion: { finished in })
+        }
     }
     
     /// 円形画像を作成するプログラム
@@ -510,6 +507,10 @@ extension VideoPlayerView: PlayerStateDelegate {
         bufferbar.maximumValue = videoPlayer.duration
         videoPlayer.setPeriodicTimeObserver(interval: CMTime(value: 5, timescale: 10))
         videoPlayer.mute()
+        if __CGSizeEqualToSize(frame.size, UIScreen.main.bounds.size) {
+            isExpand = true
+            expandCollapseButton.setImage(UIImage(systemName: "arrow.down.right.and.arrow.up.left"), for: .normal)
+        }
         delegate?.didPrepare(videoPlayerView: self)
     }
     
