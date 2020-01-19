@@ -15,6 +15,8 @@ struct VideoPlayerLog {
     let date = Date()
     /// 種類
     let category: String
+    /// 種類の色
+    let categoryColor: UIColor
     /// 値
     let value: String
 }
@@ -68,10 +70,16 @@ class ViewController: UIViewController {
         self.videoPlayerView = videoPlayerView
         playerView.isHidden = false
     }
+    
+    func insertLog(category: String, categoryColor: UIColor, value: String = "") {
+        videoPlayerLogList.append(VideoPlayerLog(category: category, categoryColor: categoryColor, value: value))
+        tableView.insertRows(at: [IndexPath(row: videoPlayerLogList.count - 1, section: 0)], with: .automatic)
+    }
 }
 
 extension ViewController: VideoPlayerViewDelegate {
     func didPrepare(videoPlayerView: VideoPlayerView) {
+        insertLog(category: "didPrepare", categoryColor: UIColor.systemGreen)
         videoPlayerView.play()
     }
     
@@ -98,7 +106,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VideoPlayerLogTableViewCell", for: indexPath) as! VideoPlayerLogTableViewCell
         cell.dateLabel.text = dateFormatter.string(from: videoPlayerLogList[indexPath.row].date)
-        cell.categoryLabel.text = videoPlayerLogList[indexPath.row].category
+        cell.categoryLabel.text = " \(videoPlayerLogList[indexPath.row].category) "
+        cell.categoryLabel.backgroundColor = videoPlayerLogList[indexPath.row].categoryColor
         cell.valueLabel.text = videoPlayerLogList[indexPath.row].value
         return cell
     }

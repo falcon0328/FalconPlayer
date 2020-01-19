@@ -17,6 +17,8 @@ class VideoPlayerLogTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        categoryLabel.clipsToBounds = true
+        categoryLabel.layer.cornerRadius = 5.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,6 +30,7 @@ class VideoPlayerLogTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         dateLabel.text = ""
         categoryLabel.text = ""
+        categoryLabel.backgroundColor = UIColor.clear
         valueLabel.text = ""
     }
     
