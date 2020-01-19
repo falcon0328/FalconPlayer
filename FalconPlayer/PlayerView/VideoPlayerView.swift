@@ -482,10 +482,6 @@ class VideoPlayerView: UIView {
     }
     
     @objc func didChangeOrientation(notification: NSNotification){
-        seekbar.maximumValue = videoPlayer.duration
-        bufferbar.maximumValue = videoPlayer.duration
-        seekbar.value = videoPlayer.currentTime
-        bufferbar.value = videoPlayer.bufferLoadedRange
         switch UIDevice.current.orientation {
         case .landscapeLeft, .landscapeRight:
             expand()
