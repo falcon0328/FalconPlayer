@@ -46,6 +46,7 @@ class ViewController: UIViewController {
                            forCellReuseIdentifier: "VideoPlayerLogTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     override func viewDidAppear(_ animated: Bool) {
