@@ -43,6 +43,7 @@
                     <navigationItem key="navigationItem" id="JnC-Je-Qmn"/>
                     <connections>
                         <outlet property="playerView" destination="Y8x-TM-S0T" id="lCb-ym-T3g"/>
+                        <outlet property="tableView" destination="dDm-q8-KN4" id="gJy-Jf-Y1Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yM-r1-kBP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

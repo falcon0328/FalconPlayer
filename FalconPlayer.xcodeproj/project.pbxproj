@@ -34,6 +34,8 @@
 		55ADDA3B23C62B9300D99D34 /* SemiModalBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */; };
 		55ADDA3E23C6318B00D99D34 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ADDA3C23C6318B00D99D34 /* SettingTableViewCell.swift */; };
 		55ADDA3F23C6318B00D99D34 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55ADDA3D23C6318B00D99D34 /* SettingTableViewCell.xib */; };
+		55B77EB323D496CC00647448 /* VideoPlayerLogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B77EB123D496CC00647448 /* VideoPlayerLogTableViewCell.swift */; };
+		55B77EB423D496CC00647448 /* VideoPlayerLogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B77EB223D496CC00647448 /* VideoPlayerLogTableViewCell.xib */; };
 		55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */; };
 		55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,8 @@
 		55ADDA3A23C62B9300D99D34 /* SemiModalBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiModalBaseViewController.swift; sourceTree = "<group>"; };
 		55ADDA3C23C6318B00D99D34 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		55ADDA3D23C6318B00D99D34 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
+		55B77EB123D496CC00647448 /* VideoPlayerLogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerLogTableViewCell.swift; sourceTree = "<group>"; };
+		55B77EB223D496CC00647448 /* VideoPlayerLogTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLogTableViewCell.xib; sourceTree = "<group>"; };
 		55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerSeekThumbnailView.xib; sourceTree = "<group>"; };
 		55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSeekThumbnailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,6 +160,8 @@
 				55A0717823BBC6C3003503E2 /* Main.storyboard */,
 				55A0715023BBC6A2003503E2 /* SceneDelegate.swift */,
 				55A0717623BBC6C3003503E2 /* ViewController.swift */,
+				55B77EB123D496CC00647448 /* VideoPlayerLogTableViewCell.swift */,
+				55B77EB223D496CC00647448 /* VideoPlayerLogTableViewCell.xib */,
 			);
 			path = FalconPlayer;
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 				55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */,
 				555A410423CCB4BE00D4E93A /* ThumbnailView.xib in Resources */,
 				55A0715B23BBC6A3003503E2 /* LaunchScreen.storyboard in Resources */,
+				55B77EB423D496CC00647448 /* VideoPlayerLogTableViewCell.xib in Resources */,
 				55A0718323BBC6C3003503E2 /* Main.storyboard in Resources */,
 				55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */,
 				55ADDA3F23C6318B00D99D34 /* SettingTableViewCell.xib in Resources */,
@@ -350,6 +357,7 @@
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,
 				55ADDA3E23C6318B00D99D34 /* SettingTableViewCell.swift in Sources */,
 				552B324223C0C66D00BD9753 /* DismissAnimator.swift in Sources */,
+				55B77EB323D496CC00647448 /* VideoPlayerLogTableViewCell.swift in Sources */,
 				55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */,
 				55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */,
 				55A0715123BBC6A2003503E2 /* SceneDelegate.swift in Sources */,
