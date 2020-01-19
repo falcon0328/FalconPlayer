@@ -31,10 +31,28 @@ protocol VideoPlayerViewDelegate: class {
     /// プレイヤービュー内の各UIコンポーネントがタップされた
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter componentName: タップされたUIコンポーネント
-    func didTap(videoPlayerView: VideoPlayerView, componentName: String)
+    func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName)
 }
 
 class VideoPlayerView: UIView {
+    /// 各UI要素の名前
+    enum ComponentName: String {
+        case videoPlayer
+        case errorView
+        case controlView
+        case listButton
+        case playButton
+        case pauseButton
+        case replayButton
+        case gobackward10Button
+        case goforward10Button
+        case muteButton
+        case unmuteButton
+        case expandButton
+        case collapseButton
+        case routePickerView
+    }
+    
     static let SEEKBAR_THUMB_SIZE: CGFloat = 12.0
     
     var videoPlayerViewFrame: CGRect?
@@ -225,10 +243,13 @@ class VideoPlayerView: UIView {
     @IBAction func didTapPlayPauseButton(_ sender: Any) {
         switch videoPlayer.playerState {
         case .playing:
+            delegate?.didTap(videoPlayerView: self, componentName: .pauseButton)
             pause()
         case .paused:
+            delegate?.didTap(videoPlayerView: self, componentName: .playButton)
             play()
         case .ended:
+            delegate?.didTap(videoPlayerView: self, componentName: .replayButton)
             replay()
         default:
             break
@@ -237,6 +258,7 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapForward10secButton(_ sender: Any) {
+        delegate?.didTap(videoPlayerView: self, componentName: .goforward10Button)
         videoPlayer.seek(to: videoPlayer.currentTime + 10.0,
                          completionHandler: { finished in
             
@@ -244,6 +266,7 @@ class VideoPlayerView: UIView {
     }
     
     @IBAction func didTapBackward10secButton(_ sender: Any) {
+        delegate?.didTap(videoPlayerView: self, componentName: .gobackward10Button)
         videoPlayer.seek(to: videoPlayer.currentTime - 10.0,
                          completionHandler: { finished in
             
@@ -252,18 +275,22 @@ class VideoPlayerView: UIView {
     
     @IBAction func didTapMuteUnmuteButton(_ sender: Any) {
         if videoPlayer.audioState == .mute {
+            delegate?.didTap(videoPlayerView: self, componentName: .unmuteButton)
             videoPlayer.unmute()
         } else {
+            delegate?.didTap(videoPlayerView: self, componentName: .muteButton)
             videoPlayer.mute()
         }
     }
     
     @IBAction func didTapExpandCollapseButton(_ sender: Any) {
         if isExpand {
+            delegate?.didTap(videoPlayerView: self, componentName: .collapseButton)
             UIDevice.current.setValue(UIDeviceOrientation.portrait.rawValue,
                                       forKey: "orientation")
 
         } else {
+            delegate?.didTap(videoPlayerView: self, componentName: .expandButton)
             UIDevice.current.setValue(UIDeviceOrientation.landscapeLeft.rawValue,
                                       forKey: "orientation")
 
@@ -272,7 +299,7 @@ class VideoPlayerView: UIView {
     
     @IBAction func didTapListButton(_ sender: Any) {
         delegate?.didTap(videoPlayerView: self,
-                         componentName: "List")
+                         componentName: .listButton)
         guard let topVC = RootViewControllerGetter.getRootViewController() else {
             return
         }
@@ -490,10 +517,12 @@ class VideoPlayerView: UIView {
     }
     
     @objc func didTapVideoView() {
+        delegate?.didTap(videoPlayerView: self, componentName: .videoPlayer)
         showControlView()
     }
     
     @objc func didTapControlView() {
+        delegate?.didTap(videoPlayerView: self, componentName: .controlView)
         hideControlView()
     }
 }
@@ -544,7 +573,9 @@ extension VideoPlayerView: PlayerStateDelegate {
 }
 
 extension VideoPlayerView: AVRoutePickerViewDelegate {
-    func routePickerViewWillBeginPresentingRoutes(_ routePickerView: AVRoutePickerView) {}
+    func routePickerViewWillBeginPresentingRoutes(_ routePickerView: AVRoutePickerView) {
+        delegate?.didTap(videoPlayerView: self, componentName: .routePickerView)
+    }
     
     func routePickerViewDidEndPresentingRoutes(_ routePickerView: AVRoutePickerView) {}
 }
