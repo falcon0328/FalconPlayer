@@ -377,7 +377,6 @@ class VideoPlayer: UIView {
                 return
             }
             let effectiveRate = Float(CMTimebaseGetRate(timebase))
-            print("😺 EffectiveRate: \(effectiveRate)")
             self?.effectiveRate = effectiveRate
         }
     }
