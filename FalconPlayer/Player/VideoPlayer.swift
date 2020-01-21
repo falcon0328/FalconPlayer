@@ -157,10 +157,7 @@ class VideoPlayer: UIView {
     }
     
     deinit {
-        removePeriodicTimeObserver()
-        removePlayerObserver()
-        removeDidPlayToEndTimeNotification()
-        removeTimeBaseEffectiveRateChanged()
+        releaseVideoPlayer()
     }
     
     /// AVPlayerをセットし、各種オブザーバーを起動させる
@@ -328,6 +325,17 @@ class VideoPlayer: UIView {
     func unmute() {
         player?.isMuted = false
         delegate?.didChange(player: self, audioState: self.audioState)
+    }
+    
+    /// プレイヤーの破棄を行う
+    func releaseVideoPlayer() {
+        removePeriodicTimeObserver()
+        removePlayerObserver()
+        removeDidPlayToEndTimeNotification()
+        removeTimeBaseEffectiveRateChanged()
+        player?.replaceCurrentItem(with: nil)
+        player = nil
+        playerState = .idle
     }
     
     /// AVPlayerItemのステータスによってコールバックの内容を変更する
