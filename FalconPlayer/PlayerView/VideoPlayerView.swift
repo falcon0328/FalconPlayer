@@ -120,6 +120,11 @@ class VideoPlayerView: UIView {
         videoPlayer.setVideoURL(url: url)
     }
     
+    /// 内部のプレイヤーを破棄させる
+    func releaseVideoPlayer() {
+        videoPlayer.releaseVideoPlayer()
+    }
+    
     override func awakeFromNib() {
         let videoPlayerTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoView))
         videoPlayer.addGestureRecognizer(videoPlayerTapGesture)
