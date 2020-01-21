@@ -110,11 +110,6 @@ class VideoPlayerView: UIView {
         videoPlayerViewFrame = frame
     }
     
-    func setPlayer(player: AVPlayer?) {
-        videoPlayer.delegate = self
-        videoPlayer.setPlayer(player: player)
-    }
-    
     func setVideoURL(url: URL?) {
         videoPlayer.delegate = self
         videoPlayer.setVideoURL(url: url)
@@ -126,6 +121,7 @@ class VideoPlayerView: UIView {
     }
     
     override func awakeFromNib() {
+        videoPlayer.delegate = self
         let videoPlayerTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapVideoView))
         videoPlayer.addGestureRecognizer(videoPlayerTapGesture)
         
