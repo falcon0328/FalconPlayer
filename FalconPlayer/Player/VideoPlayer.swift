@@ -195,6 +195,7 @@ class VideoPlayer: UIView {
                                                 let player = AVPlayer(playerItem: playerItem)
                                                 sself.setPlayer(player: player)
                                             default:
+                                                sself.playerState = .error
                                                 sself.delegate?.didFailure(player: sself)
                                             }
                                         }
