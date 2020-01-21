@@ -526,12 +526,18 @@ class VideoPlayerView: UIView {
     
     @objc func didTapVideoView() {
         delegate?.didTap(videoPlayerView: self, componentName: .videoPlayer)
-        showControlView()
+        if videoPlayer.playerState != .error {
+            showControlView()
+        } else {
+            // TODO: 再度動画の読み込みを行う
+        }
     }
     
     @objc func didTapControlView() {
         delegate?.didTap(videoPlayerView: self, componentName: .controlView)
-        hideControlView()
+        if videoPlayer.playerState != .error {
+            hideControlView()
+        }
     }
 }
 

@@ -341,6 +341,7 @@ class VideoPlayer: UIView {
             }
         } else {
             playerState = .error
+            delegate?.didFailure(player: self)
         }
     }
     
