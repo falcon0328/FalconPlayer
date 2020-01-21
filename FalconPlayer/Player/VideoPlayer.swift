@@ -74,15 +74,19 @@ class VideoPlayer: UIView {
         /// 再生可能かどうか
         case playable
     }
-    
+    /// 動画を再生するプレイヤー
     private(set) var player: AVPlayer? {
         get {
-            let layer = self.layer as! AVPlayerLayer
-            return layer.player
+            guard let playerLayer = self.playerLayer else {
+                return nil
+            }
+            return playerLayer.player
         }
         set(newValue) {
-            let layer = self.layer as! AVPlayerLayer
-            layer.player = newValue
+            guard let playerLayer = self.playerLayer else {
+                return
+            }
+            playerLayer.player = newValue
         }
     }
     /// プレイヤーの状態
@@ -150,20 +154,25 @@ class VideoPlayer: UIView {
     var playerItemStatusObservation: NSKeyValueObservation?
     /// AVPlayerの現状のステータス監視をしているインスタンス
     var playerTimeControlStatusObservation: NSKeyValueObservation?
-
-    
-    override class var layerClass: AnyClass {
-        return AVPlayerLayer.self
-    }
+    /// AVPlayerの映像を描画するレイヤー
+    var playerLayer: AVPlayerLayer?
     
     deinit {
         releaseVideoPlayer()
     }
     
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        playerLayer?.frame = bounds
+    }
+    
     /// AVPlayerをセットし、各種オブザーバーを起動させる
     /// - Parameter player: プレイヤー
     func setPlayer(player: AVPlayer?) {
-        self.player = player
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = bounds
+        layer.insertSublayer(playerLayer, at: 0)
+        self.playerLayer = playerLayer
         setPlayerObserver()
         setDidPlayToEndTimeNotification()
         setTimeBaseEffectiveRateChanged()
@@ -282,7 +291,10 @@ class VideoPlayer: UIView {
     }
     
     func setVideoGravity(videoGravity: AVLayerVideoGravity) {
-        (layer as! AVPlayerLayer).videoGravity = videoGravity
+        guard let playerLayer = self.playerLayer else {
+            return
+        }
+        playerLayer.videoGravity = videoGravity
     }
     
     func play() {
@@ -335,6 +347,8 @@ class VideoPlayer: UIView {
         removeTimeBaseEffectiveRateChanged()
         player?.replaceCurrentItem(with: nil)
         player = nil
+        playerLayer?.removeFromSuperlayer()
+        playerLayer = nil
         playerState = .idle
     }
     
