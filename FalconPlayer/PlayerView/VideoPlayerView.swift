@@ -36,6 +36,9 @@ protocol VideoPlayerViewDelegate: class {
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter effectiveRate: 変更後の実際の再生速度
     func didChange(videoPlayerView: VideoPlayerView, effectiveRate: Float)
+    /// プレイヤービュー内のプレイヤーがバッファリング状況によってストール状態になった
+    /// - Parameter videoPlayerView: プレイヤービュー
+    func didPlaybackStalled(videoPlayerView: VideoPlayerView)
     /// プレイヤービュー内の各UIコンポーネントがタップされた
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter componentName: タップされたUIコンポーネント
@@ -602,6 +605,10 @@ extension VideoPlayerView: PlayerStateDelegate {
     
     func didChange(player: VideoPlayer, effectiveRate: Float) {
         delegate?.didChange(videoPlayerView: self, effectiveRate: effectiveRate)
+    }
+    
+    func didPlaybackStalled(playr: VideoPlayer) {
+        delegate?.didPlaybackStalled(videoPlayerView: self)
     }
 }
 

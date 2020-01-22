@@ -66,6 +66,10 @@ protocol PlayerStateDelegate: class {
     /// - Parameter player: プレイヤー
     /// - Parameter effectiveRate: 変更後の実際の再生速度
     func didChange(player: VideoPlayer, effectiveRate: Float)
+    
+    /// プレイヤーがバッファリング状況によってストール状態になった
+    /// - Parameter playr: プレイヤー
+    func didPlaybackStalled(playr: VideoPlayer)
 }
 
 class VideoPlayer: UIView {
@@ -175,7 +179,9 @@ class VideoPlayer: UIView {
         self.playerLayer = playerLayer
         setPlayerObserver()
         setDidPlayToEndTimeNotification()
+        setDidFailedToPlayToEndTimeNotification()
         setTimeBaseEffectiveRateChanged()
+        setPlaybackStalledObserver()
     }
     
     /// 動画のURLを設定し、プレイヤーを生成する
@@ -277,6 +283,19 @@ class VideoPlayer: UIView {
                                                   object: player?.currentItem)
     }
     
+    func setDidFailedToPlayToEndTimeNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didFailedToPlayToEndTimeNotification(notification:)),
+                                               name: Notification.Name.AVPlayerItemFailedToPlayToEndTime,
+                                               object: player?.currentItem)
+    }
+    
+    func removeDidFailedToPlayToEndTimeNotification() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name.AVPlayerItemFailedToPlayToEndTime,
+                                                  object: player?.currentItem)
+    }
+    
     func setTimeBaseEffectiveRateChanged() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didTimeBaseEffectiveRateChanged(notification:)),
@@ -289,6 +308,20 @@ class VideoPlayer: UIView {
                                                   name: Notification.Name(rawValue: String(kCMTimebaseNotification_EffectiveRateChanged)),
                                                   object: player?.currentItem?.timebase)
     }
+    
+    func setPlaybackStalledObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didPlaybackStalled(notification:)),
+                                               name: Notification.Name.AVPlayerItemPlaybackStalled,
+                                               object: player?.currentItem)
+    }
+    
+    func removePlaybackStalledObserver() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name.AVPlayerItemPlaybackStalled,
+                                                  object: player?.currentItem)
+    }
+    
     
     func setVideoGravity(videoGravity: AVLayerVideoGravity) {
         guard let playerLayer = self.playerLayer else {
@@ -345,6 +378,8 @@ class VideoPlayer: UIView {
         removePlayerObserver()
         removeDidPlayToEndTimeNotification()
         removeTimeBaseEffectiveRateChanged()
+        removePlaybackStalledObserver()
+        removeDidFailedToPlayToEndTimeNotification()
         player?.replaceCurrentItem(with: nil)
         player = nil
         playerLayer?.removeFromSuperlayer()
@@ -371,6 +406,8 @@ class VideoPlayer: UIView {
     /// AVPlayerのrateが変更された際のコールバックメソッド
     /// - Parameter rate:
     func playerRateChangeHandler(rate: Float) {
+        // FailedToPlayEndTimeが発火された後にrateが強制的に0.0になるので、その際にコールバックされないようにする
+        if playerState == .error { return }
         delegate?.didChange(player: self, rate: rate)
     }
     
@@ -380,7 +417,7 @@ class VideoPlayer: UIView {
     func playerTimeControlStatusChangeHandler(timeControlStatus: AVPlayer.TimeControlStatus) {
         switch timeControlStatus {
         case .paused:
-            if playerState == .ended { return }
+            if playerState == .ended || playerState == .error { return }
             playerState = .paused
         case .playing:
             playerState = .playing
@@ -395,6 +432,11 @@ class VideoPlayer: UIView {
         playerState = .ended
     }
     
+    @objc func didFailedToPlayToEndTimeNotification(notification: Notification) {
+        playerState = .error
+        delegate?.didFailure(player: self)
+    }
+    
     @objc func didTimeBaseEffectiveRateChanged(notification: Notification) {
         DispatchQueue.main.async { [weak self] in
             guard let timebase = self?.player?.currentItem?.timebase else {
@@ -403,5 +445,9 @@ class VideoPlayer: UIView {
             let effectiveRate = Float(CMTimebaseGetRate(timebase))
             self?.effectiveRate = effectiveRate
         }
+    }
+    
+    @objc func didPlaybackStalled(notification: Notification) {
+        delegate?.didPlaybackStalled(playr: self)
     }
 }
