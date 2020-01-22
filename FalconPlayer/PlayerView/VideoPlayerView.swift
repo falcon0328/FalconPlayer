@@ -164,7 +164,7 @@ class VideoPlayerView: UIView {
                                                      owner: self,
                                                      options: nil)?.first as! ThumbnailView
         thumbnailView.setImage(image: UIImage(named: "BigBuckBunny"))
-        insertSubview(thumbnailView, aboveSubview: controlView)
+        insertSubview(thumbnailView, aboveSubview: errorView)
         self.thumbnailView = thumbnailView
         showThumbnailView()
         
@@ -488,6 +488,7 @@ class VideoPlayerView: UIView {
     func showThumbnailView() {
         thumbnailView.loadImage()
         thumbnailView.isHidden = false
+        thumbnailView.alpha = 1.0
     }
     
     /// サムネイルを非表示にする
