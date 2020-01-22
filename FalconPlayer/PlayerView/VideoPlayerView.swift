@@ -100,6 +100,8 @@ class VideoPlayerView: UIView {
     var settingViewController: SemiModalTableViewController!
     /// 設定一覧画面のデータソース
     let settingViewDataSouce = SettingViewDataSource()
+    /// 再生中の動画URL
+    var currentVideoURL: URL?
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -111,7 +113,7 @@ class VideoPlayerView: UIView {
     }
     
     func setVideoURL(url: URL?) {
-        videoPlayer.delegate = self
+        currentVideoURL = url
         videoPlayer.setVideoURL(url: url)
     }
     
@@ -199,6 +201,14 @@ class VideoPlayerView: UIView {
     /// 動画を最初から再生する
     func replay() {
         videoPlayer.replay()
+    }
+    
+    /// 動画のリソース取得から再度行う
+    func retry() {
+        hideErrorView()
+        showThumbnailView()
+        releaseVideoPlayer()
+        setVideoURL(url: currentVideoURL)
     }
     
     func expand(transform: CGAffineTransform) {
@@ -530,7 +540,7 @@ class VideoPlayerView: UIView {
         if videoPlayer.playerState != .error {
             showControlView()
         } else {
-            // TODO: 再度動画の読み込みを行う
+            retry()
         }
     }
     
