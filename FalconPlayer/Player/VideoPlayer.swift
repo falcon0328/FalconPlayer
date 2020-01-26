@@ -75,8 +75,10 @@ protocol PlayerStateDelegate: class {
 class VideoPlayer: UIView {
     /// AVAsset生成時に読み込ませたいキーの一覧
     enum AssetLoadKeys: String {
-        /// 再生可能かどうか
+        /// AVPlayerItemが生成できるかどうか
         case playable
+        /// 動画の尺
+        case duration
     }
     /// 動画を再生するプレイヤー
     private(set) var player: AVPlayer? {
@@ -188,17 +190,18 @@ class VideoPlayer: UIView {
     /// - Parameter url: 動画のURL
     func setVideoURL(url: URL?) {
         guard let url = url else {
+            playerState = .error
             delegate?.didFailure(player: self)
             return
         }
         let asset = AVAsset(url: url)
-        asset.loadValuesAsynchronously(forKeys: [AssetLoadKeys.playable.rawValue],
+        asset.loadValuesAsynchronously(forKeys: [AssetLoadKeys.duration.rawValue],
                                        completionHandler: { [weak self] in
                                         guard let sself = self else {
                                             return
                                         }
                                         var error: NSError?
-                                        let status = asset.statusOfValue(forKey: AssetLoadKeys.playable.rawValue,
+                                        let status = asset.statusOfValue(forKey: AssetLoadKeys.duration.rawValue,
                                                                          error: &error)
                                         DispatchQueue.main.async {
                                             switch status {
@@ -433,6 +436,9 @@ class VideoPlayer: UIView {
     }
     
     @objc func didFailedToPlayToEndTimeNotification(notification: Notification) {
+        print("😺 \(player?.currentItem?.status.rawValue)")
+        print("😺 \(player?.currentItem?.error)")
+        print("😺 \(notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey])")
         playerState = .error
         delegate?.didFailure(player: self)
     }
