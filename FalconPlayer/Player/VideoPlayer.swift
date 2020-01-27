@@ -70,6 +70,10 @@ protocol PlayerStateDelegate: class {
     /// プレイヤーがバッファリング状況によってストール状態になった
     /// - Parameter playr: プレイヤー
     func didPlaybackStalled(playr: VideoPlayer)
+    
+    /// プレイヤーの再生時間がシークなどによって不連続に再生時間が変更されたことを通知する
+    /// - Parameter player: プレイヤー
+    func didPlayerItemTimeJump(player: VideoPlayer)
 }
 
 class VideoPlayer: UIView {
@@ -184,6 +188,7 @@ class VideoPlayer: UIView {
         setDidFailedToPlayToEndTimeNotification()
         setTimeBaseEffectiveRateChanged()
         setPlaybackStalledObserver()
+        setPlayerItemTimeJumpedObserver()
     }
     
     /// 動画のURLを設定し、プレイヤーを生成する
@@ -325,6 +330,20 @@ class VideoPlayer: UIView {
                                                   object: player?.currentItem)
     }
     
+    func setPlayerItemTimeJumpedObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didPlayerItemTimeJump(notification:)),
+                                               name: Notification.Name.AVPlayerItemTimeJumped,
+                                               object: player?.currentItem)
+    }
+    
+    func removePlayerItemTimeJumpedObserver() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name.AVPlayerItemTimeJumped,
+                                                  object: player?.currentItem)
+    }
+    
+    
     
     func setVideoGravity(videoGravity: AVLayerVideoGravity) {
         guard let playerLayer = self.playerLayer else {
@@ -383,6 +402,7 @@ class VideoPlayer: UIView {
         removeTimeBaseEffectiveRateChanged()
         removePlaybackStalledObserver()
         removeDidFailedToPlayToEndTimeNotification()
+        removePlayerItemTimeJumpedObserver()
         player?.replaceCurrentItem(with: nil)
         player = nil
         playerLayer?.removeFromSuperlayer()
@@ -436,9 +456,6 @@ class VideoPlayer: UIView {
     }
     
     @objc func didFailedToPlayToEndTimeNotification(notification: Notification) {
-        print("😺 \(player?.currentItem?.status.rawValue)")
-        print("😺 \(player?.currentItem?.error)")
-        print("😺 \(notification.userInfo?[AVPlayerItemFailedToPlayToEndTimeErrorKey])")
         playerState = .error
         delegate?.didFailure(player: self)
     }
@@ -455,5 +472,14 @@ class VideoPlayer: UIView {
     
     @objc func didPlaybackStalled(notification: Notification) {
         delegate?.didPlaybackStalled(playr: self)
+    }
+    
+    @objc func didPlayerItemTimeJump(notification: Notification) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.delegate?.didPlayerItemTimeJump(player: self)
+        }
     }
 }

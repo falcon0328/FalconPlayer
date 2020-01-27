@@ -43,6 +43,9 @@ protocol VideoPlayerViewDelegate: class {
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter componentName: タップされたUIコンポーネント
     func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName)
+    /// プレイヤーの再生時間がシークなどによって不連続に再生時間が変更されたことを通知する
+    /// - Parameter videoPlayerView: プレイヤービュー
+    func didPlayerItemTimeJump(videoPlayerView: VideoPlayerView)
 }
 
 class VideoPlayerView: UIView {
@@ -609,6 +612,10 @@ extension VideoPlayerView: PlayerStateDelegate {
     
     func didPlaybackStalled(playr: VideoPlayer) {
         delegate?.didPlaybackStalled(videoPlayerView: self)
+    }
+    
+    func didPlayerItemTimeJump(player: VideoPlayer) {
+        delegate?.didPlayerItemTimeJump(videoPlayerView: self)
     }
 }
 

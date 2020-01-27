@@ -119,6 +119,10 @@ extension ViewController: VideoPlayerViewDelegate {
     func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName) {
         insertLog(category: "didTap", categoryColor: UIColor.systemOrange, value: "componentName: \(componentName)")
     }
+    
+    func didPlayerItemTimeJump(videoPlayerView: VideoPlayerView) {
+        insertLog(category: "didPlayerItemTimeJump", categoryColor: UIColor.systemGreen)
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
