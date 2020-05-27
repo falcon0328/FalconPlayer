@@ -55,6 +55,7 @@ class VideoPlayerView: UIView {
         case errorView
         case controlView
         case listButton
+        case fullScreenButton
         case playButton
         case pauseButton
         case replayButton
@@ -331,6 +332,21 @@ class VideoPlayerView: UIView {
         topVC.present(settingViewController,
                       animated: true,
                       completion: nil)
+    }
+    
+    @IBAction func didTapFullScreenButton(_ sender: Any) {
+        delegate?.didTap(videoPlayerView: self,
+                         componentName: .fullScreenButton)
+        guard let topVC = RootViewControllerGetter.getRootViewController() else {
+            return
+        }
+        videoPlayer.pause()
+        
+        let fullScreenVC = FullScreenVideoPlayerViewController()
+        fullScreenVC.delegate = self
+        fullScreenVC.modalPresentationStyle = .fullScreen
+        
+        topVC.present(fullScreenVC, animated: true, completion: nil)
     }
     
     @IBAction func didTouchStartSeekbar(_ sender: Any) {
@@ -625,4 +641,12 @@ extension VideoPlayerView: AVRoutePickerViewDelegate {
     }
     
     func routePickerViewDidEndPresentingRoutes(_ routePickerView: AVRoutePickerView) {}
+}
+
+extension VideoPlayerView: FullScreenVideoPlayerViewControllerDelegate {
+    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+    }
+    
+    func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+    }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -176,6 +176,18 @@
                                         <constraint firstAttribute="height" constant="48" id="oa7-am-JjD"/>
                                     </constraints>
                                 </activityIndicatorView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F4a-HK-eZU">
+                                    <rect key="frame" x="12" y="22.5" width="32" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="32" id="cvf-XM-fb6"/>
+                                        <constraint firstAttribute="height" constant="32" id="d0w-iu-Vgt"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="app" catalog="system"/>
+                                    <connections>
+                                        <action selector="didTapFullScreenButton:" destination="1eD-Qv-9vk" eventType="touchUpInside" id="ymt-DM-HKJ"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -189,10 +201,12 @@
                                 <constraint firstItem="2bw-fX-4bG" firstAttribute="leading" secondItem="LGH-fN-H99" secondAttribute="trailing" constant="10" id="FtD-LB-XVR"/>
                                 <constraint firstItem="dPa-bP-05X" firstAttribute="centerY" secondItem="SHQ-aK-Ocm" secondAttribute="centerY" id="GvU-1e-nN7"/>
                                 <constraint firstAttribute="bottom" secondItem="mPn-Gf-Gnb" secondAttribute="bottom" constant="22" id="J7X-WK-7TE"/>
+                                <constraint firstItem="F4a-HK-eZU" firstAttribute="top" secondItem="SHQ-aK-Ocm" secondAttribute="top" constant="22.5" id="LH4-VE-b1g"/>
                                 <constraint firstItem="DiG-CN-oFq" firstAttribute="centerX" secondItem="SHQ-aK-Ocm" secondAttribute="centerX" id="LoL-Xq-793"/>
                                 <constraint firstItem="mPn-Gf-Gnb" firstAttribute="leading" secondItem="4Xf-TW-Rb0" secondAttribute="trailing" constant="10" id="TiT-2U-bK7"/>
                                 <constraint firstItem="nJg-F8-pdb" firstAttribute="leading" secondItem="dPa-bP-05X" secondAttribute="trailing" constant="88" id="TsF-Sw-ynS"/>
                                 <constraint firstItem="tDL-Ya-Txc" firstAttribute="top" secondItem="SHQ-aK-Ocm" secondAttribute="top" constant="22.5" id="XgF-N2-QnW"/>
+                                <constraint firstItem="F4a-HK-eZU" firstAttribute="leading" secondItem="SHQ-aK-Ocm" secondAttribute="leading" constant="12" id="XpG-ae-9qq"/>
                                 <constraint firstAttribute="trailing" secondItem="70J-M3-gru" secondAttribute="trailing" constant="10" id="dJ7-fb-8Sb"/>
                                 <constraint firstAttribute="bottom" secondItem="2bw-fX-4bG" secondAttribute="bottom" constant="22" id="ezq-1z-Mey"/>
                                 <constraint firstItem="4Xf-TW-Rb0" firstAttribute="leading" secondItem="2bw-fX-4bG" secondAttribute="trailing" constant="10" id="fGt-ea-Vbv"/>
@@ -260,6 +274,7 @@
         </label>
     </objects>
     <resources>
+        <image name="app" catalog="system" width="64" height="56"/>
         <image name="arrow.up.left.and.arrow.down.right" catalog="system" width="64" height="56"/>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="exclamationmark.triangle" catalog="system" width="64" height="56"/>

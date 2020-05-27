@@ -18,6 +18,9 @@
 		555A410923CDE6D900D4E93A /* SemiModalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A410723CDE6D900D4E93A /* SemiModalTableViewController.swift */; };
 		555A410A23CDE6D900D4E93A /* SemiModalTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555A410823CDE6D900D4E93A /* SemiModalTableViewController.xib */; };
 		555A410C23CDF98700D4E93A /* SettingViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555A410B23CDF98700D4E93A /* SettingViewDataSource.swift */; };
+		5582FF4E247D80720085910E /* FullScreenVideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5582FF4D247D80720085910E /* FullScreenVideoPlayerViewController.xib */; };
+		5582FF50247D81450085910E /* FullScreenVideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5582FF4F247D81450085910E /* FullScreenVideoPlayerViewController.swift */; };
+		5582FF52247E43CB0085910E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5582FF51247E43CB0085910E /* PlayerView.swift */; };
 		55A0714F23BBC6A2003503E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0714E23BBC6A2003503E2 /* AppDelegate.swift */; };
 		55A0715123BBC6A2003503E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0715023BBC6A2003503E2 /* SceneDelegate.swift */; };
 		55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A0715723BBC6A3003503E2 /* Assets.xcassets */; };
@@ -62,6 +65,9 @@
 		555A410723CDE6D900D4E93A /* SemiModalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiModalTableViewController.swift; sourceTree = "<group>"; };
 		555A410823CDE6D900D4E93A /* SemiModalTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SemiModalTableViewController.xib; sourceTree = "<group>"; };
 		555A410B23CDF98700D4E93A /* SettingViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewDataSource.swift; sourceTree = "<group>"; };
+		5582FF4D247D80720085910E /* FullScreenVideoPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FullScreenVideoPlayerViewController.xib; sourceTree = "<group>"; };
+		5582FF4F247D81450085910E /* FullScreenVideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerViewController.swift; sourceTree = "<group>"; };
+		5582FF51247E43CB0085910E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		55A0714B23BBC6A2003503E2 /* FalconPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FalconPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A0714E23BBC6A2003503E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A0715023BBC6A2003503E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +133,15 @@
 				555A410523CCB58E00D4E93A /* ThumbnailView.swift */,
 			);
 			path = ThumbnailView;
+			sourceTree = "<group>";
+		};
+		5582FF4C247D80420085910E /* FullScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5582FF4D247D80720085910E /* FullScreenVideoPlayerViewController.xib */,
+				5582FF4F247D81450085910E /* FullScreenVideoPlayerViewController.swift */,
+			);
+			path = FullScreen;
 			sourceTree = "<group>";
 		};
 		55A0714223BBC6A2003503E2 = {
@@ -196,11 +211,13 @@
 		55BB89BE23C4C72D007D81F9 /* PlayerView */ = {
 			isa = PBXGroup;
 			children = (
+				5582FF51247E43CB0085910E /* PlayerView.swift */,
 				55A0717023BBC6C2003503E2 /* VideoPlayerView.swift */,
 				55A0717523BBC6C3003503E2 /* VideoPlayerView.xib */,
 				555A410223CCAF1B00D4E93A /* ThumbnailView */,
 				55BB89BA23C4B536007D81F9 /* Seekbar */,
 				55FA50BD23C6177F00740790 /* SettingView */,
+				5582FF4C247D80420085910E /* FullScreen */,
 			);
 			path = PlayerView;
 			sourceTree = "<group>";
@@ -324,6 +341,7 @@
 				55A0715823BBC6A3003503E2 /* Assets.xcassets in Resources */,
 				55ADDA3F23C6318B00D99D34 /* SettingTableViewCell.xib in Resources */,
 				555A410A23CDE6D900D4E93A /* SemiModalTableViewController.xib in Resources */,
+				5582FF4E247D80720085910E /* FullScreenVideoPlayerViewController.xib in Resources */,
 				55A0718023BBC6C3003503E2 /* VideoPlayerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +378,8 @@
 				55B77EB323D496CC00647448 /* VideoPlayerLogTableViewCell.swift in Sources */,
 				55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */,
 				55A0718223BBC6C3003503E2 /* UIImageView+AnimatedGIF.swift in Sources */,
+				5582FF50247D81450085910E /* FullScreenVideoPlayerViewController.swift in Sources */,
+				5582FF52247E43CB0085910E /* PlayerView.swift in Sources */,
 				55A0715123BBC6A2003503E2 /* SceneDelegate.swift in Sources */,
 				55A0717B23BBC6C3003503E2 /* VideoPlayerView.swift in Sources */,
 				555A410923CDE6D900D4E93A /* SemiModalTableViewController.swift in Sources */,
