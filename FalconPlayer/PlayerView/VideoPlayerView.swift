@@ -337,16 +337,6 @@ class VideoPlayerView: UIView {
     @IBAction func didTapFullScreenButton(_ sender: Any) {
         delegate?.didTap(videoPlayerView: self,
                          componentName: .fullScreenButton)
-        guard let topVC = RootViewControllerGetter.getRootViewController() else {
-            return
-        }
-        videoPlayer.pause()
-        
-        let fullScreenVC = FullScreenVideoPlayerViewController()
-        fullScreenVC.delegate = self
-        fullScreenVC.modalPresentationStyle = .fullScreen
-        
-        topVC.present(fullScreenVC, animated: true, completion: nil)
     }
     
     @IBAction func didTouchStartSeekbar(_ sender: Any) {

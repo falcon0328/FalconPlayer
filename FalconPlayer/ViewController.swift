@@ -22,10 +22,10 @@ struct VideoPlayerLog {
 }
 
 class ViewController: UIViewController {
-    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var playerBaseView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
-    var videoPlayerView: VideoPlayerView?
+    var playerView: PlayerView?
     
     var videoPlayerLogList: [VideoPlayerLog] = []
     
@@ -53,28 +53,26 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let videoURL = URL(string: "https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8")
-        let videoPlayerViewFrame = playerView.frame
-        
-        let videoPlayerView = Bundle.main.loadNibNamed("VideoPlayerView", owner: self, options: nil)?.first as! VideoPlayerView
-        videoPlayerView.frame = playerView.frame
-        insertLog(category: "frame = ", categoryColor: UIColor.systemOrange, value: "frame: \(videoPlayerViewFrame)")
-        // https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8
-        videoPlayerView.delegate = self
-        videoPlayerView.setVideoURL(url: videoURL)
-        insertLog(category: "setVideoURL(url:)", categoryColor: UIColor.systemOrange, value: videoURL!.absoluteString)
-        playerView.addSubview(videoPlayerView)
-        insertLog(category: "playerView.addSubview", categoryColor: UIColor.systemOrange)
-        
-
-        videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
-        videoPlayerView.leadingAnchor.constraint(equalTo: playerView.leadingAnchor).isActive = true
-        videoPlayerView.topAnchor.constraint(equalTo: playerView.topAnchor).isActive = true
-        videoPlayerView.bottomAnchor.constraint(equalTo: playerView.bottomAnchor).isActive = true
-        videoPlayerView.trailingAnchor.constraint(equalTo: playerView.trailingAnchor).isActive = true
-        self.videoPlayerView = videoPlayerView
-        playerView.isHidden = false
+        if playerView == nil {
+//            let videoURL = URL(string: "https://multiplatform-f.akamaihd.net/i/multi/will/bunny/big_buck_bunny_,640x360_400,640x360_700,640x360_1000,950x540_1500,.f4v.csmil/master.m3u8")
+            let videoURL = Bundle.main.url(forResource: "BigBuckBunny_320x180", withExtension: "mp4")
+            
+            let playerView = PlayerView(frame: playerBaseView.frame)
+            insertLog(category: "frame = ", categoryColor: UIColor.systemOrange, value: "frame: \(playerView.frame)")
+            playerView.delegate = self
+            playerView.set(videoURL: videoURL)
+            insertLog(category: "setVideoURL(url:)", categoryColor: UIColor.systemOrange, value: videoURL!.absoluteString)
+            playerBaseView.addSubview(playerView)
+            insertLog(category: "playerView.addSubview", categoryColor: UIColor.systemOrange)
+            
+            playerView.translatesAutoresizingMaskIntoConstraints = false
+            playerView.leadingAnchor.constraint(equalTo: playerBaseView.leadingAnchor).isActive = true
+            playerView.topAnchor.constraint(equalTo: playerBaseView.topAnchor).isActive = true
+            playerView.bottomAnchor.constraint(equalTo: playerBaseView.bottomAnchor).isActive = true
+            playerView.trailingAnchor.constraint(equalTo: playerBaseView.trailingAnchor).isActive = true
+            self.playerView = playerView
+            playerBaseView.isHidden = false
+        }
     }
     
     func insertLog(category: String, categoryColor: UIColor, value: String = "") {
@@ -83,44 +81,44 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: VideoPlayerViewDelegate {
-    func didPrepare(videoPlayerView: VideoPlayerView) {
+extension ViewController: PlayerViewDelegate {
+    func didPrepare(playerView: PlayerView) {
         insertLog(category: "didPrepare", categoryColor: UIColor.systemGreen)
-        videoPlayerView.play()
+        playerView.videoPlayerView?.play()
         insertLog(category: "play()", categoryColor: UIColor.systemOrange)
     }
     
-    func didFailure(videoPlayerView: VideoPlayerView) {
+    func didFailure(playerView: PlayerView) {
         insertLog(category: "didFailure", categoryColor: UIColor.systemRed)
     }
     
-    func didUpdatePeriodicTimer(videoPlayerView: VideoPlayerView) {}
+    func didUpdatePeriodicTimer(playerView: PlayerView) {}
     
-    func didChange(videoPlayerView: VideoPlayerView, playerState: VideoPlayerState) {
+    func didChange(playerView: PlayerView, playerState: VideoPlayerState) {
         insertLog(category: "didChange playerState", categoryColor: UIColor.systemGreen, value: "playerState: \(playerState)")
     }
     
-    func didChange(videoPlayerView: VideoPlayerView, audioState: AudioState) {
+    func didChange(playerView: PlayerView, audioState: AudioState) {
         insertLog(category: "didChange audioState", categoryColor: UIColor.systemGreen, value: "audioState: \(audioState)")
     }
     
-    func didChange(videoPlayerView: VideoPlayerView, rate: Float) {
+    func didChange(playerView: PlayerView, rate: Float) {
         insertLog(category: "didChange rate", categoryColor: UIColor.systemGreen, value: "rate: \(rate)")
     }
     
-    func didChange(videoPlayerView: VideoPlayerView, effectiveRate: Float) {
+    func didChange(playerView: PlayerView, effectiveRate: Float) {
         insertLog(category: "didChange effectiveRate", categoryColor: UIColor.systemGreen, value: "effectiveRate: \(effectiveRate)")
     }
     
-    func didPlaybackStalled(videoPlayerView: VideoPlayerView) {
+    func didPlaybackStalled(playerView: PlayerView) {
         insertLog(category: "didPlaybackStalled", categoryColor: UIColor.systemRed)
     }
     
-    func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName) {
+    func didTap(playerView: PlayerView, componentName: VideoPlayerView.ComponentName) {
         insertLog(category: "didTap", categoryColor: UIColor.systemOrange, value: "componentName: \(componentName)")
     }
     
-    func didPlayerItemTimeJump(videoPlayerView: VideoPlayerView) {
+    func didPlayerItemTimeJump(playerView: PlayerView) {
         insertLog(category: "didPlayerItemTimeJump", categoryColor: UIColor.systemGreen)
     }
 }

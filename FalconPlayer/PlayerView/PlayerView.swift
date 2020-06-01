@@ -52,6 +52,14 @@ class PlayerView: UIView {
     
     weak var delegate: PlayerViewDelegate?
     
+    var fullScreenVC: FullScreenVideoPlayerViewController?
+    var fullScreenTransition: FullScreenVideoPlayerAnimatedTransitioning?
+    var baseViewFrame: CGRect = CGRect.zero
+    var baseViewLeadingAnchor: NSLayoutConstraint?
+    var baseViewTopAnchor: NSLayoutConstraint?
+    var baseViewBottomAnchor: NSLayoutConstraint?
+    var baseViewTrailingAnchor: NSLayoutConstraint?
+    
     convenience init() {
         self.init(frame: CGRect.zero)
     }
@@ -67,10 +75,14 @@ class PlayerView: UIView {
         addSubview(baseView)
         
         baseView.translatesAutoresizingMaskIntoConstraints = false
-        baseView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        baseView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        baseView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        baseView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        baseViewLeadingAnchor = baseView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        baseViewLeadingAnchor?.isActive = true
+        baseViewTopAnchor = baseView.topAnchor.constraint(equalTo: topAnchor)
+        baseViewTopAnchor?.isActive = true
+        baseViewBottomAnchor = baseView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        baseViewBottomAnchor?.isActive = true
+        baseViewTrailingAnchor = baseView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        baseViewTrailingAnchor?.isActive = true
 
         videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
         videoPlayerView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor).isActive = true
@@ -91,11 +103,23 @@ class PlayerView: UIView {
     }
     
     func openFullScreenViewController() {
+        guard let topVC = RootViewControllerGetter.getRootViewController(), let baseView = self.baseView else {
+            return
+        }
+        fullScreenTransition = FullScreenVideoPlayerAnimatedTransitioning(isPresent: true, shouldAnimate: true, baseView: baseView)
         
+        let fullScreenVC = FullScreenVideoPlayerViewController()
+        fullScreenVC.delegate = self
+        fullScreenVC.modalPresentationStyle = .fullScreen
+        fullScreenVC.transitioningDelegate = fullScreenTransition
+        self.fullScreenVC = fullScreenVC
+        baseViewFrame = baseView.frame
+        topVC.present(fullScreenVC, animated: true, completion: nil)
     }
     
     func closeFullScreenViewController() {
-        
+        guard let fullScreenVC = self.fullScreenVC else { return }
+        fullScreenVC.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -134,9 +158,35 @@ extension PlayerView: VideoPlayerViewDelegate {
     
     func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName) {
         delegate?.didTap(playerView: self, componentName: componentName)
+        if componentName == .fullScreenButton {
+            videoPlayerView.pause()
+            openFullScreenViewController()
+        }
     }
     
     func didPlayerItemTimeJump(videoPlayerView: VideoPlayerView) {
         delegate?.didPlayerItemTimeJump(playerView: self)
+    }
+}
+
+extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
+    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {}
+    
+    func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        guard let baseView = fullScreenVideoPlayerViewController.baseView else { return }
+        baseView.frame = baseViewFrame
+        addSubview(baseView)
+        
+        baseViewLeadingAnchor = baseView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        baseViewLeadingAnchor?.isActive = true
+        baseViewTopAnchor = baseView.topAnchor.constraint(equalTo: topAnchor)
+        baseViewTopAnchor?.isActive = true
+        baseViewBottomAnchor = baseView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        baseViewBottomAnchor?.isActive = true
+        baseViewTrailingAnchor = baseView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        baseViewTrailingAnchor?.isActive = true
+        
+        self.baseView = baseView
+        fullScreenVC = nil
     }
 }
