@@ -53,7 +53,6 @@ class PlayerView: UIView {
     weak var delegate: PlayerViewDelegate?
     
     var fullScreenVC: FullScreenVideoPlayerViewController?
-    var fullScreenTransition: FullScreenVideoPlayerAnimatedTransitioning?
     var baseViewFrame: CGRect = CGRect.zero
     var baseViewLeadingAnchor: NSLayoutConstraint?
     var baseViewTopAnchor: NSLayoutConstraint?

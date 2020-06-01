@@ -19,15 +19,15 @@ class FullScreenVideoPlayerViewController: UIViewController {
     weak var baseView: UIView?
 
     weak var delegate: FullScreenVideoPlayerViewControllerDelegate?
-    let animationController: FullScreenVideoPlayerAnimatedTransitioning
+    let animationController: FullScreenVideoPlayerAnimationController
     
     init(delegate: FullScreenVideoPlayerViewControllerDelegate,
          baseView: UIView,
          modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
-         animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimatedTransitioning()) {
+         animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimationController()) {
         self.delegate = delegate
         self.baseView = baseView
-        self.animationController = FullScreenVideoPlayerAnimatedTransitioning()
+        self.animationController = FullScreenVideoPlayerAnimationController()
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = modalPresentationStyle
         self.transitioningDelegate = self

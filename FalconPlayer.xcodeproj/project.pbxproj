@@ -44,7 +44,7 @@
 		55B77EB423D496CC00647448 /* VideoPlayerLogTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B77EB223D496CC00647448 /* VideoPlayerLogTableViewCell.xib */; };
 		55BB89B923C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */; };
 		55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */; };
-		55E267FC24828824005D7256 /* FullScreenVideoPlayerAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E267FB24828824005D7256 /* FullScreenVideoPlayerAnimatedTransitioning.swift */; };
+		55E267FC24828824005D7256 /* FullScreenVideoPlayerAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E267FB24828824005D7256 /* FullScreenVideoPlayerAnimationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +99,7 @@
 		55B77EB223D496CC00647448 /* VideoPlayerLogTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerLogTableViewCell.xib; sourceTree = "<group>"; };
 		55BB89B823C4B3F8007D81F9 /* VideoPlayerSeekThumbnailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerSeekThumbnailView.xib; sourceTree = "<group>"; };
 		55BB89BB23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSeekThumbnailView.swift; sourceTree = "<group>"; };
-		55E267FB24828824005D7256 /* FullScreenVideoPlayerAnimatedTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerAnimatedTransitioning.swift; sourceTree = "<group>"; };
+		55E267FB24828824005D7256 /* FullScreenVideoPlayerAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoPlayerAnimationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +148,7 @@
 			children = (
 				5582FF4D247D80720085910E /* FullScreenVideoPlayerViewController.xib */,
 				5582FF4F247D81450085910E /* FullScreenVideoPlayerViewController.swift */,
-				55E267FB24828824005D7256 /* FullScreenVideoPlayerAnimatedTransitioning.swift */,
+				55E267FB24828824005D7256 /* FullScreenVideoPlayerAnimationController.swift */,
 			);
 			path = FullScreen;
 			sourceTree = "<group>";
@@ -388,7 +388,7 @@
 				55BB89BC23C4B577007D81F9 /* VideoPlayerSeekThumbnailView.swift in Sources */,
 				55A0717D23BBC6C3003503E2 /* VideoPlayer.swift in Sources */,
 				55ADDA3E23C6318B00D99D34 /* SettingTableViewCell.swift in Sources */,
-				55E267FC24828824005D7256 /* FullScreenVideoPlayerAnimatedTransitioning.swift in Sources */,
+				55E267FC24828824005D7256 /* FullScreenVideoPlayerAnimationController.swift in Sources */,
 				552B324223C0C66D00BD9753 /* DismissAnimator.swift in Sources */,
 				55B77EB323D496CC00647448 /* VideoPlayerLogTableViewCell.swift in Sources */,
 				55A0718523BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift in Sources */,

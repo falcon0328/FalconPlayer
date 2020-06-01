@@ -1,5 +1,5 @@
 //
-//  FullScreenVideoPlayerAnimatedTransitioning.swift
+//  FullScreenVideoPlayerAnimationController.swift
 //  FalconPlayer
 //
 //  Created by aseo on 2020/05/30.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+class FullScreenVideoPlayerAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
     var shouldAnimate: Bool
     
     /// フルスクリーンに遷移したbaseViewのsuperViewを覚えておく変数
