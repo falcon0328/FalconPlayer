@@ -12,6 +12,11 @@ import UIKit
 class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
     var shouldAnimate: Bool
     
+    /// フルスクリーンに遷移したbaseViewのsuperViewを覚えておく変数
+    weak var baseViewSuperView: UIView?
+    /// フルスクリーンに遷移したbaseViewのFrame位置を覚えておく変数
+    var originalRect: CGRect = CGRect.zero
+    
     init(shouldAnimate: Bool = true) {
         self.shouldAnimate = shouldAnimate
     }
@@ -22,7 +27,7 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? FullScreenVideoPlayerViewController else {
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
                 return
         }
         if type(of: toVC) == FullScreenVideoPlayerViewController.self {
@@ -45,6 +50,9 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
         }
         let containerView = transitionContext.containerView
         
+        // フルスクリーンから復帰する際に必要になるパラメータを覚えておく
+        self.originalRect = originalRect
+        self.baseViewSuperView = baseView.superview
         // 既に追加されている遷移元のViewの下に、遷移先のViewを追加
         toVC.view.frame = window.bounds
         containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
@@ -73,6 +81,36 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
     }
     
     func dismiss(transitionContext: UIViewControllerContextTransitioning) {
+        // 遷移元、遷移先及び、遷移コンテナの取得
+        guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? FullScreenVideoPlayerViewController,
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) ,
+            let baseView = fromVC.baseView else {
+                return
+        }
+        let containerView = transitionContext.containerView
+        // アニメーション完了後のFrame情報を事前に取得
+        let toVCFinalFrame = transitionContext.finalFrame(for: toVC)
+        toVC.view.frame = toVCFinalFrame
+        // 既に追加されている遷移元のViewの下に、遷移先のViewを追加
+        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+
+        // 16:9の位置にあらかじめ動画のViewを制約をかけて移動させる
+        Constraints.shared.update(baseView, rect: Frame.shared.make(toView: fromVC.view))
+        fromVC.view.layoutIfNeeded()
         
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: { [weak self] in
+            guard let sself = self else { return }
+            fromVC.view.backgroundColor = UIColor.clear
+            Constraints.shared.update(baseView, rect: sself.originalRect)
+            fromVC.view.layoutIfNeeded()
+        }) { [weak self] (completion) in
+            guard let sself = self else { return }
+            if let baseViewSuperView = sself.baseViewSuperView {
+                baseViewSuperView.addSubview(baseView)
+                Constraints.shared.update(baseView)
+                baseViewSuperView.layoutIfNeeded()
+            }
+            transitionContext.completeTransition(true)
+        }
     }
 }

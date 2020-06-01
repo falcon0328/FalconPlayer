@@ -168,20 +168,6 @@ extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
     func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {}
     
     func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
-        guard let baseView = fullScreenVideoPlayerViewController.baseView else { return }
-        baseView.frame = baseViewFrame
-        addSubview(baseView)
-        
-        baseViewLeadingAnchor = baseView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        baseViewLeadingAnchor?.isActive = true
-        baseViewTopAnchor = baseView.topAnchor.constraint(equalTo: topAnchor)
-        baseViewTopAnchor?.isActive = true
-        baseViewBottomAnchor = baseView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        baseViewBottomAnchor?.isActive = true
-        baseViewTrailingAnchor = baseView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        baseViewTrailingAnchor?.isActive = true
-        
-        self.baseView = baseView
         fullScreenVC = nil
     }
 }
