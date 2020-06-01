@@ -106,12 +106,7 @@ class PlayerView: UIView {
         guard let topVC = RootViewControllerGetter.getRootViewController(), let baseView = self.baseView else {
             return
         }
-        fullScreenTransition = FullScreenVideoPlayerAnimatedTransitioning(isPresent: true, shouldAnimate: true, baseView: baseView)
-        
-        let fullScreenVC = FullScreenVideoPlayerViewController()
-        fullScreenVC.delegate = self
-        fullScreenVC.modalPresentationStyle = .fullScreen
-        fullScreenVC.transitioningDelegate = fullScreenTransition
+        let fullScreenVC = FullScreenVideoPlayerViewController(delegate: self, baseView: baseView)
         self.fullScreenVC = fullScreenVC
         baseViewFrame = baseView.frame
         topVC.present(fullScreenVC, animated: true, completion: nil)

@@ -10,16 +10,10 @@ import Foundation
 import UIKit
 
 class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
-    var isPresent: Bool
     var shouldAnimate: Bool
-    let baseView: UIView
     
-    init(isPresent: Bool = false,
-         shouldAnimate: Bool = true,
-         baseView: UIView) {
-        self.isPresent = isPresent
+    init(shouldAnimate: Bool = true) {
         self.shouldAnimate = shouldAnimate
-        self.baseView = baseView
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -27,9 +21,15 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        if isPresent {
+        guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? FullScreenVideoPlayerViewController else {
+                return
+        }
+        if type(of: toVC) == FullScreenVideoPlayerViewController.self {
+            // 遷移先がフルスクリーン用のViewControllerなら開こう（present）としている
             present(transitionContext: transitionContext)
-        } else {
+        } else if type(of: fromVC) == FullScreenVideoPlayerViewController.self {
+            // 遷移元がフルスクリーン用のViewControllerなら閉じよう（dismiss）としている
             dismiss(transitionContext: transitionContext)
         }
     }
@@ -38,6 +38,7 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
         // 遷移元、遷移先及び、遷移コンテナの取得
         guard let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
             let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? FullScreenVideoPlayerViewController,
+            let baseView = toVC.baseView,
             let window = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive}).map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first,
             let originalRect = baseView.superview?.convert(baseView.frame, to: baseView.window?.rootViewController?.view) else {
                 return
@@ -48,7 +49,6 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
         toVC.view.frame = window.bounds
         containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
         toVC.view.insertSubview(baseView, belowSubview: toVC.closeButton)
-        toVC.baseView = baseView
 
         // この後のアニメーションのために背景色を無効化
         toVC.view.backgroundColor = UIColor.clear
@@ -68,8 +68,8 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
             // アニメーションのために透明にした背景色を黒色に戻す
             toVC.view.backgroundColor = UIColor.black
             // 16:9の位置になるように制約をかける
-            toVC.view.removeConstraints(toVC.view.constraints.filter(firstItemView: self.baseView)) // 3
-            toVC.view.addConstraints(Constraints.shared.build(self.baseView,
+            toVC.view.removeConstraints(toVC.view.constraints.filter(firstItemView: baseView)) // 3
+            toVC.view.addConstraints(Constraints.shared.build(baseView,
                                                               rect: Frame.shared.make(toView: toVC.view),
                                                               toView: toVC.view)) // 3
             toVC.view.layoutIfNeeded()
@@ -80,17 +80,5 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
     
     func dismiss(transitionContext: UIViewControllerContextTransitioning) {
         
-    }
-}
-
-extension FullScreenVideoPlayerAnimatedTransitioning: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        isPresent = true
-        return self
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        isPresent = false
-        return self
     }
 }

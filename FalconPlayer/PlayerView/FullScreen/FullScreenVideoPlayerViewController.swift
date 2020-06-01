@@ -16,9 +16,27 @@ protocol FullScreenVideoPlayerViewControllerDelegate: class {
 
 class FullScreenVideoPlayerViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
+    weak var baseView: UIView?
+
     weak var delegate: FullScreenVideoPlayerViewControllerDelegate?
-    var baseView: UIView?
-        
+    let animationController: FullScreenVideoPlayerAnimatedTransitioning
+    
+    init(delegate: FullScreenVideoPlayerViewControllerDelegate,
+         baseView: UIView,
+         modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
+         animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimatedTransitioning()) {
+        self.delegate = delegate
+        self.baseView = baseView
+        self.animationController = FullScreenVideoPlayerAnimatedTransitioning()
+        super.init(nibName: nil, bundle: nil)
+        self.modalPresentationStyle = modalPresentationStyle
+        self.transitioningDelegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -46,5 +64,15 @@ class FullScreenVideoPlayerViewController: UIViewController {
             guard let sself = self else { return }
             sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
         })
+    }
+}
+
+extension FullScreenVideoPlayerViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return animationController
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return animationController
     }
 }
