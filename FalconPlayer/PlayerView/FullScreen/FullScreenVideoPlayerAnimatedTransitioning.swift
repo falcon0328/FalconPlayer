@@ -58,20 +58,14 @@ class FullScreenVideoPlayerAnimatedTransitioning: NSObject, UIViewControllerAnim
         // 1. 元々、baseViewに掛けられていた制約を全て削除
         // 2. baseViewの現在の位置に合うように制約をかける
         // 3. 画面中央に16:9になる位置・サイズで制約をかける（この手順はアニメーションさせたい制約なので、UIView.animate内で行う）
-        toVC.view.removeConstraints(toVC.view.constraints.filter(firstItemView: baseView)) // 1
-        toVC.view.addConstraints(Constraints.shared.build(baseView,
-                                                          rect: originalRect,
-                                                          toView: toVC.view)) // 2
+        Constraints.shared.update(baseView, rect: originalRect)
         toVC.view.layoutIfNeeded()
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             // アニメーションのために透明にした背景色を黒色に戻す
             toVC.view.backgroundColor = UIColor.black
             // 16:9の位置になるように制約をかける
-            toVC.view.removeConstraints(toVC.view.constraints.filter(firstItemView: baseView)) // 3
-            toVC.view.addConstraints(Constraints.shared.build(baseView,
-                                                              rect: Frame.shared.make(toView: toVC.view),
-                                                              toView: toVC.view)) // 3
+            Constraints.shared.update(baseView, rect: Frame.shared.make(toView: toVC.view))
             toVC.view.layoutIfNeeded()
         }, completion: { finished in
             transitionContext.completeTransition(true)
