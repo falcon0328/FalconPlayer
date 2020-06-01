@@ -38,7 +38,7 @@ class Constraints {
     
     /// Objective-Cで動作するconstraints = の挙動を再現したメソッド
     ///
-    /// toView上で指定されたview用のConstraintsを削除し、新しくrect指定のConstraintsを指定する
+    /// superViewで指定されたview用のConstraintsを削除し、新しくrect指定のConstraintsを指定する
     /// - Parameters:
     ///   - view: 制約をかけたいView
     ///   - rect: 制約のかけ方をRectで指定する
