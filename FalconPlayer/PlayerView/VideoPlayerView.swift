@@ -218,8 +218,8 @@ class VideoPlayerView: UIView {
         setVideoURL(url: currentVideoURL)
     }
     
-    func expand(transform: CGAffineTransform) {
-         if isExpand { return }
+    func expand() {
+        if isExpand { return }
         isExpand = true
         expandCollapseButton.setImage(UIImage(systemName: "arrow.down.right.and.arrow.up.left"), for: .normal)
         videoPlayerViewFrame = superview!.frame
@@ -230,10 +230,6 @@ class VideoPlayerView: UIView {
                                            width: UIScreen.main.bounds.width,
                                            height: UIScreen.main.bounds.height)
         })
-    }
-    
-    func expand() {
-        expand(transform: calcurateTransform(deviceOrientation: UIDevice.current.orientation))
     }
     
     func collapse() {
@@ -515,17 +511,6 @@ class VideoPlayerView: UIView {
         })
     }
     
-    /// デバイスの向きに対応した回転角度
-    /// - Parameter deviceOrientation: デバイスの向き
-    func calcurateTransform(deviceOrientation: UIDeviceOrientation) -> CGAffineTransform {
-        if deviceOrientation == .landscapeLeft {
-            return CGAffineTransform(rotationAngle: (90 * .pi) / 180)
-        } else if deviceOrientation == .landscapeRight {
-            return CGAffineTransform(rotationAngle: (-90 * .pi) / 180)
-        }
-        return CGAffineTransform(rotationAngle: (0 * .pi) / 180)
-    }
-    
     @objc func viewWillEnterForeground(notification: Notification) {}
 
     
@@ -631,12 +616,4 @@ extension VideoPlayerView: AVRoutePickerViewDelegate {
     }
     
     func routePickerViewDidEndPresentingRoutes(_ routePickerView: AVRoutePickerView) {}
-}
-
-extension VideoPlayerView: FullScreenVideoPlayerViewControllerDelegate {
-    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
-    }
-    
-    func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
-    }
 }
