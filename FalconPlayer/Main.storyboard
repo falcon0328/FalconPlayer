@@ -23,19 +23,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="264"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Y8x-TM-S0T" secondAttribute="height" multiplier="69:44" id="Isa-pp-XXE"/>
+                                    <constraint firstAttribute="height" constant="264" id="bl4-8z-ld0"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="17w-zM-J0J"/>
-                            <constraint firstItem="dDm-q8-KN4" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="1Dd-0Z-TVj"/>
-                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="top" secondItem="NHi-5b-mM5" secondAttribute="top" id="PTR-de-TkH"/>
-                            <constraint firstItem="dDm-q8-KN4" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="WiA-8O-znW"/>
-                            <constraint firstAttribute="bottom" secondItem="dDm-q8-KN4" secondAttribute="bottom" id="aX1-dU-Qkj"/>
-                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="knF-h4-25U"/>
-                            <constraint firstItem="dDm-q8-KN4" firstAttribute="top" secondItem="Y8x-TM-S0T" secondAttribute="bottom" id="kpC-Vv-Tm2"/>
+                            <constraint firstItem="dDm-q8-KN4" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="0Op-KC-Bi6"/>
+                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="top" secondItem="NHi-5b-mM5" secondAttribute="top" id="MDZ-GZ-dEV"/>
+                            <constraint firstItem="dDm-q8-KN4" firstAttribute="top" secondItem="Y8x-TM-S0T" secondAttribute="bottom" id="MPM-WA-zOK"/>
+                            <constraint firstAttribute="bottom" secondItem="dDm-q8-KN4" secondAttribute="bottom" id="Rat-X3-T1s"/>
+                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="leading" secondItem="0GA-ZU-WMn" secondAttribute="leading" id="ezP-R5-O4f"/>
+                            <constraint firstItem="dDm-q8-KN4" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="fFU-41-7UE"/>
+                            <constraint firstItem="Y8x-TM-S0T" firstAttribute="trailing" secondItem="0GA-ZU-WMn" secondAttribute="trailing" id="hMM-jR-EaG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0GA-ZU-WMn"/>
                     </view>
