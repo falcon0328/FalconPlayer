@@ -72,8 +72,12 @@ class FullScreenVideoPlayerAnimationController: NSObject, UIViewControllerAnimat
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
             // アニメーションのために透明にした背景色を黒色に戻す
             toVC.view.backgroundColor = UIColor.black
-            // 16:9の位置になるように制約をかける
-            Constraints.shared.update(baseView, rect: Frame.shared.make(toView: toVC.view))
+            if let orientation = fromVC.view.window?.windowScene?.interfaceOrientation, orientation.isLandscape {
+                Constraints.shared.update(baseView)
+            } else {
+                // 16:9の位置になるように制約をかける
+                Constraints.shared.update(baseView, rect: Frame.shared.make(toView: toVC.view))
+            }
             toVC.view.layoutIfNeeded()
         }, completion: { finished in
             transitionContext.completeTransition(true)

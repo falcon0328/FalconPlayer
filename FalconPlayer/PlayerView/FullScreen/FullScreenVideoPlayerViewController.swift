@@ -41,16 +41,18 @@ class FullScreenVideoPlayerViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if let baseView = baseView, !isBeingPresented && !isBeingDismissed {
-            if UIDevice.current.orientation.isLandscape {
-                Constraints.shared.update(baseView)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { [weak self] (context) in
+            guard let sself = self, let baseView = sself.baseView else { return }
+            if size.width <= size.height {
+                // 縦向きのレイアウト
+                Constraints.shared.update(baseView, rect: Frame.shared.make(toView: sself.view))
             } else {
-                Constraints.shared.update(baseView, rect: Frame.shared.make(toView: view))
+                // 横向きのレイアウト
+                Constraints.shared.update(baseView)
             }
-        }
+        }) { (context) in }
     }
         
     override var prefersHomeIndicatorAutoHidden: Bool {
