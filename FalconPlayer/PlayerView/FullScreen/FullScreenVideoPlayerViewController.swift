@@ -16,6 +16,7 @@ protocol FullScreenVideoPlayerViewControllerDelegate: class {
 
 class FullScreenVideoPlayerViewController: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var topBar: UIView!
     weak var baseView: UIView?
 
     weak var delegate: FullScreenVideoPlayerViewControllerDelegate?

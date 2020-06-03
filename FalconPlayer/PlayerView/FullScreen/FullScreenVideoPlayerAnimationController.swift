@@ -56,7 +56,7 @@ class FullScreenVideoPlayerAnimationController: NSObject, UIViewControllerAnimat
         // 既に追加されている遷移元のViewの下に、遷移先のViewを追加
         toVC.view.frame = window.bounds
         containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
-        toVC.view.insertSubview(baseView, belowSubview: toVC.closeButton)
+        toVC.view.insertSubview(baseView, belowSubview: toVC.topBar)
 
         // この後のアニメーションのために背景色を無効化
         toVC.view.backgroundColor = UIColor.clear

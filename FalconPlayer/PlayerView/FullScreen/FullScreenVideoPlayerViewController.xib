@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullScreenVideoPlayerViewController" customModule="FalconPlayer" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="K6T-0t-OFs" id="4WD-lg-yXm"/>
+                <outlet property="topBar" destination="y2w-nl-vnw" id="JOr-SR-MNi"/>
                 <outlet property="view" destination="Zfj-Lz-o4E" id="YYR-qe-dSY"/>
             </connections>
         </placeholder>
@@ -20,12 +21,19 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-yR-gcB">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="wdp-Je-ieQ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2w-nl-vnw">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6T-0t-OFs">
                             <rect key="frame" x="370" y="0.0" width="44" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="44" id="XsJ-lh-scG"/>
-                                <constraint firstAttribute="height" constant="44" id="eax-Xc-a49"/>
+                                <constraint firstAttribute="height" constant="44" id="1Ro-8n-wdL"/>
+                                <constraint firstAttribute="width" constant="44" id="mCO-Yu-Aod"/>
                             </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" image="xmark" catalog="system"/>
@@ -36,15 +44,19 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="wdp-Je-ieQ"/>
-                        <constraint firstItem="K6T-0t-OFs" firstAttribute="top" secondItem="hqN-yR-gcB" secondAttribute="top" id="yXI-dT-4Q7"/>
-                        <constraint firstAttribute="trailing" secondItem="K6T-0t-OFs" secondAttribute="trailing" id="zva-vo-1R9"/>
+                        <constraint firstItem="K6T-0t-OFs" firstAttribute="top" secondItem="y2w-nl-vnw" secondAttribute="top" id="RDu-fT-QE0"/>
+                        <constraint firstAttribute="bottom" secondItem="K6T-0t-OFs" secondAttribute="bottom" id="WIu-w4-ImE"/>
+                        <constraint firstAttribute="height" constant="44" id="XCP-zs-xde"/>
+                        <constraint firstAttribute="trailing" secondItem="K6T-0t-OFs" secondAttribute="trailing" id="s5U-wH-dRp"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="y2w-nl-vnw" firstAttribute="trailing" secondItem="rY1-wO-FJ8" secondAttribute="trailing" id="8Ph-0i-8Ws"/>
                 <constraint firstItem="hqN-yR-gcB" firstAttribute="trailing" secondItem="rY1-wO-FJ8" secondAttribute="trailing" id="GJv-tD-o9B"/>
+                <constraint firstItem="y2w-nl-vnw" firstAttribute="leading" secondItem="rY1-wO-FJ8" secondAttribute="leading" id="SUy-dT-Jnr"/>
+                <constraint firstItem="y2w-nl-vnw" firstAttribute="top" secondItem="rY1-wO-FJ8" secondAttribute="top" id="aPx-dh-Caz"/>
                 <constraint firstItem="hqN-yR-gcB" firstAttribute="top" secondItem="rY1-wO-FJ8" secondAttribute="top" id="klo-Vr-I5u"/>
                 <constraint firstItem="hqN-yR-gcB" firstAttribute="leading" secondItem="rY1-wO-FJ8" secondAttribute="leading" id="yOI-6Y-hTI"/>
             </constraints>
