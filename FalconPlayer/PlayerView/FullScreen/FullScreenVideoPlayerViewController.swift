@@ -44,6 +44,13 @@ class FullScreenVideoPlayerViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        if let baseView = baseView, !isBeingPresented && !isBeingDismissed {
+            if UIDevice.current.orientation.isLandscape {
+                Constraints.shared.update(baseView)
+            } else {
+                Constraints.shared.update(baseView, rect: Frame.shared.make(toView: view))
+            }
+        }
     }
         
     override var prefersHomeIndicatorAutoHidden: Bool {

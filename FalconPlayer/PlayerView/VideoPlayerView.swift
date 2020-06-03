@@ -222,27 +222,12 @@ class VideoPlayerView: UIView {
         if isExpand { return }
         isExpand = true
         expandCollapseButton.setImage(UIImage(systemName: "arrow.down.right.and.arrow.up.left"), for: .normal)
-        videoPlayerViewFrame = superview!.frame
-        UIView.animate(withDuration: 0.5, animations: {
-            self.superview?.translatesAutoresizingMaskIntoConstraints = true
-            self.superview?.frame = CGRect(x: 0,
-                                           y: 0,
-                                           width: UIScreen.main.bounds.width,
-                                           height: UIScreen.main.bounds.height)
-        })
     }
     
     func collapse() {
         if !isExpand { return }
         isExpand = false
         expandCollapseButton.setImage(UIImage(systemName: "arrow.up.left.and.arrow.down.right"), for: .normal)
-        if let portraitFrame = videoPlayerViewFrame {
-            UIView.animate(withDuration: 0.5,
-                           animations: {
-                            self.superview?.translatesAutoresizingMaskIntoConstraints = false
-                            self.superview?.frame = portraitFrame
-            }, completion: { finished in })
-        }
     }
     
     /// 円形画像を作成するプログラム
@@ -526,7 +511,7 @@ class VideoPlayerView: UIView {
         switch UIDevice.current.orientation {
         case .landscapeLeft, .landscapeRight:
             expand()
-        case .portrait, .portraitUpsideDown:
+        case .portrait:
             collapse()
         default:
             break
@@ -559,10 +544,6 @@ extension VideoPlayerView: PlayerStateDelegate {
         bufferbar.maximumValue = videoPlayer.duration
         videoPlayer.setPeriodicTimeObserver(interval: CMTime(value: 5, timescale: 10))
         videoPlayer.mute()
-        if __CGSizeEqualToSize(frame.size, UIScreen.main.bounds.size) {
-            isExpand = true
-            expandCollapseButton.setImage(UIImage(systemName: "arrow.down.right.and.arrow.up.left"), for: .normal)
-        }
         delegate?.didPrepare(videoPlayerView: self)
     }
     
