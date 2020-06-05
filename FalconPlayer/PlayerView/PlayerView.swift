@@ -123,6 +123,7 @@ class PlayerView: UIView {
         }
         let fullScreenVC = FullScreenVideoPlayerViewController(delegate: self,
                                                                baseView: baseView,
+                                                               deviceOrientation: UIDevice.current.orientation,
                                                                openReason: openReason)
         self.fullScreenVC = fullScreenVC
         baseViewFrame = baseView.frame
