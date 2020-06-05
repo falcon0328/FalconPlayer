@@ -58,11 +58,6 @@ class PlayerView: UIView {
     weak var delegate: PlayerViewDelegate?
     
     var fullScreenVC: FullScreenVideoPlayerViewController?
-    var baseViewFrame: CGRect = CGRect.zero
-    var baseViewLeadingAnchor: NSLayoutConstraint?
-    var baseViewTopAnchor: NSLayoutConstraint?
-    var baseViewBottomAnchor: NSLayoutConstraint?
-    var baseViewTrailingAnchor: NSLayoutConstraint?
     
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -79,14 +74,10 @@ class PlayerView: UIView {
         addSubview(baseView)
         
         baseView.translatesAutoresizingMaskIntoConstraints = false
-        baseViewLeadingAnchor = baseView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        baseViewLeadingAnchor?.isActive = true
-        baseViewTopAnchor = baseView.topAnchor.constraint(equalTo: topAnchor)
-        baseViewTopAnchor?.isActive = true
-        baseViewBottomAnchor = baseView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        baseViewBottomAnchor?.isActive = true
-        baseViewTrailingAnchor = baseView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        baseViewTrailingAnchor?.isActive = true
+        baseView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        baseView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        baseView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        baseView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
         videoPlayerView.translatesAutoresizingMaskIntoConstraints = false
         videoPlayerView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor).isActive = true
@@ -126,7 +117,6 @@ class PlayerView: UIView {
                                                                deviceOrientation: UIDevice.current.orientation,
                                                                openReason: openReason)
         self.fullScreenVC = fullScreenVC
-        baseViewFrame = baseView.frame
         topVC.present(fullScreenVC, animated: true, completion: nil)
     }
 }
