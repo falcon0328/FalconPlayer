@@ -58,6 +58,10 @@ class PlayerView: UIView {
     weak var delegate: PlayerViewDelegate?
     
     var fullScreenVC: FullScreenVideoPlayerViewController?
+    /// 設定の一覧を表示するセミモーダルビュー
+    var settingViewController: SemiModalTableViewController?
+    /// 設定一覧画面のデータソース
+    let settingViewDataSouce = SettingViewDataSource()
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -100,6 +104,11 @@ class PlayerView: UIView {
         
         self.baseView = baseView
         self.videoPlayerView = videoPlayerView
+        // 各種設定画面
+        self.settingViewController = SemiModalTableViewController.make()
+        self.settingViewController?.register(SettingViewDataSource.cellNib,
+                                             forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
+        self.settingViewController?.setDataSource(dataSource: settingViewDataSouce)
     }
     
     required init?(coder: NSCoder) {
@@ -137,6 +146,24 @@ class PlayerView: UIView {
                         sself.videoPlayerView?.hideControlView()
                         sself.videoPlayerView?.play()
         })
+    }
+    
+    func openSettingViewController() {
+        guard let settingViewController = settingViewController else { return }
+        if let fullScreenVC = self.fullScreenVC {
+            fullScreenVC.present(settingViewController,
+                                 animated: true,
+                                 completion: nil)
+        } else if let topVC = RootViewControllerGetter.getRootViewController() {
+            topVC.present(settingViewController,
+                          animated: true,
+                          completion: nil)
+        }
+    }
+    
+    func closeSettingViewController() {
+        guard let settingViewController = settingViewController else { return }
+        settingViewController.dismiss(animated: true, completion: nil)
     }
     
     @objc func viewDidEnterBackground(notification: Notification) {
@@ -204,6 +231,8 @@ extension PlayerView: VideoPlayerViewDelegate {
             videoPlayerView.hideControlView()
             videoPlayerView.pause()
             openFullScreenViewController()
+        } else if componentName == .listButton {
+            openSettingViewController()
         }
     }
     

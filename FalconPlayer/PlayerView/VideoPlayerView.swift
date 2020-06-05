@@ -111,11 +111,7 @@ class VideoPlayerView: UIView {
     
     /// サムネイルを表示するView
     var thumbnailView: ThumbnailView!
-    
-    /// 設定の一覧を表示するセミモーダルビュー
-    var settingViewController: SemiModalTableViewController!
-    /// 設定一覧画面のデータソース
-    let settingViewDataSouce = SettingViewDataSource()
+
     /// 再生中の動画URL
     var currentVideoURL: URL?
     
@@ -183,10 +179,6 @@ class VideoPlayerView: UIView {
         insertSubview(thumbnailView, aboveSubview: errorView)
         self.thumbnailView = thumbnailView
         showThumbnailView()
-        
-        settingViewController = SemiModalTableViewController.make()
-        settingViewController.register(SettingViewDataSource.cellNib, forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
-        settingViewController.setDataSource(dataSource: settingViewDataSouce)
     }
     
     func play() {
@@ -303,12 +295,6 @@ class VideoPlayerView: UIView {
     @IBAction func didTapListButton(_ sender: Any) {
         delegate?.didTap(videoPlayerView: self,
                          componentName: .listButton)
-        guard let topVC = RootViewControllerGetter.getRootViewController() else {
-            return
-        }
-        topVC.present(settingViewController,
-                      animated: true,
-                      completion: nil)
     }
     
     @IBAction func didTapFullScreenButton(_ sender: Any) {
