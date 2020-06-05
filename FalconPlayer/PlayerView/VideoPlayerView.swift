@@ -187,19 +187,6 @@ class VideoPlayerView: UIView {
         settingViewController = SemiModalTableViewController.make()
         settingViewController.register(SettingViewDataSource.cellNib, forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
         settingViewController.setDataSource(dataSource: settingViewDataSouce)
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(viewWillEnterForeground(notification:)),
-                                               name: UIApplication.willEnterForegroundNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(viewDidEnterBackground(notification:)),
-                                               name: UIApplication.didEnterBackgroundNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(didChangeOrientation(notification:)),
-                                               name: UIDevice.orientationDidChangeNotification,
-                                               object: nil)
     }
     
     func play() {
@@ -505,26 +492,8 @@ class VideoPlayerView: UIView {
         })
     }
     
-    @objc func viewWillEnterForeground(notification: Notification) {}
-
-    
-    @objc func viewDidEnterBackground(notification: Notification) {
-        pause()
-    }
-    
     @objc func timerUpdate() {
         hideControlView()
-    }
-    
-    @objc func didChangeOrientation(notification: NSNotification){
-        switch UIDevice.current.orientation {
-        case .landscapeLeft, .landscapeRight:
-            expand()
-        case .portrait:
-            collapse()
-        default:
-            break
-        }
     }
     
     @objc func didTapVideoView() {
@@ -552,7 +521,6 @@ extension VideoPlayerView: PlayerStateDelegate {
         seekbar.maximumValue = videoPlayer.duration
         bufferbar.maximumValue = videoPlayer.duration
         videoPlayer.setPeriodicTimeObserver(interval: CMTime(value: 5, timescale: 10))
-        videoPlayer.mute()
         delegate?.didPrepare(videoPlayerView: self)
     }
     

@@ -59,6 +59,10 @@ class PlayerView: UIView {
     
     var fullScreenVC: FullScreenVideoPlayerViewController?
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     convenience init() {
         self.init(frame: CGRect.zero)
     }
@@ -84,6 +88,15 @@ class PlayerView: UIView {
         videoPlayerView.topAnchor.constraint(equalTo: baseView.topAnchor).isActive = true
         videoPlayerView.bottomAnchor.constraint(equalTo: baseView.bottomAnchor).isActive = true
         videoPlayerView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor).isActive = true
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(viewDidEnterBackground(notification:)),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didChangeOrientation(notification:)),
+                                               name: UIDevice.orientationDidChangeNotification,
+                                               object: nil)
         
         self.baseView = baseView
         self.videoPlayerView = videoPlayerView
@@ -124,6 +137,21 @@ class PlayerView: UIView {
                         sself.videoPlayerView?.hideControlView()
                         sself.videoPlayerView?.play()
         })
+    }
+    
+    @objc func viewDidEnterBackground(notification: Notification) {
+        videoPlayerView?.pause()
+    }
+    
+    @objc func didChangeOrientation(notification: NSNotification){
+        switch UIDevice.current.orientation {
+        case .landscapeLeft, .landscapeRight:
+            videoPlayerView?.expand()
+        case .portrait:
+            videoPlayerView?.collapse()
+        default:
+            break
+        }
     }
 }
 
