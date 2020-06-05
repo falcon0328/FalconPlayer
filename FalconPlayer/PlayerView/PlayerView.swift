@@ -138,7 +138,8 @@ class PlayerView: UIView {
                                                                baseView: baseView,
                                                                deviceOrientation: UIDevice.current.orientation,
                                                                openReason: openReason)
-        self.fullScreenVC = fullScreenVC
+        videoPlayerView?.hideControlView()
+        videoPlayerView?.pause()
         topVC.present(fullScreenVC,
                       animated: true,
                       completion: { [weak self] in
@@ -146,6 +147,7 @@ class PlayerView: UIView {
                         sself.videoPlayerView?.hideControlView()
                         sself.videoPlayerView?.play()
         })
+        self.fullScreenVC = fullScreenVC
     }
     
     func openSettingViewController() {
