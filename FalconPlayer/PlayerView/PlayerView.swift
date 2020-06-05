@@ -139,6 +139,7 @@ class PlayerView: UIView {
                                                                deviceOrientation: UIDevice.current.orientation,
                                                                openReason: openReason)
         videoPlayerView?.hideControlView()
+        videoPlayerView?.fullScreenButton.isHidden = true
         videoPlayerView?.pause()
         topVC.present(fullScreenVC,
                       animated: true,
@@ -245,6 +246,7 @@ extension PlayerView: VideoPlayerViewDelegate {
 
 extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
     func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        videoPlayerView?.fullScreenButton.isHidden = false
         videoPlayerView?.hideControlView()
     }
     

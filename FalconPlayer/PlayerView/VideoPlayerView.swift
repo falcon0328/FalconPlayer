@@ -102,6 +102,7 @@ class VideoPlayerView: UIView {
     @IBOutlet weak var muteUnmuteButton: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var expandCollapseButton: UIButton!
+    @IBOutlet weak var fullScreenButton: UIButton!
     @IBOutlet weak var bufferActivityIndicatiorView: UIActivityIndicatorView!
     
     var routePickerView: AVRoutePickerView!
