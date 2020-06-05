@@ -117,7 +117,13 @@ class PlayerView: UIView {
                                                                deviceOrientation: UIDevice.current.orientation,
                                                                openReason: openReason)
         self.fullScreenVC = fullScreenVC
-        topVC.present(fullScreenVC, animated: true, completion: nil)
+        topVC.present(fullScreenVC,
+                      animated: true,
+                      completion: { [weak self] in
+                        guard let sself = self else { return }
+                        sself.videoPlayerView?.hideControlView()
+                        sself.videoPlayerView?.play()
+        })
     }
 }
 
@@ -167,6 +173,7 @@ extension PlayerView: VideoPlayerViewDelegate {
     func didTap(videoPlayerView: VideoPlayerView, componentName: VideoPlayerView.ComponentName) {
         delegate?.didTap(playerView: self, componentName: componentName)
         if componentName == .fullScreenButton {
+            videoPlayerView.hideControlView()
             videoPlayerView.pause()
             openFullScreenViewController()
         }
@@ -178,7 +185,9 @@ extension PlayerView: VideoPlayerViewDelegate {
 }
 
 extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
-    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {}
+    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        videoPlayerView?.hideControlView()
+    }
     
     func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
         fullScreenVC = nil
