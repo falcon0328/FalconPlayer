@@ -21,14 +21,26 @@ class FullScreenVideoPlayerViewController: UIViewController {
 
     weak var delegate: FullScreenVideoPlayerViewControllerDelegate?
     let animationController: FullScreenVideoPlayerAnimationController
+    /// フルスクリーン画面が開かれた理由
+    let openReason: FullScreenOpenReason
+    
+    /// フルスクリーン画面が開かれた理由を表す列挙型
+    enum FullScreenOpenReason {
+        /// ユーザによる指示
+        case user
+        /// PlayerView表示時に端末の回転を行なったため
+        case deviceRotation
+    }
     
     init(delegate: FullScreenVideoPlayerViewControllerDelegate,
          baseView: UIView,
          modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
-         animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimationController()) {
+         animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimationController(),
+         openReason: FullScreenOpenReason = .user) {
         self.delegate = delegate
         self.baseView = baseView
         self.animationController = FullScreenVideoPlayerAnimationController()
+        self.openReason = openReason
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = modalPresentationStyle
         self.transitioningDelegate = self
@@ -67,13 +79,18 @@ class FullScreenVideoPlayerViewController: UIViewController {
         // [参考文献](https://qiita.com/k-yamada-github/items/c1c653084a11129dcbbb)
         return .lightContent
     }
-
-    @IBAction func didTapCloseButton(_ sender: Any) {
+    
+    /// フルスクリーンを閉じる
+    func close() {
         self.delegate?.willDismiss(fullScreenVideoPlayerViewController: self)
         self.dismiss(animated: true, completion: { [weak self] in
             guard let sself = self else { return }
             sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
         })
+    }
+
+    @IBAction func didTapCloseButton(_ sender: Any) {
+        close()
     }
 }
 

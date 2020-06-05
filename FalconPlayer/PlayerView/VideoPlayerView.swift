@@ -36,6 +36,11 @@ protocol VideoPlayerViewDelegate: class {
     /// - Parameter videoPlayerView: プレイヤービュー
     /// - Parameter effectiveRate: 変更後の実際の再生速度
     func didChange(videoPlayerView: VideoPlayerView, effectiveRate: Float)
+    /// プレイヤービュー内のプレイヤーの拡大・縮小状態が変更されたことを通知する
+    /// - Parameters:
+    ///   - videoPlayerView: プレイヤービュー
+    ///   - isExpand: 拡大状態かどうか
+    func didChange(videoPlayerView: VideoPlayerView, isExpand: Bool)
     /// プレイヤービュー内のプレイヤーがバッファリング状況によってストール状態になった
     /// - Parameter videoPlayerView: プレイヤービュー
     func didPlaybackStalled(videoPlayerView: VideoPlayerView)
@@ -73,7 +78,11 @@ class VideoPlayerView: UIView {
     var videoPlayerViewFrame: CGRect?
     weak var delegate: VideoPlayerViewDelegate?
     /// 拡大中かどうかを示すフラグ
-    var isExpand = false
+    var isExpand = false {
+        didSet {
+            delegate?.didChange(videoPlayerView: self, isExpand: isExpand)
+        }
+    }
     /// シークバーを操作したことによるシーク処理をしている間かどうかを示すフラグ
     var isSeekFromBar = false
     /// シークバーに触れているかどうかを示すフラグ

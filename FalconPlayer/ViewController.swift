@@ -110,6 +110,10 @@ extension ViewController: PlayerViewDelegate {
         insertLog(category: "didChange effectiveRate", categoryColor: UIColor.systemGreen, value: "effectiveRate: \(effectiveRate)")
     }
     
+    func didChange(playerView: PlayerView, isExpand: Bool) {
+        insertLog(category: "didChange isExpand", categoryColor: UIColor.systemGreen, value: "isExpand: \(isExpand)")
+    }
+    
     func didPlaybackStalled(playerView: PlayerView) {
         insertLog(category: "didPlaybackStalled", categoryColor: UIColor.systemRed)
     }

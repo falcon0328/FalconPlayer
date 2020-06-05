@@ -34,6 +34,11 @@ protocol PlayerViewDelegate: class {
     /// - Parameter playerView: プレイヤービュー
     /// - Parameter effectiveRate: 変更後の実際の再生速度
     func didChange(playerView: PlayerView, effectiveRate: Float)
+    /// プレイヤービュー内のプレイヤーの拡大・縮小状態が変更されたことを通知する
+    /// - Parameters:
+    ///   - playerView: プレイヤービュー
+    ///   - isExpand: 拡大状態かどうか
+    func didChange(playerView: PlayerView, isExpand: Bool)
     /// プレイヤービュー内のプレイヤーがバッファリング状況によってストール状態になった
     /// - Parameter playerView: プレイヤービュー
     func didPlaybackStalled(playerView: PlayerView)
@@ -102,18 +107,26 @@ class PlayerView: UIView {
     }
     
     func openFullScreenViewController() {
-        guard let topVC = RootViewControllerGetter.getRootViewController(), let baseView = self.baseView else {
-            return
-        }
-        let fullScreenVC = FullScreenVideoPlayerViewController(delegate: self, baseView: baseView)
-        self.fullScreenVC = fullScreenVC
-        baseViewFrame = baseView.frame
-        topVC.present(fullScreenVC, animated: true, completion: nil)
+        internalOpenFullScreenViewController(openReason: .user)
     }
     
     func closeFullScreenViewController() {
         guard let fullScreenVC = self.fullScreenVC else { return }
-        fullScreenVC.dismiss(animated: true, completion: nil)
+        fullScreenVC.close()
+    }
+    
+    func internalOpenFullScreenViewController(openReason: FullScreenVideoPlayerViewController.FullScreenOpenReason) {
+        guard fullScreenVC == nil,
+            let topVC = RootViewControllerGetter.getRootViewController(),
+            let baseView = self.baseView else {
+            return
+        }
+        let fullScreenVC = FullScreenVideoPlayerViewController(delegate: self,
+                                                               baseView: baseView,
+                                                               openReason: openReason)
+        self.fullScreenVC = fullScreenVC
+        baseViewFrame = baseView.frame
+        topVC.present(fullScreenVC, animated: true, completion: nil)
     }
 }
 
@@ -144,6 +157,16 @@ extension PlayerView: VideoPlayerViewDelegate {
 
     func didChange(videoPlayerView: VideoPlayerView, effectiveRate: Float) {
         delegate?.didChange(playerView: self, effectiveRate: effectiveRate)
+    }
+    
+    func didChange(videoPlayerView: VideoPlayerView, isExpand: Bool) {
+        delegate?.didChange(playerView: self, isExpand: isExpand)
+        if fullScreenVC == nil, isExpand {
+            internalOpenFullScreenViewController(openReason: .deviceRotation)
+        } else if let fullScreenVC = fullScreenVC, fullScreenVC.openReason != .user, !isExpand {
+            // ユーザ指示以外でフルスクリーンが開かれていて、isExpandがfalse
+            closeFullScreenViewController()
+        }
     }
     
     func didPlaybackStalled(videoPlayerView: VideoPlayerView) {
