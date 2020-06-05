@@ -12,6 +12,7 @@ import AVFoundation
 protocol FullScreenVideoPlayerViewControllerDelegate: class {
     func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
     func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
+    func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
 }
 
 class FullScreenVideoPlayerViewController: UIViewController {
@@ -27,6 +28,8 @@ class FullScreenVideoPlayerViewController: UIViewController {
     let deviceOrientationForPlayerView: UIDeviceOrientation
     /// フルスクリーンを閉じるためのcompletionHandler
     var closeCompletionHandler: (()->())?
+    /// VIewをタップした時のジェスチャー
+    var viewTapGesture: UITapGestureRecognizer?
     
     /// フルスクリーン画面が開かれた理由を表す列挙型
     enum FullScreenOpenReason {
@@ -50,6 +53,9 @@ class FullScreenVideoPlayerViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = modalPresentationStyle
         self.transitioningDelegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        self.viewTapGesture = tapGesture
     }
     
     required init?(coder: NSCoder) {
@@ -112,12 +118,17 @@ class FullScreenVideoPlayerViewController: UIViewController {
                 guard let sself = self else { return }
                 sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
                 sself.closeCompletionHandler = nil
+                sself.viewTapGesture = nil
             })
         }
     }
 
     @IBAction func didTapCloseButton(_ sender: Any) {
         close()
+    }
+    
+    @objc func didTap(_ sender: UITapGestureRecognizer){
+        delegate?.didTap(fullScreenVideoPlayerViewController: self)
     }
 }
 

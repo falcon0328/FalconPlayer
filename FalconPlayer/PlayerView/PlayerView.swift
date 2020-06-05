@@ -220,4 +220,13 @@ extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
     func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
         fullScreenVC = nil
     }
+    
+    func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        guard let videoPlayerView = videoPlayerView else { return }
+        if videoPlayerView.controlView.isHidden {
+            videoPlayerView.showControlView()
+        } else {
+            videoPlayerView.hideControlView()
+        }
+    }
 }
