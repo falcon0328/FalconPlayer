@@ -52,8 +52,8 @@ protocol PlayerViewDelegate: class {
 }
 
 class PlayerView: UIView {
-    var baseView: UIView?
-    var videoPlayerView: VideoPlayerView?
+    weak var baseView: UIView?
+    weak var videoPlayerView: VideoPlayerView?
     
     weak var delegate: PlayerViewDelegate?
     
