@@ -77,9 +77,11 @@ class FullScreenVideoPlayerViewController: UIViewController {
             if size.width <= size.height {
                 // 縦向きのレイアウト
                 Constraints.shared.update(baseView, rect: Frame.shared.make(toView: sself.view))
+                sself.closeButton.isHidden = false
             } else {
                 // 横向きのレイアウト
                 Constraints.shared.update(baseView)
+                sself.closeButton.isHidden = true
             }
         }) { [weak self] (context) in
             guard let sself = self else { return }
