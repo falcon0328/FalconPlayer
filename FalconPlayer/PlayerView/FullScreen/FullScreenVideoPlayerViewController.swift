@@ -90,17 +90,16 @@ class FullScreenVideoPlayerViewController: UIViewController {
             }
         }
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        // 動画再生のフルスクリーンUIにはステータスバーは不要
+        return true
+    }
         
     override var prefersHomeIndicatorAutoHidden: Bool {
         // 動画再生のフルスクリーンUIにはHomeIndicatorは不要
         // [参考文献](https://dev.classmethod.jp/articles/iphone-x-dealing-with-home-indicator/)
         return false
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        // 動画再生のフルスクリーンUIではステータスバーのテキストを白色にしないと見えづらい
-        // [参考文献](https://qiita.com/k-yamada-github/items/c1c653084a11129dcbbb)
-        return .lightContent
     }
     
     /// フルスクリーンを閉じる
