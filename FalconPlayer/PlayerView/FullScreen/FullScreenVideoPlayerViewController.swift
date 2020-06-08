@@ -99,7 +99,7 @@ class FullScreenVideoPlayerViewController: UIViewController {
     override var prefersHomeIndicatorAutoHidden: Bool {
         // 動画再生のフルスクリーンUIにはHomeIndicatorは不要
         // [参考文献](https://dev.classmethod.jp/articles/iphone-x-dealing-with-home-indicator/)
-        return false
+        return true
     }
     
     /// フルスクリーンを閉じる
