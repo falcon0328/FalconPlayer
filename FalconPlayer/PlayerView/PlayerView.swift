@@ -104,11 +104,6 @@ class PlayerView: UIView {
         
         self.baseView = baseView
         self.videoPlayerView = videoPlayerView
-        // 各種設定画面
-        self.settingViewController = SemiModalTableViewController.make()
-        self.settingViewController?.register(SettingViewDataSource.cellNib,
-                                             forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
-        self.settingViewController?.setDataSource(dataSource: settingViewDataSouce)
     }
     
     required init?(coder: NSCoder) {
@@ -152,7 +147,11 @@ class PlayerView: UIView {
     }
     
     func openSettingViewController() {
-        guard let settingViewController = settingViewController else { return }
+        let settingViewController = SemiModalTableViewController.make()
+        settingViewController.semiModalBaseViewControllerDelegate = self
+        settingViewController.register(SettingViewDataSource.cellNib,
+                                       forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
+        settingViewController.setDataSource(dataSource: settingViewDataSouce)
         if let fullScreenVC = self.fullScreenVC {
             fullScreenVC.present(settingViewController,
                                  animated: true,
@@ -162,6 +161,7 @@ class PlayerView: UIView {
                           animated: true,
                           completion: nil)
         }
+        self.settingViewController = settingViewController
     }
     
     func closeSettingViewController() {
@@ -241,6 +241,15 @@ extension PlayerView: VideoPlayerViewDelegate {
     
     func didPlayerItemTimeJump(videoPlayerView: VideoPlayerView) {
         delegate?.didPlayerItemTimeJump(playerView: self)
+    }
+}
+
+extension PlayerView: SemiModalBaseViewControllerDelegate {
+    func willDismiss(semiModalBaseViewController: SemiModalBaseViewController) {
+    }
+    
+    func didDismiss(semiModalBaseViewController: SemiModalBaseViewController) {
+        settingViewController = nil
     }
 }
 

@@ -74,6 +74,7 @@ class SemiModalTableViewController: SemiModalBaseViewController {
             self?.tableView.bounces = true
         }
         setupViews()
+        tableView.reloadData()
     }
 
     /// UIのセットアップ

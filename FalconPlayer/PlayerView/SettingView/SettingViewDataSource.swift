@@ -52,7 +52,7 @@ class SettingViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as! SettingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SettingViewDataSource.cellReuseIdentifier, for: indexPath) as! SettingTableViewCell
         cell.iconImageView.image = cellDatas[indexPath.row].image
         cell.categoryLabel.text = cellDatas[indexPath.row].category
         cell.valueLabel.text = cellDatas[indexPath.row].value

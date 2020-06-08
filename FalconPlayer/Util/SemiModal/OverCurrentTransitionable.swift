@@ -1,6 +1,6 @@
 import UIKit
 
-protocol OverCurrentTransitionable where Self: UIViewController {
+protocol OverCurrentTransitionable where Self: SemiModalBaseViewController {
     var percentThreshold: CGFloat { get }
     var interactor: OverCurrentTransitioningInteractor { get }
 }

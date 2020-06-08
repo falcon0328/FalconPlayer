@@ -8,9 +8,26 @@
 
 import UIKit
 
+protocol SemiModalBaseViewControllerDelegate: class {
+    func willDismiss(semiModalBaseViewController: SemiModalBaseViewController)
+    func didDismiss(semiModalBaseViewController: SemiModalBaseViewController)
+}
+
 class SemiModalBaseViewController: UIViewController, OverCurrentTransitionable {
     var percentThreshold: CGFloat = 0.3
     var interactor = OverCurrentTransitioningInteractor()
+    weak var semiModalBaseViewControllerDelegate: SemiModalBaseViewControllerDelegate?
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        semiModalBaseViewControllerDelegate?.willDismiss(semiModalBaseViewController: self)
+        super.dismiss(animated: flag, completion: { [weak self] in
+            guard let sself = self else { return }
+            if let completion = completion {
+                completion()
+            }
+            sself.semiModalBaseViewControllerDelegate?.didDismiss(semiModalBaseViewController: sself)
+        })
+    }
 }
 
 extension SemiModalBaseViewController: UIGestureRecognizerDelegate {
