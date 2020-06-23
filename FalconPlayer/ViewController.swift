@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     var playerView: PlayerView?
     
     var videoPlayerLogList: [VideoPlayerLog] = []
+    var insertRowCount = 0
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -75,9 +76,23 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateLogIfNeed() {
+        guard insertRowCount > 0, let playerView = playerView, playerView.fullScreenVC == nil else { return }
+        var insertRows: [IndexPath] = []
+        for index in 0..<insertRowCount {
+            insertRows.append(IndexPath(row: index, section: 0))
+        }
+        tableView.insertRows(at: insertRows, with: .automatic)
+        insertRowCount = 0
+    }
+    
     func insertLog(category: String, categoryColor: UIColor, value: String = "") {
+        // ログデータをテーブルビューに表示するために配列に保存しておく
         videoPlayerLogList.insert(VideoPlayerLog(category: category, categoryColor: categoryColor, value: value), at: 0)
-        tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        // 挿入した行数を覚えておく
+        insertRowCount += 1
+        // テーブルビューに更新反映を行う
+        updateLogIfNeed()
     }
 }
 
@@ -124,6 +139,44 @@ extension ViewController: PlayerViewDelegate {
     
     func didPlayerItemTimeJump(playerView: PlayerView) {
         insertLog(category: "didPlayerItemTimeJump", categoryColor: UIColor.systemGreen)
+    }
+    
+    func willPresent(semiModalBaseViewController: SemiModalBaseViewController) {
+        insertLog(category: "willPresent semiModalBaseViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func didPresent(semiModalBaseViewController: SemiModalBaseViewController) {
+        insertLog(category: "didPresent semiModalBaseViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func willDismiss(semiModalBaseViewController: SemiModalBaseViewController) {
+        insertLog(category: "willDismiss semiModalBaseViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func didDismiss(semiModalBaseViewController: SemiModalBaseViewController) {
+        insertLog(category: "didDismiss semiModalBaseViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func willPresent(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        insertLog(category: "willPresent fullScreenVideoPlayerViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func didPresent(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        insertLog(category: "didPresent fullScreenVideoPlayerViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        insertLog(category: "willDismiss fullScreenVideoPlayerViewController", categoryColor: UIColor.systemOrange)
+    }
+    
+    func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        insertLog(category: "didDismiss fullScreenVideoPlayerViewController", categoryColor: UIColor.systemOrange)
+        // フルスクリーン中に追加されたログをアプリ上に表示するためにテーブルビューの表示更新を行う
+        updateLogIfNeed()
+    }
+    
+    func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
+        insertLog(category: "didTap fullScreenVideoPlayerViewController", categoryColor: UIColor.systemOrange)
     }
 }
 
