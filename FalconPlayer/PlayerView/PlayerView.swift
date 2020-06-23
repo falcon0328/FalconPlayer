@@ -131,7 +131,7 @@ class PlayerView: UIView {
         }
         let fullScreenVC = FullScreenVideoPlayerViewController(delegate: self,
                                                                baseView: baseView,
-                                                               deviceOrientation: UIDevice.current.orientation,
+                                                               interfaceOrientation: Orientation.shared.interfaceOrientation(topVC),
                                                                openReason: openReason)
         videoPlayerView?.hideControlView()
         videoPlayerView?.fullScreenButton.isHidden = true

@@ -25,7 +25,7 @@ class FullScreenVideoPlayerViewController: UIViewController {
     /// フルスクリーン画面が開かれた理由
     let openReason: FullScreenOpenReason
     /// フルスクリーンになる前のプレイヤービューのデバイス向き
-    let deviceOrientationForPlayerView: UIDeviceOrientation
+    let interfaceOrientationForPlayerView: UIInterfaceOrientation
     /// フルスクリーンを閉じるためのcompletionHandler
     var closeCompletionHandler: (()->())?
     /// VIewをタップした時のジェスチャー
@@ -43,12 +43,12 @@ class FullScreenVideoPlayerViewController: UIViewController {
          baseView: UIView,
          modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
          animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimationController(),
-         deviceOrientation: UIDeviceOrientation,
+         interfaceOrientation: UIInterfaceOrientation,
          openReason: FullScreenOpenReason = .user) {
         self.delegate = delegate
         self.baseView = baseView
         self.animationController = FullScreenVideoPlayerAnimationController()
-        self.deviceOrientationForPlayerView = deviceOrientation
+        self.interfaceOrientationForPlayerView = interfaceOrientation
         self.openReason = openReason
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = modalPresentationStyle
@@ -105,9 +105,13 @@ class FullScreenVideoPlayerViewController: UIViewController {
     /// フルスクリーンを閉じる
     func close() {
         // 画面向きを必要に応じて回転させる
-        if openReason == .user && UIDevice.current.orientation != deviceOrientationForPlayerView {
-            // 画面を回転させる
-            UIDevice.current.setValue(deviceOrientationForPlayerView.rawValue, forKey: "orientation")
+        if openReason == .user && Orientation.shared.interfaceOrientation(self) != interfaceOrientationForPlayerView {
+            let deviceOrientation =
+                Orientation.shared.deviceOrientationFrom(interfaceOrientation: interfaceOrientationForPlayerView)
+            if deviceOrientation != .unknown {
+                // 画面を回転させる
+                UIDevice.current.setValue(deviceOrientation.rawValue, forKey: "orientation")
+            }
             // viewWillTransition（要は画面が回転してUIコンポーネントが再配置された）後にクローズ処理を行う
             closeCompletionHandler = { [weak self] in
                 guard let sself = self else { return }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5521FA36248F3CB200DE2201 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5521FA35248F3CB200DE2201 /* Orientation.swift */; };
 		552B323E23C0C66000BD9753 /* OverCurrentTransitioningInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B323B23C0C65F00BD9753 /* OverCurrentTransitioningInteractor.swift */; };
 		552B323F23C0C66000BD9753 /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B323C23C0C66000BD9753 /* ModalPresentationController.swift */; };
 		552B324023C0C66000BD9753 /* OverCurrentTransitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B323D23C0C66000BD9753 /* OverCurrentTransitionable.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5521FA35248F3CB200DE2201 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		552B323B23C0C65F00BD9753 /* OverCurrentTransitioningInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverCurrentTransitioningInteractor.swift; sourceTree = "<group>"; };
 		552B323C23C0C66000BD9753 /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
 		552B323D23C0C66000BD9753 /* OverCurrentTransitionable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverCurrentTransitionable.swift; sourceTree = "<group>"; };
@@ -237,8 +239,9 @@
 			children = (
 				555886A82483AF6A00207C35 /* Frame.swift */,
 				555886A62483A66400207C35 /* Constraints.swift */,
-				55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */,
+				5521FA35248F3CB200DE2201 /* Orientation.swift */,
 				552B324723C0D62D00BD9753 /* RootViewControllerGetter.swift */,
+				55A0717A23BBC6C3003503E2 /* VideoPlayerTimeFormatter.swift */,
 				55BB89C023C4C766007D81F9 /* GIFAnimation */,
 				552B323A23C0C61B00BD9753 /* SemiModal */,
 			);
@@ -398,6 +401,7 @@
 				55A0715123BBC6A2003503E2 /* SceneDelegate.swift in Sources */,
 				55A0717B23BBC6C3003503E2 /* VideoPlayerView.swift in Sources */,
 				555A410923CDE6D900D4E93A /* SemiModalTableViewController.swift in Sources */,
+				5521FA36248F3CB200DE2201 /* Orientation.swift in Sources */,
 				555886A92483AF6A00207C35 /* Frame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
