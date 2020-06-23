@@ -86,13 +86,20 @@ class ViewController: UIViewController {
         insertRowCount = 0
     }
     
-    func insertLog(category: String, categoryColor: UIColor, value: String = "") {
+    func reloadLogIfNeed() {
+        tableView.reloadData()
+        insertRowCount = 0
+    }
+    
+    func insertLog(category: String, categoryColor: UIColor, value: String = "", isNeedToUpdate: Bool = true) {
         // ログデータをテーブルビューに表示するために配列に保存しておく
         videoPlayerLogList.insert(VideoPlayerLog(category: category, categoryColor: categoryColor, value: value), at: 0)
         // 挿入した行数を覚えておく
         insertRowCount += 1
-        // テーブルビューに更新反映を行う
-        updateLogIfNeed()
+        if isNeedToUpdate {
+            // テーブルビューに更新反映を行う
+            updateLogIfNeed()
+        }
     }
 }
 
@@ -170,9 +177,11 @@ extension ViewController: PlayerViewDelegate {
     }
     
     func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
-        insertLog(category: "didDismiss fullScreenVideoPlayerViewController", categoryColor: UIColor.systemOrange)
+        insertLog(category: "didDismiss fullScreenVideoPlayerViewController",
+                  categoryColor: UIColor.systemOrange,
+                  isNeedToUpdate: false)
         // フルスクリーン中に追加されたログをアプリ上に表示するためにテーブルビューの表示更新を行う
-        updateLogIfNeed()
+        reloadLogIfNeed()
     }
     
     func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
