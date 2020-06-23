@@ -121,9 +121,9 @@ class FullScreenVideoPlayerViewController: UIViewController {
             self.delegate?.willDismiss(fullScreenVideoPlayerViewController: self)
             self.dismiss(animated: true, completion: { [weak self] in
                 guard let sself = self else { return }
-                sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
                 sself.closeCompletionHandler = nil
                 sself.viewTapGesture = nil
+                sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
             })
         }
     }

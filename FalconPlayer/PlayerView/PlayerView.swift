@@ -49,6 +49,35 @@ protocol PlayerViewDelegate: class {
     /// プレイヤーの再生時間がシークなどによって不連続に再生時間が変更されたことを通知する
     /// - Parameter playerView: プレイヤービュー
     func didPlayerItemTimeJump(playerView: PlayerView)
+    
+    /// 設定画面のセミモーダルビューが表示されることを通知する
+    /// - Parameter semiModalBaseViewController: 設定画面のセミモーダルビュー
+    func willPresent(semiModalBaseViewController: SemiModalBaseViewController)
+    /// 設定画面のセミモーダルビューが表示されたことを通知する
+    /// - Parameter semiModalBaseViewController: 設定画面のセミモーダルビュー
+    func didPresent(semiModalBaseViewController: SemiModalBaseViewController)
+    /// 設定画面のセミモーダルビューが閉じることを通知する
+    /// - Parameter semiModalBaseViewController: 設定画面のセミモーダルビュー
+    func willDismiss(semiModalBaseViewController: SemiModalBaseViewController)
+    /// 設定画面のセミモーダルビューが閉じたことを通知する
+    /// - Parameter semiModalBaseViewController: 設定画面のセミモーダルビュー
+    func didDismiss(semiModalBaseViewController: SemiModalBaseViewController)
+    
+    /// フルスクリーンが表示されることを通知する
+    /// - Parameter fullScreenVideoPlayerViewController: フルスクリーン
+    func willPresent(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
+    /// フルスクリーンが表示されたことを通知する
+    /// - Parameter fullScreenVideoPlayerViewController: フルスクリーン
+    func didPresent(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
+    /// フルスクリーンが閉じることを通知する
+    /// - Parameter fullScreenVideoPlayerViewController: フルスクリーン
+    func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
+    /// フルスクリーンが閉じたことを通知する
+    /// - Parameter fullScreenVideoPlayerViewController: フルスクリーン
+    func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
+    /// フルスクリーンの画面がタップされたことを通知する
+    /// - Parameter fullScreenVideoPlayerViewController: フルスクリーン
+    func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
 }
 
 class PlayerView: UIView {
@@ -136,12 +165,14 @@ class PlayerView: UIView {
         videoPlayerView?.hideControlView()
         videoPlayerView?.fullScreenButton.isHidden = true
         videoPlayerView?.pause()
+        delegate?.willPresent(fullScreenVideoPlayerViewController: fullScreenVC)
         topVC.present(fullScreenVC,
                       animated: true,
                       completion: { [weak self] in
                         guard let sself = self else { return }
                         sself.videoPlayerView?.hideControlView()
                         sself.videoPlayerView?.play()
+                        sself.delegate?.didPresent(fullScreenVideoPlayerViewController: fullScreenVC)
         })
         self.fullScreenVC = fullScreenVC
     }
@@ -152,14 +183,19 @@ class PlayerView: UIView {
         settingViewController.register(SettingViewDataSource.cellNib,
                                        forCellReuseIdentifier: SettingViewDataSource.cellReuseIdentifier)
         settingViewController.setDataSource(dataSource: settingViewDataSouce)
+        delegate?.willPresent(semiModalBaseViewController: settingViewController)
+        let presentCompletion = { [weak self] in
+            guard let sself = self else { return }
+            sself.delegate?.didPresent(semiModalBaseViewController: settingViewController)
+        }
         if let fullScreenVC = self.fullScreenVC {
             fullScreenVC.present(settingViewController,
                                  animated: true,
-                                 completion: nil)
+                                 completion: presentCompletion)
         } else if let topVC = RootViewControllerGetter.getRootViewController() {
             topVC.present(settingViewController,
                           animated: true,
-                          completion: nil)
+                          completion: presentCompletion)
         }
         self.settingViewController = settingViewController
     }
@@ -246,10 +282,12 @@ extension PlayerView: VideoPlayerViewDelegate {
 
 extension PlayerView: SemiModalBaseViewControllerDelegate {
     func willDismiss(semiModalBaseViewController: SemiModalBaseViewController) {
+        delegate?.willDismiss(semiModalBaseViewController: semiModalBaseViewController)
     }
     
     func didDismiss(semiModalBaseViewController: SemiModalBaseViewController) {
         settingViewController = nil
+        delegate?.didDismiss(semiModalBaseViewController: semiModalBaseViewController)
     }
 }
 
@@ -257,10 +295,12 @@ extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
     func willDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
         videoPlayerView?.fullScreenButton.isHidden = false
         videoPlayerView?.hideControlView()
+        delegate?.willDismiss(fullScreenVideoPlayerViewController: fullScreenVideoPlayerViewController)
     }
     
     func didDismiss(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
         fullScreenVC = nil
+        delegate?.didDismiss(fullScreenVideoPlayerViewController: fullScreenVideoPlayerViewController)
     }
     
     func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController) {
@@ -270,5 +310,6 @@ extension PlayerView: FullScreenVideoPlayerViewControllerDelegate {
         } else {
             videoPlayerView.hideControlView()
         }
+        delegate?.didTap(fullScreenVideoPlayerViewController: fullScreenVideoPlayerViewController)
     }
 }
