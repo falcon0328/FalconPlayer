@@ -54,6 +54,8 @@ class FullScreenVideoPlayerViewController: UIViewController {
         self.modalPresentationStyle = modalPresentationStyle
         self.transitioningDelegate = self
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.delegate = self
         self.view.addGestureRecognizer(tapGesture)
         self.viewTapGesture = tapGesture
     }
@@ -66,7 +68,7 @@ class FullScreenVideoPlayerViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         if openReason == .deviceRotation {
-            closeButton.isHidden = true
+            topBar.isHidden = true
         }
     }
     
@@ -77,11 +79,11 @@ class FullScreenVideoPlayerViewController: UIViewController {
             if size.width <= size.height {
                 // 縦向きのレイアウト
                 Constraints.shared.update(baseView, rect: Frame.shared.make(toView: sself.view))
-                sself.closeButton.isHidden = false
+                sself.topBar.isHidden = false
             } else {
                 // 横向きのレイアウト
                 Constraints.shared.update(baseView)
-                sself.closeButton.isHidden = true
+                sself.topBar.isHidden = true
             }
         }) { [weak self] (context) in
             guard let sself = self else { return }
@@ -144,5 +146,14 @@ extension FullScreenVideoPlayerViewController: UIViewControllerTransitioningDele
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animationController
+    }
+}
+
+extension FullScreenVideoPlayerViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        guard let touchView = touch.view else { return false }
+        // iPhoneのフルスクリーン横向き時など、画面に映像領域のみが表示された時（上下に黒い帯がでない時）の対策として、
+        // フルスクリーンのViewControllerのViewがタップされた時のみ反応するようにする
+        return touchView == view
     }
 }
