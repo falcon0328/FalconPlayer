@@ -166,6 +166,8 @@ class VideoPlayer: UIView {
     var playerTimeControlStatusObservation: NSKeyValueObservation?
     /// AVPlayerの映像を描画するレイヤー
     var playerLayer: AVPlayerLayer?
+    /// プレイヤーの準備ができたことをプレイヤーに通知しているかどうかを示すフラグ
+    var isNotifyPrepared = false
     
     deinit {
         releaseVideoPlayer()
@@ -182,6 +184,7 @@ class VideoPlayer: UIView {
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = bounds
         layer.insertSublayer(playerLayer, at: 0)
+        isNotifyPrepared = false
         self.playerLayer = playerLayer
         setPlayerObserver()
         setDidPlayToEndTimeNotification()
@@ -408,6 +411,7 @@ class VideoPlayer: UIView {
         playerLayer?.removeFromSuperlayer()
         playerLayer = nil
         playerState = .idle
+        isNotifyPrepared = false
     }
     
     /// AVPlayerItemのステータスによってコールバックの内容を変更する
@@ -415,9 +419,11 @@ class VideoPlayer: UIView {
     func playerItemStatusChangeHandler(playerItemStatus: AVPlayerItem.Status) {
         if playerItemStatus == .readyToPlay {
             // 初回のreadyToPlay時は、ステータスをpausedにしプレイヤーの準備成功をコールバックする
-            if playerState == .idle {
+            // AVPlayerの条件によってはBuffering中にreadyToPlayになる場合があるため、一度もPreparedがない場合は通知を行う
+            if !isNotifyPrepared {
                 playerState = .paused
                 delegate?.didPrepare(player: self)
+                isNotifyPrepared = true
                 return
             }
         } else {
