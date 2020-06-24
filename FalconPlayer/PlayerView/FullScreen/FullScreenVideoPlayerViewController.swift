@@ -33,10 +33,10 @@ class FullScreenVideoPlayerViewController: UIViewController {
     
     /// フルスクリーン画面が開かれた理由を表す列挙型
     enum FullScreenOpenReason {
-        /// ユーザによる指示
-        case user
-        /// PlayerView表示時に端末の回転を行なったため
-        case deviceRotation
+        /// 外部向けのフルスクリーンを開く処理が呼ばれたため
+        case callToOpenFullScreen
+        /// Expand処理が呼ばれたため
+        case callToExpand
     }
     
     init(delegate: FullScreenVideoPlayerViewControllerDelegate,
@@ -44,7 +44,7 @@ class FullScreenVideoPlayerViewController: UIViewController {
          modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
          animationContrller: UIViewControllerAnimatedTransitioning = FullScreenVideoPlayerAnimationController(),
          interfaceOrientation: UIInterfaceOrientation,
-         openReason: FullScreenOpenReason = .user) {
+         openReason: FullScreenOpenReason = .callToOpenFullScreen) {
         self.delegate = delegate
         self.baseView = baseView
         self.animationController = FullScreenVideoPlayerAnimationController()
@@ -67,7 +67,7 @@ class FullScreenVideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if openReason == .deviceRotation {
+        if openReason == .callToExpand {
             topBar.isHidden = true
         }
     }

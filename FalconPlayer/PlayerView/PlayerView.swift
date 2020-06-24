@@ -144,7 +144,7 @@ class PlayerView: UIView {
     }
     
     func openFullScreenViewController() {
-        internalOpenFullScreenViewController(openReason: .user)
+        internalOpenFullScreenViewController(openReason: .callToOpenFullScreen)
     }
     
     func closeFullScreenViewController() {
@@ -205,6 +205,14 @@ class PlayerView: UIView {
         settingViewController.dismiss(animated: true, completion: nil)
     }
     
+    func expand() {
+        videoPlayerView?.expand()
+    }
+    
+    func collapse() {
+        videoPlayerView?.collapse()
+    }
+    
     @objc func viewDidEnterBackground(notification: Notification) {
         videoPlayerView?.pause()
     }
@@ -253,8 +261,8 @@ extension PlayerView: VideoPlayerViewDelegate {
     func didChange(videoPlayerView: VideoPlayerView, isExpand: Bool) {
         delegate?.didChange(playerView: self, isExpand: isExpand)
         if fullScreenVC == nil, isExpand {
-            internalOpenFullScreenViewController(openReason: .deviceRotation)
-        } else if let fullScreenVC = fullScreenVC, fullScreenVC.openReason != .user, !isExpand {
+            internalOpenFullScreenViewController(openReason: .callToExpand)
+        } else if let fullScreenVC = fullScreenVC, fullScreenVC.openReason != .callToOpenFullScreen, !isExpand {
             // ユーザ指示以外でフルスクリーンが開かれていて、isExpandがfalse
             closeFullScreenViewController()
         }
