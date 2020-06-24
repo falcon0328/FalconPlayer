@@ -106,28 +106,13 @@ class FullScreenVideoPlayerViewController: UIViewController {
     
     /// フルスクリーンを閉じる
     func close() {
-        // 画面向きを必要に応じて回転させる
-        if openReason == .user && Orientation.shared.interfaceOrientation(self) != interfaceOrientationForPlayerView {
-            let deviceOrientation =
-                Orientation.shared.deviceOrientationFrom(interfaceOrientation: interfaceOrientationForPlayerView)
-            if deviceOrientation != .unknown {
-                // 画面を回転させる
-                UIDevice.current.setValue(deviceOrientation.rawValue, forKey: "orientation")
-            }
-            // viewWillTransition（要は画面が回転してUIコンポーネントが再配置された）後にクローズ処理を行う
-            closeCompletionHandler = { [weak self] in
-                guard let sself = self else { return }
-                sself.close()
-            }
-        } else {
-            self.delegate?.willDismiss(fullScreenVideoPlayerViewController: self)
-            self.dismiss(animated: true, completion: { [weak self] in
-                guard let sself = self else { return }
-                sself.closeCompletionHandler = nil
-                sself.viewTapGesture = nil
-                sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
-            })
-        }
+        self.delegate?.willDismiss(fullScreenVideoPlayerViewController: self)
+        self.dismiss(animated: true, completion: { [weak self] in
+            guard let sself = self else { return }
+            sself.closeCompletionHandler = nil
+            sself.viewTapGesture = nil
+            sself.delegate?.didDismiss(fullScreenVideoPlayerViewController: sself)
+        })
     }
 
     @IBAction func didTapCloseButton(_ sender: Any) {
