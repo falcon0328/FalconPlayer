@@ -80,6 +80,26 @@ protocol PlayerViewDelegate: class {
     func didTap(fullScreenVideoPlayerViewController: FullScreenVideoPlayerViewController)
 }
 
+/**
+ - リポジトリを切り替えて、個人用のPCで開発できるようにする
+ - currentVideoURLはPlayerView側
+ - PlayerViewからリソース破棄命令を呼べるようにする
+ - 動画リソースとしてモデルクラスを渡す形に修正する
+ - シークサムネイルを渡せる・表示できるようにする
+ - TwitterUI/YoutubeUI を切り替えれるようにする
+ - 設定画面の項目の見直しと実装
+ - 画面の自動回転制御対応・拡大縮小ボタンの非表示
+ - iPad SlideOver・SplitViewの対応と確認
+ - デリゲートメソッドの見直し
+ - VideoPlayer, VideoPlayerView, PlayerVIewで同一のメソッド名に統一する
+ - ライブラリの形にまとめる（名前：Rupin）
+ ===
+ - PiP・ネイティブのVC対応
+ - ライブ対応
+ - iPad用UI修正機能追加（ボタンサイズ変更など）
+ - CI/CD対応
+ - README.md英語対応
+ */
 class PlayerView: UIView {
     weak var baseView: UIView?
     weak var videoPlayerView: VideoPlayerView?
